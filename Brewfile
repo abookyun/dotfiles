@@ -9,6 +9,8 @@ mas 'Keynote', id: 409183694
 mas 'iMovie', id: 408981434
 ## Better email client
 mas 'Spark', id: 1176895641
+## Password manager
+mas '1Password', id: 443987910
 ## Diary app
 mas 'Day One', id: 1055511498
 ## Money app
@@ -35,8 +37,6 @@ mas 'JustExifViewer', id: 980953143
 mas 'Irvue', id: 1039633667
 ## JRE
 cask 'java'
-## Password manager
-cask '1password'
 ## Browsers
 cask 'firefox'
 cask 'google-chrome'
@@ -70,6 +70,8 @@ cask 'the-unarchiver'
 ## Video player
 cask 'mplayerx'
 cask 'vlc'
+## Video converter
+cask 'handbrake'
 ## Mac product catalog
 cask 'mactracker'
 ## BBS client
@@ -79,6 +81,8 @@ cask 'plex-media-player'
 cask 'plex-media-server'
 ## Prevent your mac from sleep
 cask 'caffeine'
+## App Cleaner
+cask 'appcleaner'
 
 # Development tools
 ## Better terminal
