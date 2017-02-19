@@ -7,6 +7,8 @@ mas 'Numbers', id: 409203825
 mas 'Keynote', id: 409183694
 ## iLife
 mas 'iMovie', id: 408981434
+## Better email client
+mas 'Spark', id: 1176895641
 ## Diary app
 mas 'Day One', id: 1055511498
 ## Money app
@@ -27,8 +29,6 @@ mas 'Sip', id: 507257563
 mas 'Cobook', id: 525225808
 ## Typing game
 mas 'Type Fu', id: 509818877
-## Prevent your mac from sleep
-mas 'Caffeine', id: 411246225
 ## EXIF viewer
 mas 'JustExifViewer', id: 980953143
 ## Beautiful wallpaper
@@ -40,8 +40,6 @@ cask '1password'
 ## Browsers
 cask 'firefox'
 cask 'google-chrome'
-## Better email client
-cask 'spark'
 ## IMs
 cask 'telegram'
 cask 'slack'
@@ -76,11 +74,11 @@ cask 'vlc'
 cask 'mactracker'
 ## BBS client
 cask 'welly'
-## BT client
-cask 'utorrent'
 ## Plex related
-cask 'plex-home-theater'
+cask 'plex-media-player'
 cask 'plex-media-server'
+## Prevent your mac from sleep
+cask 'caffeine'
 
 # Development tools
 ## Better terminal
