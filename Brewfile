@@ -6,6 +6,7 @@ cask "iterm2"
 brew "git"
 brew "vim"
 brew "tmux"
+brew "mas"
 mas '1Password'                    , id: 443987910  # 1Password 7
 cask "alfred"
 cask "obsidian"
@@ -26,29 +27,34 @@ mas "Irvue"                        , id: 1039633667 # beautiful wallpaper
 mas "Amphetamine"                  , id: 937984704  # keep computer awake
 
 # Command Line Tool Essentials
+brew "openssl"
 brew "ag"  # the silver searcher
+brew "fzf"  # fuzzy finder
+brew "bat"  # better cat
+brew "exa"  # better ls
+brew "tree"  # show folder as tree
+brew "tldr"  # shorter man
 brew "zsh-syntax-highlighting"
 brew "readline"
 brew "universal-ctags"
+brew "mobile-shell"  # better ssh
+brew "hub"  # github cli
+brew "curl"
+
+# More brew
+brew "wget"
 brew "ruby"
 brew "rbenv"
 brew "ruby-build"
-brew "mobile-shell"  # better ssh
-brew "hub"
-brew "openssl"
-brew "wget"
-brew "curl"
 brew "python"
 brew "pyenv"
-brew "mas"
-
-# More brew
 brew "sqlite"
 brew "postgresql"
 brew "pgcli"
 brew "mysql"
 brew "redis"
 # brew "go"
+# brew "rust"
 # brew "perl"
 # brew "node"
 # brew "heroku"
@@ -60,7 +66,7 @@ brew "redis"
 # brew "graphicsmagick"  # better imagemagick
 # brew "exiftool"
 # brew "ffmpeg"
-# brew "tldr"
+# brew "handbrake"
 
 # More cask
 cask "istat-menus"
@@ -70,10 +76,10 @@ cask "hiddenbar"
 cask "transmit"
 cask "plex"
 cask "maestral"  # open-source dropbox client
-cask "sequel-pro"
-cask "aerial"
 cask "bike"
+cask "aerial"
 cask "transmission"
+cask "sequel-pro"
 # cask "macs-fan-control"
 # cask "macvim"
 # cask "openbb-terminal"
@@ -90,7 +96,6 @@ cask "transmission"
 # cask "vlc"
 # cask "mactracker"  # apple products catalog
 # cask "plex-media-server"
-# cask "handbrake"
 
 # More mas
 mas "Pages"                        , id: 409201541
