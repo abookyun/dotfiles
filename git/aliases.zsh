@@ -14,8 +14,9 @@ alias gdc='git diff --cached'
 alias gl='git pull --prune'
 alias glog="git log --graph --pretty=format:'%Cred%h%Creset %an: %s - %Creset %C(yellow)%d%Creset %Cgreen(%cr)%Creset' --abbrev-commit --date=relative"
 
-alias gp='git push origin HEAD'
+alias gp='git push'
 
 alias gr='git reset'
 
-alias gs='git status -sb'
+alias gst='git status'
+alias gss='git status -sb'
