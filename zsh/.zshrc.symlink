@@ -18,7 +18,7 @@ done
 
 # initialize autocomplete here, otherwise functions won't be loaded
 autoload -U compinit
-compinit -d ${XDG_CACHE_HOME}/zsh/zcompdump-$(date -u +%Y-%m-%dT%H:%M:%SZ)
+compinit -d ${XDG_CACHE_HOME}/zsh/zcompdump-$ZSH_VERSION-by-$(whoami)
 
 # load every completion after autocomplete loads
 for file in ${(M)config_files:#*/completion.zsh}
