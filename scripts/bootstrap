@@ -28,7 +28,7 @@ fail () {
 }
 
 setup_gitconfig () {
-  if ! [ -f git/gitconfig.local.symlink ]
+  if ! [ -f git/config.local.symlink ]
   then
     info 'setup gitconfig'
 
@@ -43,12 +43,11 @@ setup_gitconfig () {
     user ' - What is your github author email?'
     read -e git_authoremail
 
-    sed -e "s/AUTHORNAME/$git_authorname/g" -e "s/AUTHOREMAIL/$git_authoremail/g" -e "s/GIT_CREDENTIAL_HELPER/$git_credential/g" git/gitconfig.local.symlink.example > git/gitconfig.local.symlink
+    sed -e "s/AUTHORNAME/$git_authorname/g" -e "s/AUTHOREMAIL/$git_authoremail/g" -e "s/GIT_CREDENTIAL_HELPER/$git_credential/g" git/config.local.symlink.example > git/config.local.symlink
 
     success 'gitconfig'
   fi
 }
-
 
 link_file () {
   local src=$1 dst=$2
@@ -63,8 +62,8 @@ link_file () {
     then
 
       local currentSrc="$(readlink $dst)"
-
       if [ "$currentSrc" == "$src" ]
+
       then
 
         skip=true;
@@ -125,6 +124,17 @@ link_file () {
   fi
 }
 
+setup_zshenv () {
+  if [ -f zsh/zshenv ]
+  then
+    info 'setup zshenv'
+
+    local overwrite_all=false backup_all=false skip_all=false
+
+    link_file $(realpath zsh/zshenv) "$HOME/.zshenv"
+  fi
+}
+
 install_dotfiles () {
   info 'installing dotfiles'
 
@@ -132,12 +142,14 @@ install_dotfiles () {
 
   for src in $(find -H "$DOTFILES_ROOT" -maxdepth 2 -name '*.symlink' -not -path '*.git*')
   do
-    dst="$HOME/.$(basename "${src%.*}")"
+    src_topic=$(basename $(dirname ${src%.*}))
+    dst="$XDG_CONFIG_HOME/$src_topic/$(basename "${src%.*}")"
     link_file "$src" "$dst"
   done
 }
 
 setup_gitconfig
+setup_zshenv
 install_dotfiles
 
 # If we're on a Mac, let's install and setup homebrew.
