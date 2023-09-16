@@ -155,12 +155,24 @@ install_dotfiles
 # If we're on a Mac, let's install and setup homebrew.
 if [ "$(uname -s)" == "Darwin" ]
 then
-  info "installing dependencies"
-  if source bin/dot | while read -r data; do info "$data"; done
+  # Check for Homebrew
+  if test ! $(which brew)
   then
-    success "dependencies installed"
-  else
-    fail "error installing dependencies"
+    echo "  Installing Homebrew for you."
+
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+    success "homebrew installed!"
+  fi
+
+  # Check for Brewfile
+  if test $DOTFILES_ROOT/Brewfile
+  then
+    info "detected Brewfile, starting brew bundle..."
+
+    brew bundle --no-lock
+
+    success "brew bundle completed!"
   fi
 fi
 
