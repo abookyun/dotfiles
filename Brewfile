@@ -34,12 +34,13 @@ brew "bat"  # better cat
 brew "exa"  # better ls
 brew "tree"  # show folder as tree
 brew "tldr"  # shorter man
-brew "zsh-syntax-highlighting"
 brew "readline"
 brew "universal-ctags"
 brew "mobile-shell"  # better ssh
 brew "hub"  # github cli
 brew "curl"
+brew "zsh-syntax-highlighting"
+cask "powerlevel10k"
 
 # More brew
 brew "wget"
