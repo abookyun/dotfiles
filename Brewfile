@@ -31,7 +31,7 @@ brew "openssl"
 brew "ag"  # the silver searcher
 brew "fzf"  # fuzzy finder
 brew "bat"  # better cat
-brew "exa"  # better ls
+brew "eza"  # better ls
 brew "tree"  # show folder as tree
 brew "tldr"  # shorter man
 brew "readline"
