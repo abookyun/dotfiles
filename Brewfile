@@ -41,6 +41,7 @@ brew "hub"  # github cli
 brew "curl"
 brew "zsh-fast-syntax-highlighting"
 brew "powerlevel10k"
+brew "timewarrior"
 
 # More brew
 brew "wget"
