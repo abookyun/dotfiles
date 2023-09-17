@@ -25,6 +25,8 @@ done
 
 # initialize autocomplete here, otherwise functions won't be loaded
 autoload -U compinit
+# compaudit | xargs chmod g-w
+# https://unix.stackexchange.com/questions/383365/zsh-compinit-insecure-directories-run-compaudit-for-list
 compinit -d ${XDG_CACHE_HOME}/zsh/zcompdump-$ZSH_VERSION-by-$(whoami)
 
 # load every completion after autocomplete loads
