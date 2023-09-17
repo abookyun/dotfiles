@@ -1,5 +1,5 @@
 tap "homebrew/bundle"
-tap "homebrew/service"
+tap "homebrew/services"
 
 # Essentials
 cask "iterm2"
@@ -40,7 +40,7 @@ brew "mobile-shell"  # better ssh
 brew "hub"  # github cli
 brew "curl"
 brew "zsh-syntax-highlighting"
-cask "powerlevel10k"
+brew "powerlevel10k"
 
 # More brew
 brew "wget"
@@ -50,7 +50,7 @@ brew "ruby-build"
 brew "python"
 brew "pyenv"
 brew "sqlite"
-brew "postgresql"
+brew "postgresql@16"
 brew "pgcli"
 brew "mysql"
 brew "redis"
