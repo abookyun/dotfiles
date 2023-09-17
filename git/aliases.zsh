@@ -1,5 +1,7 @@
 alias ga='git add'
+alias gan='git add -N'
 alias gac='git add -A && git commit -m'
+alias gap='git add -p'
 
 alias gb='git branch'
 
