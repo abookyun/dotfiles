@@ -39,7 +39,7 @@ brew "universal-ctags"
 brew "mobile-shell"  # better ssh
 brew "hub"  # github cli
 brew "curl"
-brew "zsh-syntax-highlighting"
+brew "zsh-fast-syntax-highlighting"
 brew "powerlevel10k"
 
 # More brew
