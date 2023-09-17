@@ -1,0 +1,26 @@
+# Local/private config goes in the include
+[include]
+    path = ./config.local
+[hub]
+    protocol = https
+[alias]
+    co = checkout
+    hist = log --graph --abbrev-commit --decorate --date=relative --format=format:'%C(bold blue)%h%C(reset) - %C(bold green)(%ar)%C(reset) %C(white)%s%C(reset) %C(dim white)- %an%C(reset)%C(bold yellow)%d%C(reset)' --all
+    count = !git shortlog -sn
+[color]
+    diff = auto
+    status = auto
+    branch = auto
+    ui = true
+[apply]
+    whitespace = nowarn
+[mergetool]
+    keepBackup = false
+[help]
+    autocorrect = 1
+[push]
+    default = simple
+[credential]
+    helper = osxkeychain
+[init]
+    defaultBranch = main
