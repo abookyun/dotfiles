@@ -1,0 +1,57 @@
+" Environment
+set directory=$XDG_CACHE_HOME/vim,~/,/tmp
+set backupdir=$XDG_CACHE_HOME/vim,~/,/tmp
+set viminfo+=n$XDG_CACHE_HOME/vim/viminfo
+set runtimepath=$XDG_CONFIG_HOME/vim,$XDG_CONFIG_HOME/vim/after,$VIM,$VIMRUNTIME
+let $MYVIMRC="$XDG_CONFIG_HOME/vim/vimrc"
+
+" Basic Settings
+" use sensible.vim basic settings: https://github.com/tpope/vim-sensible/blob/master/plugin/sensible.vim
+set encoding=utf-8       " utf-8 encoding
+set number               " show line numbers
+set directory-=.         " don't store swapfiles in the current directory
+set cursorline
+set cursorcolumn
+set tabstop=2
+set shiftwidth=2
+set expandtab
+set nobackup
+set mouse=a
+
+" vim-colors-solarized
+set background=dark
+colorscheme solarized
+
+" Keyboard Shortcuts
+let mapleader = ','
+nnoremap <leader>d :NERDTreeToggle<CR>
+nnoremap <leader>f :NERDTreeFind<CR>
+nnoremap <leader>t :CtrlP<CR>
+nnoremap <leader>T :CtrlPClearCache<CR>:CtrlP<CR>
+nnoremap <leader>g :GitGutterToggle<CR>
+nnoremap <leader>] :TagbarToggle<CR>
+
+noremap <leader>a :Ag<space>
+noremap <silent> <leader>V :source ${XDG_CONFIG_HOME}/vim/vimrc<CR>:filetype detect<CR>:exe ":echo 'vimrc reloaded'"<CR>
+
+" Plugin Settings
+" vim-gitgutter
+let g:gitgutter_enabled = 0
+
+" vim-airline
+let g:airline#extensions#ale#enabled = 1
+let g:airline#extensions#tabline#enabled = 1
+let g:airline#extensions#tabline#fnamemod = ':t'
+
+" vim-markdown
+let g:vim_markdown_folding_disabled = 1
+
+" vim-markdown-preview
+let g:ctrlp_map = ''
+let vim_markdown_preview_hotkey = '<C-p>'
+let vim_markdown_preview_github = 1
+let vim_markdown_preview_temp_file = 1
+
+" md is markdown
+autocmd BufRead,BufNewFile *.md set filetype=markdown
+autocmd BufRead,BufNewFile *.md set spell
