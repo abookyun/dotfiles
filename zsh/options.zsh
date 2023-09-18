@@ -19,7 +19,7 @@ setopt COMPLETE_IN_WORD
 
 # History
 setopt APPEND_HISTORY # adds history
-setopt SHARE_HISTORY # share history between sessions ???
+setopt SHARE_HISTORY # share history between sessions
 setopt EXTENDED_HISTORY # add timestamps to history
 setopt HIST_VERIFY
 setopt INC_APPEND_HISTORY SHARE_HISTORY  # adds history incrementally and share it across sessions
