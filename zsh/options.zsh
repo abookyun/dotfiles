@@ -1,12 +1,4 @@
-# Directory Stack
-setopt AUTO_PUSHD # push the current directory visited on the stack
-setopt PUSHD_IGNORE_DUPS # do not store duplicates in the stack
-setopt PUSHD_SILENT # do not print the directory stack after pushd or popd
-
-# Completion
-setopt LIST_PACKED
-setopt COMPLETE_IN_WORD
-
+setopt AUTOCD
 setopt AUTO_LIST
 setopt NO_BG_NICE # don't nice background tasks
 setopt NO_HUP
@@ -15,6 +7,15 @@ setopt LOCAL_OPTIONS # allow functions to have local options
 setopt LOCAL_TRAPS # allow functions to have local traps
 setopt PROMPT_SUBST
 setopt IGNORE_EOF
+
+# Directory Stack
+setopt AUTO_PUSHD # push the current directory visited on the stack
+setopt PUSHD_IGNORE_DUPS # do not store duplicates in the stack
+setopt PUSHD_SILENT # do not print the directory stack after pushd or popd
+
+# Completion
+setopt LIST_PACKED
+setopt COMPLETE_IN_WORD
 
 # History
 setopt APPEND_HISTORY # adds history
