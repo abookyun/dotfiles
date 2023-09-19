@@ -5,3 +5,4 @@ alias ll='eza -la -sold'
 
 alias ts='timew start'
 alias tp='timew stop'
+alias tc='timew continue'
