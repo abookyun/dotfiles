@@ -1,0 +1,31 @@
+convcc() {
+  echo "files list:"
+  ls *.(srt|ass)
+
+  echo "Do you want to convert these files?(y/n): "
+  read answer
+
+  if [ "$answer" = "y" ]; then
+    for file in *.(srt|ass); do
+      iconv -f UTF-8 $file > /dev/null
+
+      if [ $? -eq 0 ]; then
+        mkdir -p utf-8
+        opencc -i $file -o utf-8/$file -c s2twp.json
+      else
+        iconv -f GBK $file > /dev/null
+
+        if [ $? -eq 0 ]; then
+          iconv -f GBK -t UTF-8 $file > $file
+          opencc -i $file -o utf-8/$file -c s2twp.json
+        else
+          mkdir -p unknown
+          mv $file unknown/$file
+        fi
+      fi
+    done
+    echo "convert complete"
+  else
+    echo "convert aborted"
+  fi
+}
