@@ -23,6 +23,11 @@ let vim_markdown_preview_hotkey = '<C-p>'
 let vim_markdown_preview_github = 1
 let vim_markdown_preview_temp_file = 1
 
+" vim-devicons
+set guifont=:h
+set guifont=DroidSansMono_Nerd_Font:h11
+let g:airline_powerline_fonts = 1
+
 " md is markdown
 autocmd BufRead,BufNewFile *.md set filetype=markdown
 autocmd BufRead,BufNewFile *.md set spell
