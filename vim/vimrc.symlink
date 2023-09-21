@@ -75,6 +75,9 @@ noremap <leader>a :Ag<space>
 noremap <silent> <leader>V :source ${XDG_CONFIG_HOME}/vim/vimrc<CR>:filetype detect<CR>:exe ":echo 'vimrc reloaded'"<CR>
 
 " Plugin Settings
+" ctrl-p
+let g:ctrlp_show_hidden = 1
+
 " vim-gitgutter
 let g:gitgutter_enabled = 0
 
