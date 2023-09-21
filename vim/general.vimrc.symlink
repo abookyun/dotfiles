@@ -1,0 +1,13 @@
+" General Settings
+" use sensible.vim basic settings: https://github.com/tpope/vim-sensible/blob/master/plugin/sensible.vim
+set encoding=utf-8       " utf-8 encoding
+set number               " show line numbers
+set relativenumber
+set directory-=.         " don't store swapfiles in the current directory
+set cursorline
+set cursorcolumn
+set tabstop=2
+set shiftwidth=2
+set expandtab
+set nobackup
+set mouse=a

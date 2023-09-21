@@ -1,0 +1,38 @@
+" Install vim-plug if not found
+if empty(glob('~/.config/vim/autoload/plug.vim'))
+  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
+    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+endif
+
+" Run PlugInstall if there are missing plugins
+autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
+  \| PlugInstall --sync | source $MYVIMRC
+\| endif
+
+call plug#begin()
+Plug 'altercation/vim-colors-solarized'
+Plug 'preservim/nerdtree'
+Plug 'ctrlpvim/ctrlp.vim'
+Plug 'tpope/vim-fugitive'
+Plug 'airblade/vim-gitgutter'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-repeat'
+Plug 'preservim/tagbar'
+Plug 'dense-analysis/ale'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'tpope/vim-commentary'
+Plug 'preservim/vim-indent-guides'
+Plug 'preservim/vim-markdown'
+Plug 'tpope/vim-rails'
+Plug 'vim-ruby/vim-ruby'
+Plug 'rking/ag.vim'
+Plug 'tpope/vim-endwise'
+Plug 'editorconfig/editorconfig-vim'
+Plug 'elzr/vim-json'
+Plug 'godlygeek/tabular'
+Plug 'tpope/vim-sensible'
+Plug 'mg979/vim-visual-multi'
+Plug 'JamshedVesuna/vim-markdown-preview'
+Plug 'tpope/vim-dispatch'
+call plug#end()
