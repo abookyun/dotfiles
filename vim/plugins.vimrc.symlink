@@ -3,6 +3,9 @@
 set background=dark
 colorscheme solarized
 
+" NERDTree
+let g:NERDTreeBookmarksFile = expand('$XDG_STATE_HOME').'/.NERDTreeBookmarks'
+
 " ctrl-p
 let g:ctrlp_show_hidden = 1
 
