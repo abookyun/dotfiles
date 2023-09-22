@@ -33,7 +33,7 @@ brew "fzf"  # fuzzy finder
 brew "bat"  # better cat
 brew "eza"  # better ls
 brew "tree"  # show folder as tree
-brew "tldr"  # shorter man
+brew "tealdeer"  # fast tldr written in rust
 brew "readline"
 brew "universal-ctags"
 brew "mobile-shell"  # better ssh
