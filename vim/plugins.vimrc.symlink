@@ -4,7 +4,7 @@ set background=dark
 colorscheme solarized
 
 " NERDTree
-let g:NERDTreeBookmarksFile = expand('$XDG_STATE_HOME').'/.NERDTreeBookmarks'
+let g:NERDTreeBookmarksFile = $MY_VIM_STATE_DIR.'/NERDTreeBookmarks'
 
 " ctrl-p
 let g:ctrlp_show_hidden = 1
