@@ -1,9 +1,12 @@
 " General Settings
 " use sensible.vim basic settings: https://github.com/tpope/vim-sensible/blob/master/plugin/sensible.vim
+
+set directory=$MY_VIM_STATE_DIR,~/,/tmp
+set backupdir=$MY_VIM_STATE_DIR,~/,/tmp
+set viminfo+=n$MY_VIM_STATE_DIR/viminfo
 set encoding=utf-8       " utf-8 encoding
 set number               " show line numbers
 set relativenumber
-set directory-=.         " don't store swapfiles in the current directory
 set cursorline
 set cursorcolumn
 set tabstop=2

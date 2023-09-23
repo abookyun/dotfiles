@@ -10,6 +10,7 @@ let g:ctrlp_show_hidden = 1
 let g:gitgutter_enabled = 0
 
 " vim-airline
+" let g:airline#extensions#disable_rtp_load = 1
 let g:airline#extensions#ale#enabled = 1
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#fnamemod = ':t'
