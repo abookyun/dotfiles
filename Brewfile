@@ -42,6 +42,8 @@ brew "curl"
 # not fast for man: https://github.com/zdharma-continuum/fast-syntax-highlighting/issues/27
 # brew "zsh-fast-syntax-highlighting"
 brew "zsh-syntax-highlighting"
+brew "zsh-autosuggestions"
+brew "zsh-completions"
 brew "powerlevel10k"
 brew "timewarrior"
 

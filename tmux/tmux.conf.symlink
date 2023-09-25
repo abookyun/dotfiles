@@ -27,6 +27,7 @@ set -g @plugin 'tmux-plugins/tmux-sensible'
 set -g @plugin 'catppuccin/tmux'
 set -g @plugin 'tmux-plugins/tmux-battery'
 set -g @plugin 'christoomey/vim-tmux-navigator'
+set -g @plugin 'tmux-plugins/tmux-resurrect'
 
 # catppuccin/tmux
 set -g @catppuccin_flavour 'latte' # or latte, frappe, macchiato, mocha
