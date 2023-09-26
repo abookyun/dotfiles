@@ -27,6 +27,13 @@ let vim_markdown_preview_hotkey = '<C-p>'
 let vim_markdown_preview_github = 1
 let vim_markdown_preview_temp_file = 1
 
+" goyo + limelight = zen mode
+autocmd! User GoyoEnter Limelight
+autocmd! User GoyoLeave Limelight!
+" Color name (:help cterm-colors) or ANSI code
+let g:limelight_conceal_ctermfg = 'gray'
+let g:limelight_conceal_ctermfg = 240
+
 " vim-devicons
 set guifont=:h
 set guifont=DroidSansMono_Nerd_Font:h11
@@ -34,4 +41,4 @@ let g:airline_powerline_fonts = 1
 
 " md is markdown
 autocmd BufRead,BufNewFile *.md set filetype=markdown
-autocmd BufRead,BufNewFile *.md set spell
+autocmd BufRead,BufNewFile *.md set spell spelllang+=cjk

@@ -38,4 +38,6 @@ Plug 'tpope/vim-sensible'
 Plug 'mg979/vim-visual-multi'
 Plug 'JamshedVesuna/vim-markdown-preview'
 Plug 'tpope/vim-dispatch'
+Plug 'junegunn/goyo.vim'
+Plug 'junegunn/limelight.vim'
 call plug#end()
