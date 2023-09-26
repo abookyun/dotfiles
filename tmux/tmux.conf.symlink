@@ -24,16 +24,28 @@ bind r source-file "${XDG_CONFIG_HOME}/tmux/tmux.conf"
 # List of plugins
 set -g @plugin 'tmux-plugins/tpm'
 set -g @plugin 'tmux-plugins/tmux-sensible'
-set -g @plugin 'catppuccin/tmux'
-set -g @plugin 'tmux-plugins/tmux-battery'
-set -g @plugin 'christoomey/vim-tmux-navigator'
 set -g @plugin 'tmux-plugins/tmux-resurrect'
 
-# catppuccin/tmux
-set -g @catppuccin_flavour 'latte' # or latte, frappe, macchiato, mocha
-set -g @catppuccin_window_number_position 'left'
-set -g @catppuccin_status_modules_right "application session user date_time battery"
+set -g @plugin 'catppuccin/tmux'
+set -g @catppuccin_window_left_separator "█"
+set -g @catppuccin_window_right_separator "█ "
+set -g @catppuccin_window_number_position "right"
+set -g @catppuccin_window_middle_separator "  █"
 
+set -g @catppuccin_window_default_fill "number"
+
+set -g @catppuccin_window_current_fill "number"
+set -g @catppuccin_window_current_text "#{b:pane_current_path}"
+
+set -g @catppuccin_status_modules_right "application session date_time"
+set -g @catppuccin_status_left_separator  ""
+set -g @catppuccin_status_right_separator " "
+set -g @catppuccin_status_right_separator_inverse "yes"
+set -g @catppuccin_status_fill "all"
+set -g @catppuccin_status_connect_separator "no"
+set -g @catppuccin_date_time_text "%Y-%m-%d %H:%M:%S"
+
+set -g @plugin 'christoomey/vim-tmux-navigator'
 # Smart pane switching with awareness of Vim splits.
 # See: https://github.com/christoomey/vim-tmux-navigator
 is_vim="ps -o state= -o comm= -t '#{pane_tty}' \
