@@ -1,5 +1,13 @@
 export LC_ALL=en_US.UTF-8
 
+# tmux
+MY_TMUX_PLUGINS_DIR="${XDG_DATA_HOME}/tmux/plugins"
+if ! [ -d $MY_TMUX_PLUGINS_DIR ]; then mkdir -p $MY_TMUX_PLUGINS_DIR; fi
+MY_TPM_DIR="${MY_TMUX_PLUGINS_DIR}/tpm"
+if ! [ -d $MY_TPM_DIR ]; then
+  git clone https://github.com/tmux-plugins/tpm ${MY_TPM_DIR}
+fi
+
 # vim
 export EDITOR='vim'
 export VISUAL='vim'
