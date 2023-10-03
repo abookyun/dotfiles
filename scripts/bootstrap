@@ -124,14 +124,19 @@ link_file () {
   fi
 }
 
-setup_zshenv () {
+setup_zsh() { 
+  local overwrite_all=false backup_all=false skip_all=false
+
   if [ -f zsh/zshenv ]
   then
-    info 'setup zshenv'
-
-    local overwrite_all=false backup_all=false skip_all=false
-
+    info 'link zshenv'
     link_file $(realpath zsh/zshenv) "$HOME/.zshenv"
+  fi
+
+  if [ -f zsh/zshrc ]
+  then
+    info 'link zshrc'
+    link_file $(realpath zsh/zshrc) "$XDG_CONFIG_HOME/zsh/.zshrc"
   fi
 }
 
@@ -152,7 +157,7 @@ install_dotfiles () {
 }
 
 setup_gitconfig
-setup_zshenv
+setup_zsh
 install_dotfiles
 
 # If we're on a Mac, let's install and setup homebrew.
