@@ -160,7 +160,7 @@ if [ "$(uname -s)" == "Darwin" ]
 then
   # Check for Homebrew
   if test ! $(which brew)
-  then
+  then 
     echo "  Installing Homebrew for you."
 
     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
@@ -171,11 +171,17 @@ then
   # Check for Brewfile
   if test $DOTFILES_ROOT/Brewfile
   then
-    info "detected Brewfile, starting brew bundle..."
+    user "detected Brewfile, would you like to run brew bundle now?(y/n)"
+    read -n 1 action
 
-    brew bundle --no-lock
 
-    success "brew bundle completed!"
+    case "$action" in
+      y )
+        brew bundle --no-lock
+        success "brew bundle completed!";;
+      * )
+        info "brew bundle aborted!";;
+    esac
   fi
 fi
 
