@@ -1,8 +1,11 @@
 set-environment -g TMUX_PLUGIN_MANAGER_PATH "${XDG_DATA_HOME}/tmux/plugins"
+
+# General Settings
 set -g default-terminal 'screen-256color'
 set -g mouse on
-set -g history-limit 5000
+set -g history-limit 10000
 
+# Key Bindings
 set -g prefix M-Space
 bind-key M-Space send-prefix
 unbind C-b
@@ -25,27 +28,35 @@ bind r source-file "${XDG_CONFIG_HOME}/tmux/tmux.conf"
 set -g @plugin 'tmux-plugins/tpm'
 set -g @plugin 'tmux-plugins/tmux-sensible'
 set -g @plugin 'tmux-plugins/tmux-resurrect'
-
+# set -g @plugin 'tmux-plugins/tmux-continuum'
+set -g @plugin 'tmux-plugins/tmux-battery'
+set -g @plugin 'christoomey/vim-tmux-navigator'
 set -g @plugin 'catppuccin/tmux'
-set -g @catppuccin_window_left_separator "█"
-set -g @catppuccin_window_right_separator "█ "
-set -g @catppuccin_window_number_position "right"
-set -g @catppuccin_window_middle_separator "  █"
+
+# Plugin settings
+# catppuccin/tmux
+set -g @catppuccin_window_left_separator ""
+set -g @catppuccin_window_right_separator " "
+set -g @catppuccin_window_middle_separator "█ "
+set -g @catppuccin_window_number_position "left"
 
 set -g @catppuccin_window_default_fill "number"
+set -g @catppuccin_window_default_text "#W"
 
 set -g @catppuccin_window_current_fill "number"
-set -g @catppuccin_window_current_text "#{b:pane_current_path}"
+set -g @catppuccin_window_current_text "#W"
 
-set -g @catppuccin_status_modules_right "application session date_time"
-set -g @catppuccin_status_left_separator  ""
-set -g @catppuccin_status_right_separator " "
-set -g @catppuccin_status_right_separator_inverse "yes"
-set -g @catppuccin_status_fill "all"
+set -g @catppuccin_status_modules_left "session"
+set -g @catppuccin_status_modules_right "directory user date_time"
+set -g @catppuccin_status_left_separator  " "
+set -g @catppuccin_status_right_separator ""
+set -g @catppuccin_status_right_separator_inverse "no"
+set -g @catppuccin_status_fill "icon"
 set -g @catppuccin_status_connect_separator "no"
+set -g @catppuccin_directory_text "#{b:pane_current_path}"
 set -g @catppuccin_date_time_text "%Y-%m-%d %H:%M:%S"
 
-set -g @plugin 'christoomey/vim-tmux-navigator'
+# christoomey/vim-tmux-navigator
 # Smart pane switching with awareness of Vim splits.
 # See: https://github.com/christoomey/vim-tmux-navigator
 is_vim="ps -o state= -o comm= -t '#{pane_tty}' \
