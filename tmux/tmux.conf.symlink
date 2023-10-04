@@ -4,6 +4,8 @@ set-environment -g TMUX_PLUGIN_MANAGER_PATH "${XDG_DATA_HOME}/tmux/plugins"
 set -g default-terminal 'screen-256color'
 set -g mouse on
 set -g history-limit 10000
+set -g set-titles on
+set -g set-titles-string "#T"
 
 # Key Bindings
 set -g prefix M-Space
