@@ -40,4 +40,5 @@ Plug 'JamshedVesuna/vim-markdown-preview'
 Plug 'tpope/vim-dispatch'
 Plug 'junegunn/goyo.vim'
 Plug 'junegunn/limelight.vim'
+Plug 'mhinz/vim-startify'
 call plug#end()
