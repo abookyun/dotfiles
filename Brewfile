@@ -7,7 +7,7 @@ brew "git"
 brew "vim"
 brew "tmux"
 brew "mas"
-mas '1Password'                    , id: 443987910  # 1Password 7
+mas "1Password 7"                    , id: 1333542190  # 1Password 7
 cask "alfred"
 cask "obsidian"
 cask "mark-text"
