@@ -4,14 +4,15 @@
 set directory=$MY_VIM_STATE_DIR,~/,/tmp
 set backupdir=$MY_VIM_STATE_DIR,~/,/tmp
 set viminfo+=n$MY_VIM_STATE_DIR/viminfo
+
 set encoding=utf-8
+set nobackup
+set mouse=a
 set number relativenumber
 set cursorline cursorcolumn
 set tabstop=2
 set shiftwidth=2
 set expandtab
-set nobackup
-set mouse=a
 
 " https://vi.stackexchange.com/questions/23110/pasting-text-on-vim-inside-tmux-breaks-indentation
 " fix pasting code in tmux breaks indentation
@@ -24,6 +25,8 @@ endif
 
 " Keyboard Shortcuts
 let mapleader = ','
+noremap <silent> <leader>V :source ${XDG_CONFIG_HOME}/vim/vimrc<CR>:filetype detect<CR>:exe ":echo 'vimrc reloaded'"<CR>
+
 nnoremap <leader>d :NERDTreeToggle<CR>
 nnoremap <leader>f :NERDTreeFind<CR>
 nnoremap <leader>t :CtrlP<CR>
@@ -32,5 +35,3 @@ nnoremap <leader>g :GitGutterToggle<CR>
 nnoremap <leader>] :TagbarToggle<CR>
 
 noremap <leader>a :Ag<space>
-noremap <silent> <leader>V :source ${XDG_CONFIG_HOME}/vim/vimrc<CR>:filetype detect<CR>:exe ":echo 'vimrc reloaded'"<CR>
-

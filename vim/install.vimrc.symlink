@@ -13,8 +13,6 @@ call plug#begin()
 Plug 'tpope/vim-sensible'
 
 " User Interface
-" Plug 'altercation/vim-colors-solarized'
-" Plug 'dracula/vim', { 'as': 'dracula' }
 Plug 'catppuccin/vim', { 'as': 'catppuccin' }
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
