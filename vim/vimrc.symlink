@@ -3,7 +3,6 @@ set runtimepath=$MY_VIM_DATA_DIR,$MY_VIM_DATA_DIR/after,$VIM,$VIMRUNTIME
 let $MYVIMRC=$MY_VIM_CONFIG_DIR.'/vimrc'
 
 " Better vimrc
-source $MY_VIM_CONFIG_DIR/plug.vimrc
 source $MY_VIM_CONFIG_DIR/general.vimrc
-source $MY_VIM_CONFIG_DIR/keys.vimrc
+source $MY_VIM_CONFIG_DIR/install.vimrc
 source $MY_VIM_CONFIG_DIR/plugins.vimrc
