@@ -17,10 +17,10 @@ set expandtab
 " https://vi.stackexchange.com/questions/23110/pasting-text-on-vim-inside-tmux-breaks-indentation
 " fix pasting code in tmux breaks indentation
 if &term =~ "screen"
-    let &t_BE = "\e[?2004h"
-    let &t_BD = "\e[?2004l"
-    exec "set t_PS=\e[200~"
-    exec "set t_PE=\e[201~"
+  let &t_BE = "\e[?2004h"
+  let &t_BD = "\e[?2004l"
+  exec "set t_PS=\e[200~"
+  exec "set t_PE=\e[201~"
 endif
 
 " Keyboard Shortcuts
@@ -32,6 +32,11 @@ nnoremap <leader>f :NERDTreeFind<CR>
 nnoremap <leader>t :CtrlP<CR>
 nnoremap <leader>T :CtrlPClearCache<CR>:CtrlP<CR>
 nnoremap <leader>g :GitGutterToggle<CR>
-nnoremap <leader>] :TagbarToggle<CR>
+nnoremap <leader>} :TagbarToggle<CR>
+nnoremap <leader>1 :bfirst<CR>
+nnoremap <leader>] :bnext<CR>
+nnoremap <leader>[ :bprevious<CR>
+nnoremap <leader>9 :blast<CR>
+nnoremap <leader>x :bdelete<CR>
 
 noremap <leader>a :Ag<space>
