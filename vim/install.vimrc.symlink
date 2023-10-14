@@ -13,7 +13,7 @@ call plug#begin()
 Plug 'tpope/vim-sensible'
 
 " User Interface
-Plug 'catppuccin/vim', { 'as': 'catppuccin' }
+Plug 'dracula/vim', { 'as': 'dracula' }
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'yggdroot/indentline'
