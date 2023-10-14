@@ -3,6 +3,7 @@ tap "homebrew/services"
 
 # Essentials
 cask "iterm2"
+brew "zsh-vi-mode"
 brew "git"
 brew "vim"
 brew "tmux"
