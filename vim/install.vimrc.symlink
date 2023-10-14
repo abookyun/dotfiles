@@ -44,6 +44,10 @@ Plug 'tpope/vim-dispatch'
 
 " Syntax, Linter and Autocompletion
 Plug 'dense-analysis/ale'
+Plug 'prabirshrestha/vim-lsp'
+Plug 'mattn/vim-lsp-settings'
+Plug 'jayli/vim-easycomplete'
+Plug 'SirVer/ultisnips'
 Plug 'ervandew/supertab'
 Plug 'vim-ruby/vim-ruby'
 Plug 'tpope/vim-rails'
