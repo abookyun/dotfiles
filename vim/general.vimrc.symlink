@@ -23,6 +23,12 @@ if &term =~ "screen"
   exec "set t_PE=\e[201~"
 endif
 
+augroup dynamic_smartcase
+    autocmd!
+    autocmd CmdLineEnter : set nosmartcase ignorecase
+    autocmd CmdLineLeave : set smartcase
+augroup END
+
 " Keyboard Shortcuts
 let mapleader = ','
 noremap <silent> <leader>V :source ${XDG_CONFIG_HOME}/vim/vimrc<CR>:filetype detect<CR>:exe ":echo 'vimrc reloaded'"<CR>
