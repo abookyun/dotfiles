@@ -1,5 +1,11 @@
 export LC_ALL=en_US.UTF-8
 
+mkdir -p ${XDG_STATE_HOME}/zsh
+HISTFILE=${XDG_STATE_HOME}/zsh/zsh_history
+HISTSIZE=10000
+SAVEHIST=10000
+SHELL_SESSIONS_DISABLE=1
+
 # tmux
 MY_TMUX_PLUGINS_DIR="${XDG_DATA_HOME}/tmux/plugins"
 if ! [ -d $MY_TMUX_PLUGINS_DIR ]; then mkdir -p $MY_TMUX_PLUGINS_DIR; fi
@@ -18,12 +24,8 @@ if ! [ -d $MY_VIM_DATA_DIR ]; then mkdir -p $MY_VIM_DATA_DIR; fi
 export MY_VIM_STATE_DIR="${XDG_STATE_HOME}/vim"
 if ! [ -d $MY_VIM_STATE_DIR ]; then mkdir -p $MY_VIM_STATE_DIR; fi
 
-
-mkdir -p ${XDG_STATE_HOME}/zsh
-HISTFILE=${XDG_STATE_HOME}/zsh/zsh_history
-HISTSIZE=10000
-SAVEHIST=10000
-SHELL_SESSIONS_DISABLE=1
+# npm
+export NPM_CONFIG_USERCONFIG=$XDG_CONFIG_HOME/npm/config
 
 # less
 export LESSHISTFILE="${XDG_STATE_HOME}/less/lesshst"
