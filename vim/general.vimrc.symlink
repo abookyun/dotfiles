@@ -30,7 +30,7 @@ augroup dynamic_smartcase
 augroup END
 
 " Keyboard Shortcuts
-let mapleader = ','
+let mapleader = ' '
 noremap <silent> <leader>V :source ${XDG_CONFIG_HOME}/vim/vimrc<CR>:filetype detect<CR>:exe ":echo 'vimrc reloaded'"<CR>
 
 nnoremap <leader>d :NERDTreeToggle<CR>
