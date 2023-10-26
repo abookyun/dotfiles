@@ -3,7 +3,9 @@
 
 set directory=$MY_VIM_STATE_DIR,~/,/tmp
 set backupdir=$MY_VIM_STATE_DIR,~/,/tmp
-set viminfo+=n$MY_VIM_STATE_DIR/viminfo
+if !has('nvim')
+  set viminfo+=n$MY_VIM_STATE_DIR/viminfo
+endif
 
 set encoding=utf-8
 set nobackup
