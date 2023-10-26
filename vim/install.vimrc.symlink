@@ -26,7 +26,9 @@ Plug 'mhinz/vim-startify'
 Plug 'preservim/nerdtree'
 Plug 'PhilRunninger/nerdtree-visual-selection'
 Plug 'ryanoasis/vim-devicons'
-Plug 'ctrlpvim/ctrlp.vim'
+" Plug 'ctrlpvim/ctrlp.vim'
+Plug 'junegunn/fzf'
+Plug 'junegunn/fzf.vim'
 
 " Git, Search, Replace and Utils
 Plug 'christoomey/vim-tmux-navigator'

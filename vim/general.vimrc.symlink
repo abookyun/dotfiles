@@ -36,9 +36,8 @@ let mapleader = ' '
 noremap <silent> <leader>r :source ${XDG_CONFIG_HOME}/vim/vimrc<CR>:filetype detect<CR>:exe ":echo 'vimrc reloaded'"<CR>
 
 nnoremap <leader>d :NERDTreeToggle<CR>
-nnoremap <leader>f :NERDTreeFind<CR>
-nnoremap <leader>t :CtrlP<CR>
-nnoremap <leader>T :CtrlPClearCache<CR>:CtrlP<CR>
+nnoremap <leader>l :NERDTreeFind<CR>
+nnoremap <leader>f :FZF<CR>
 nnoremap <leader>g :GitGutterToggle<CR>
 nnoremap <leader>} :TagbarToggle<CR>
 nnoremap <leader>1 :bfirst<CR>

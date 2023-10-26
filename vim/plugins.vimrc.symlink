@@ -26,9 +26,9 @@ let g:limelight_conceal_ctermfg = 240
 
 " Project Navigation
 let g:NERDTreeBookmarksFile = $MY_VIM_STATE_DIR.'/NERDTreeBookmarks'
-let g:ctrlp_show_hidden = 1
+" let g:ctrlp_show_hidden = 1
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip
-let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
+" let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
 
 " Git, Search, Replace and Utils
 let g:gitgutter_enabled = 0
