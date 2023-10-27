@@ -1,7 +1,14 @@
-" Plugin Settings
 " User Interface
 set termguicolors
 colorscheme dracula
+
+" indentline
+let g:vim_json_conceal = 0
+let g:markdown_syntax_conceal = 0
+let g:indentLine_setColors = 0
+let g:indentLine_char_list = ['|', '¦', '┆', '┊']
+
+let g:gitgutter_enabled = 0
 
 let g:airline#extensions#disable_rtp_load = 1
 let g:airline#extensions#tabline#enabled = 1
@@ -14,9 +21,6 @@ set guifont=:h
 set guifont=DroidSansMono_Nerd_Font:h11
 let g:airline_powerline_fonts = 1
 
-let g:indentLine_setColors = 0
-let g:indentLine_char_list = ['|', '¦', '┆', '┊']
-
 " goyo + limelight = zen mode
 autocmd! User GoyoEnter Limelight
 autocmd! User GoyoLeave Limelight!
@@ -26,12 +30,9 @@ let g:limelight_conceal_ctermfg = 240
 
 " Project Navigation
 let g:NERDTreeBookmarksFile = $MY_VIM_STATE_DIR.'/NERDTreeBookmarks'
-" let g:ctrlp_show_hidden = 1
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip
-" let g:ctrlp_custom_ignore = '\v[\/]\.(git|hg|svn)$'
 
 " Git, Search, Replace and Utils
-let g:gitgutter_enabled = 0
 
 " Syntax, Linter and Autocompletion
 " let g:ale_completion_enablbed = 1
