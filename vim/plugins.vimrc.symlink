@@ -5,7 +5,7 @@ colorscheme dracula
 " indentline
 let g:vim_json_conceal = 0
 let g:markdown_syntax_conceal = 0
-let g:indentLine_setColors = 0
+let g:indentLine_setColors = 1
 let g:indentLine_char_list = ['|', '¦', '┆', '┊']
 
 let g:gitgutter_enabled = 0
@@ -13,7 +13,7 @@ let g:gitgutter_enabled = 0
 let g:airline#extensions#disable_rtp_load = 1
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#fnamemod = ':t'
-" let g:airline#extensions#ale#enabled = 1
+let g:airline#extensions#ale#enabled = 1
 let g:airline#extensions#lsp#enabled = 1
 
 " vim-devicons
@@ -35,10 +35,13 @@ set wildignore+=*/tmp/*,*.so,*.swp,*.zip
 " Git, Search, Replace and Utils
 
 " Syntax, Linter and Autocompletion
-" let g:ale_completion_enablbed = 1
+let g:lsp_diagnostics_enabled = 0
+let g:ale_completion_enablbed = 0
+let g:asyncomplete_auto_completeopt = 0
+set completeopt=menuone,noinsert,noselect,preview
 " set omnifunc=ale#completion#OmniFunc
-" let g:ale_floating_window_border = ['│', '─', '╭', '╮', '╯', '╰', '│', '─']
-" let g:ale_floating_window_border = repeat([''], 8)
+let g:ale_floating_window_border = ['│', '─', '╭', '╮', '╯', '╰', '│', '─']
+let g:ale_floating_window_border = repeat([''], 8)
 " let g:ale_linter = {
 "     \ 'ruby': ['vim-lsp', 'ruby-lsp', 'solargraph'],
 "     \ 'vim': ['vim-language-server']
@@ -48,6 +51,9 @@ set wildignore+=*/tmp/*,*.so,*.swp,*.zip
 "     \}
 
 " vim-lsp
+" let g:lsp_log_verbose = 1
+" let g:lsp_log_file = expand('~/vim-lsp.log')
+" let g:asyncomplete_log_file = expand('~/asyncomplete.log')
 let g:lsp_settings_filetype_ruby = ['solargraph']
 function! s:on_lsp_buffer_enabled() abort
     setlocal omnifunc=lsp#complete
@@ -88,36 +94,14 @@ if executable('solargraph')
         \ })
 endif
 
-" ddc
-call ddc#custom#patch_global('ui', 'pum')
-call ddc#custom#patch_global('sources', ['around', 'vim-lsp'])
-call ddc#custom#patch_global('sourceOptions', #{
-      \   vim-lsp: #{
-      \     matchers: ['matcher_head'],
-      \     sorters: ['sorter_rank'],
-      \     mark: 'LSP',
-      \   },
-      \ })
-call ddc#custom#patch_global('sourceOptions', {
-      \ 'around': { 'mark': 'A' },
-      \ '_': {
-      \   'matchers': ['matcher_head'],
-      \   'sorters': ['sorter_rank']},
-      \ })
-call ddc#custom#patch_filetype(['ruby'], 'sources',
-      \ ['around', 'vim-lsp'])
-call ddc#custom#patch_filetype(['vim'], 'sources',
-      \ ['around', 'vim-lsp'])
-call ddc#enable()
-
-inoremap <C-n>   <Cmd>call pum#map#insert_relative(+1)<CR>
-inoremap <C-p>   <Cmd>call pum#map#insert_relative(-1)<CR>
-inoremap <C-y>   <Cmd>call pum#map#confirm()<CR>
-inoremap <C-e>   <Cmd>call pum#map#cancel()<CR>
-inoremap <PageDown> <Cmd>call pum#map#insert_relative_page(+1)<CR>
-inoremap <PageUp>   <Cmd>call pum#map#insert_relative_page(-1)<CR>
-
-call popup_preview#enable()
+if has('python3')
+    let g:UltiSnipsExpandTrigger="<c-e>"
+    call asyncomplete#register_source(asyncomplete#sources#ultisnips#get_source_options({
+        \ 'name': 'ultisnips',
+        \ 'allowlist': ['*'],
+        \ 'completor': function('asyncomplete#sources#ultisnips#completor'),
+        \ }))
+endif
 
 let g:vim_markdown_folding_disabled = 1
 let g:vim_markdown_conceal_code_blocks = 0
