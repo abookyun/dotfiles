@@ -43,18 +43,6 @@ Plug 'editorconfig/editorconfig-vim'
 Plug 'tpope/vim-dispatch'
 
 " Syntax, Linter and Autocompletion
-Plug 'dense-analysis/ale'
-Plug 'rhysd/vim-lsp-ale'
-Plug 'mattn/vim-lsp-settings'
-Plug 'prabirshrestha/vim-lsp'
-Plug 'prabirshrestha/asyncomplete.vim'
-Plug 'prabirshrestha/asyncomplete-lsp.vim'
-Plug 'prabirshrestha/asyncomplete-file.vim'
-if has('python3')
-    Plug 'SirVer/ultisnips'
-    Plug 'honza/vim-snippets'
-    Plug 'prabirshrestha/asyncomplete-ultisnips.vim'
-endif
 Plug 'ervandew/supertab'
 Plug 'vim-ruby/vim-ruby'
 Plug 'tpope/vim-rails'
