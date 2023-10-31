@@ -1,0 +1,25 @@
+- defaults:
+    link:
+      create: true
+      relink: true
+
+- clean:
+    ${XDG_CONFIG_HOME}:
+      recursive: true
+      exclude: [ '${XDG_CACHE_HOME}' ]
+
+- link:
+    ~/.zshenv: zsh/zshenv
+    ${XDG_CONFIG_HOME}/zsh/.zshrc:
+      create: true
+      path: zsh/zshrc
+    ${XDG_CONFIG_HOME}/tmux/tmux.conf:
+      create: true
+      path: tmux/tmux.conf.symlink
+    ${XDG_CONFIG_HOME}/vim/vimrc:
+      create: true
+      path: vim/vimrc.symlink
+    ${XDG_CONFIG_HOME}/vim/general.vimrc: vim/general.vimrc.symlink
+    ${XDG_CONFIG_HOME}/vim/install.vimrc: vim/install.vimrc.symlink
+    ${XDG_CONFIG_HOME}/vim/plugins.vimrc: vim/plugins.vimrc.symlink
+
