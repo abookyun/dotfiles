@@ -9,17 +9,24 @@
       exclude: [ '${XDG_CACHE_HOME}' ]
 
 - link:
+  # spaces needed
+    # zsh
     ~/.zshenv: zsh/zshenv
-    ${XDG_CONFIG_HOME}/zsh/.zshrc:
-      create: true
-      path: zsh/zshrc
-    ${XDG_CONFIG_HOME}/tmux/tmux.conf:
-      create: true
-      path: tmux/tmux.conf.symlink
-    ${XDG_CONFIG_HOME}/vim/vimrc:
-      create: true
-      path: vim/vimrc.symlink
+    ${XDG_CONFIG_HOME}/zsh/.zshrc: zsh/zshrc
+    ${XDG_CONFIG_HOME}/zsh/.p10k.zsh: zsh/p10k.zsh.symlink
+    # git
+    ${XDG_CONFIG_HOME}/git/config: git/config.symlink
+    ${XDG_CONFIG_HOME}/git/config.local: git/config.local.symlink
+    ${XDG_CONFIG_HOME}/git/ignore: git/ignore.symlink
+    # tmux
+    ${XDG_CONFIG_HOME}/tmux/tmux.conf: tmux/tmux.conf.symlink
+    # vim
+    ${XDG_CONFIG_HOME}/vim/vimrc: vim/vimrc.symlink
     ${XDG_CONFIG_HOME}/vim/general.vimrc: vim/general.vimrc.symlink
     ${XDG_CONFIG_HOME}/vim/install.vimrc: vim/install.vimrc.symlink
     ${XDG_CONFIG_HOME}/vim/plugins.vimrc: vim/plugins.vimrc.symlink
-
+    # ruby
+    ${XDG_CONFIG_HOME}/ruby/irbrc: ruby/irbrc.symlink
+    ${XDG_CONFIG_HOME}/ruby/pryrc: ruby/pryrc.symlink
+    # npm
+    ${XDG_CONFIG_HOME}/npm/config: npm/config.symlink
