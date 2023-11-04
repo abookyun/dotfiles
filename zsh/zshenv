@@ -1,15 +1,13 @@
 #!/usr/bin/env zsh
 
-# XDG
+# XDG Paths
 export XDG_CONFIG_HOME="$HOME/.config"
 export XDG_DATA_HOME="$XDG_CONFIG_HOME/local/share"
 export XDG_STATE_HOME="$XDG_CONFIG_HOME/local/state"
 export XDG_CACHE_HOME="$XDG_CONFIG_HOME/cache"
-mkdir -p $XDG_CONFIG_HOME $XDG_DATA_HOME $XDG_STATE_HOME $XDG_CACHE_HOME
 
 # zsh
 export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
-mkdir -p $ZDOTDIR
 
 # vim
 export VIMINIT='let $MYVIMRC="$XDG_CONFIG_HOME/vim/vimrc" | source $MYVIMRC'
