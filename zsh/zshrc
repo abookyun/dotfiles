@@ -5,38 +5,26 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-export DOTFILES=$HOME/.dotfiles
+# General Settings
+source ${ZDOTDIR}/general.zshrc
 
-# all of our zsh files
-typeset -U config_files
-config_files=($DOTFILES/**/*.zsh)
+# Plugin Settings
+# zsh-fast-syntax-highlighting
+# source $(brew --prefix)/share/zsh-fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
 
-# load the path files
-for file in ${(M)config_files:#*/path.zsh}
-do
-  source $file
-done
+# timewarrior
+export TIMEWARRIORDB=${XDG_DATA_HOME}/timewarrior
 
-# load everything but the path and completion files
-for file in ${${config_files:#*/path.zsh}:#*/completion.zsh}
-do
-  source $file
-done
+# tealdeer aka tldr in rust
+export TEALDEER_CONFIG_DIR=${XDG_CONFIG_HOME}/tealdeer
+# autocompletion info:
+# https://github.com/dbrgn/tealdeer/blob/main/docs/src/installing.md#autocompletion
 
-# initialize autocomplete here, otherwise functions won't be loaded
-autoload -U compinit
-_comp_options+=(globdots) # With hidden files
-# compaudit | xargs chmod g-w
-# https://unix.stackexchange.com/questions/383365/zsh-compinit-insecure-directories-run-compaudit-for-list
-compinit -d ${XDG_CACHE_HOME}/zsh/zcompdump-$ZSH_VERSION-by-$(whoami)
+# PATH and FPATH
+FPATH=$(brew --prefix)/share/zsh-completions:$FPATH
 
-# load every completion after autocomplete loads
-for file in ${(M)config_files:#*/completion.zsh}
-do
-  source $file
-done
-
-unset config_files
+# Completion
+source ${ZDOTDIR}/completion.zshrc
 
 source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh

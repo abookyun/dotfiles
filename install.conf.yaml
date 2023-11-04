@@ -10,7 +10,13 @@
     - ${XDG_CONFIG_HOME}
     - ${XDG_CACHE_HOME}
     - ${XDG_DATA_HOME}
+    - ${XDG_DATA_HOME}/zsh
+    - ${XDG_DATA_HOME}/vim
+    - ${XDG_DATA_HOME}/tmux/plugins
     - ${XDG_STATE_HOME}
+    - ${XDG_STATE_HOME}/zsh
+    - ${XDG_STATE_HOME}/vim
+    - ${XDG_STATE_HOME}/tmux
 
 - clean:
   # spaces needed
@@ -22,6 +28,8 @@
     # zsh
     ~/.zshenv: zsh/zshenv
     ${XDG_CONFIG_HOME}/zsh/.zshrc: zsh/zshrc
+    ${XDG_CONFIG_HOME}/zsh/general.zshrc: zsh/general.zshrc.symlink
+    ${XDG_CONFIG_HOME}/zsh/completion.zshrc: zsh/completion.zshrc.symlink
     ${XDG_CONFIG_HOME}/zsh/.p10k.zsh: zsh/p10k.zsh.symlink
     # git
     ${XDG_CONFIG_HOME}/git/config: git/config.symlink
