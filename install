@@ -19,3 +19,5 @@ git submodule update --init --recursive "${DOTBOT_DIR}"
 
 # install homebrew and brew bundle
 "${BASEDIR}/scripts/brew.sh"
+# install tmux tpm
+"${BASEDIR}/scripts/tpm.sh"
