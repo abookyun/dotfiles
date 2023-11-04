@@ -8,14 +8,14 @@
   # spaces needed
     # XDG Paths
     - ${XDG_CONFIG_HOME}
-    - ${XDG_DATA_HOME}
     - ${XDG_CACHE_HOME}
+    - ${XDG_DATA_HOME}
     - ${XDG_STATE_HOME}
 
 - clean:
+  # spaces needed
     ${XDG_CONFIG_HOME}:
       recursive: true
-      exclude: [ '${XDG_CACHE_HOME}', '${XDG_DATA_HOME}' ]
 
 - link:
   # spaces needed
