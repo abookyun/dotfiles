@@ -9,7 +9,9 @@ brew "lazygit"
 brew "vim"
 brew "tmux"
 brew "mas"
-mas "1Password 7"                    , id: 1333542190  # 1Password 7
+# Mac App Store version of 1Password 7 doesn't support lifetime license
+# download via https://app-updates.agilebits.com/download/OPM7
+# mas "1Password 7"                    , id: 1333542190  # 1Password 7
 cask "alfred"
 cask "obsidian"
 cask "mark-text"
