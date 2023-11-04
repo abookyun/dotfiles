@@ -15,7 +15,7 @@
 - clean:
     ${XDG_CONFIG_HOME}:
       recursive: true
-      exclude: [ '${XDG_CACHE_HOME}' ]
+      exclude: [ '${XDG_CACHE_HOME}', '${XDG_DATA_HOME}' ]
 
 - link:
   # spaces needed
