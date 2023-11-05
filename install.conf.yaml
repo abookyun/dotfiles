@@ -13,6 +13,7 @@
     - ${XDG_DATA_HOME}/zsh
     - ${XDG_DATA_HOME}/vim
     - ${XDG_DATA_HOME}/tmux/plugins
+    - ${XDG_DATA_HOME}/asdf
     - ${XDG_STATE_HOME}
     - ${XDG_STATE_HOME}/zsh
     - ${XDG_STATE_HOME}/vim
@@ -42,6 +43,9 @@
     ${XDG_CONFIG_HOME}/vim/general.vimrc: vim/general.vimrc.symlink
     ${XDG_CONFIG_HOME}/vim/install.vimrc: vim/install.vimrc.symlink
     ${XDG_CONFIG_HOME}/vim/plugins.vimrc: vim/plugins.vimrc.symlink
+    # asdf
+    ${XDG_CONFIG_HOME}/asdf/asdfrc: asdf/asdfrc
+    ~/.tool-versions: asdf/tool-versions
     # ruby
     ${XDG_CONFIG_HOME}/ruby/irbrc: ruby/irbrc.symlink
     ${XDG_CONFIG_HOME}/ruby/pryrc: ruby/pryrc.symlink
