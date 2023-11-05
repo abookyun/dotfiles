@@ -1,7 +1,6 @@
 # zsh exports
 export LC_ALL=en_US.UTF-8
 
-mkdir -p ${XDG_STATE_HOME}/zsh
 HISTFILE=${XDG_STATE_HOME}/zsh/zsh_history
 HISTSIZE=10000
 SAVEHIST=10000
