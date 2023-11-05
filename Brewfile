@@ -8,6 +8,7 @@ brew "git"
 brew "lazygit"
 brew "vim"
 brew "tmux"
+brew "asdf"
 brew "mas"
 # Mac App Store version of 1Password 7 doesn't support lifetime license
 # download via https://app-updates.agilebits.com/download/OPM7
