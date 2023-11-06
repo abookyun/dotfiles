@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 setup_gitconfig () {
-  if ! [ -f git/config.local.symlink ]
+  if ! [ -f git/config.local ]
   then
     echo 'setup gitconfig.local'
 
@@ -12,13 +12,13 @@ setup_gitconfig () {
     echo '- What is your github author email?'
     read -e git_authoremail
 
-    sed -e "s/AUTHORNAME/$git_authorname/g" -e "s/AUTHOREMAIL/$git_authoremail/g" -e "s/GIT_CREDENTIAL_HELPER/$git_credential/g" git/config.local.symlink.example > git/config.local.symlink
+    sed -e "s/AUTHORNAME/$git_authorname/g" -e "s/AUTHOREMAIL/$git_authoremail/g" -e "s/GIT_CREDENTIAL_HELPER/$git_credential/g" git/config.local.example > git/config.local
 
     echo 'git/config.local has been created'
   fi
 }
 
-if ! [ -f git/config.local.symlink ]
+if ! [ -f git/config.local ]
 then
   echo 'git/config.local not found, do you want to create?(y/n)'
   read -n 1 action

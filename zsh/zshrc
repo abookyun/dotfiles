@@ -6,7 +6,7 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
 fi
 
 # General Settings
-source ${ZDOTDIR}/general.zshrc
+source ${ZDOTDIR}/general.zsh
 
 # Plugin Settings
 # zsh-fast-syntax-highlighting
@@ -27,7 +27,7 @@ source "${XDG_DATA_HOME}/asdf/installs/rust/1.73.0/env"
 FPATH=$(brew --prefix)/share/zsh-completions:$FPATH
 
 # Completion
-source ${ZDOTDIR}/completion.zshrc
+source ${ZDOTDIR}/completion.zsh
 
 source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
