@@ -30,6 +30,7 @@
     # zsh
     ~/.zshenv: zsh/zshenv
     ${XDG_CONFIG_HOME}/zsh/.zshrc: zsh/zshrc
+    ${XDG_CONFIG_HOME}/zsh/aliases.zsh: zsh/aliases.zsh
     ${XDG_CONFIG_HOME}/zsh/general.zsh: zsh/general.zsh
     ${XDG_CONFIG_HOME}/zsh/completion.zsh: zsh/completion.zsh
     ${XDG_CONFIG_HOME}/zsh/.p10k.zsh: zsh/p10k.zsh
