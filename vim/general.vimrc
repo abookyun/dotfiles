@@ -8,7 +8,7 @@ if !has('nvim')
 endif
 
 set encoding=utf-8
-set nobackup
+set nobackup noswapfile autowriteall hidden
 set mouse=a
 set number relativenumber
 set cursorline cursorcolumn

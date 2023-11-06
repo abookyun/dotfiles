@@ -8,34 +8,48 @@
   # spaces needed
     # XDG Paths
     - ${XDG_CONFIG_HOME}
-    - ${XDG_DATA_HOME}
     - ${XDG_CACHE_HOME}
+    - ${XDG_DATA_HOME}
+    - ${XDG_DATA_HOME}/zsh
+    - ${XDG_DATA_HOME}/vim
+    - ${XDG_DATA_HOME}/tmux/plugins
+    - ${XDG_DATA_HOME}/asdf
     - ${XDG_STATE_HOME}
+    - ${XDG_STATE_HOME}/zsh
+    - ${XDG_STATE_HOME}/vim
+    - ${XDG_STATE_HOME}/tmux
+    - ${XDG_STATE_HOME}/node
 
 - clean:
+  # spaces needed
     ${XDG_CONFIG_HOME}:
       recursive: true
-      exclude: [ '${XDG_CACHE_HOME}', '${XDG_DATA_HOME}' ]
 
 - link:
   # spaces needed
     # zsh
     ~/.zshenv: zsh/zshenv
     ${XDG_CONFIG_HOME}/zsh/.zshrc: zsh/zshrc
-    ${XDG_CONFIG_HOME}/zsh/.p10k.zsh: zsh/p10k.zsh.symlink
+    ${XDG_CONFIG_HOME}/zsh/aliases.zsh: zsh/aliases.zsh
+    ${XDG_CONFIG_HOME}/zsh/general.zsh: zsh/general.zsh
+    ${XDG_CONFIG_HOME}/zsh/completion.zsh: zsh/completion.zsh
+    ${XDG_CONFIG_HOME}/zsh/.p10k.zsh: zsh/p10k.zsh
     # git
-    ${XDG_CONFIG_HOME}/git/config: git/config.symlink
-    ${XDG_CONFIG_HOME}/git/config.local: git/config.local.symlink
-    ${XDG_CONFIG_HOME}/git/ignore: git/ignore.symlink
+    ${XDG_CONFIG_HOME}/git/config: git/config
+    ${XDG_CONFIG_HOME}/git/config.local: git/config.local
+    ${XDG_CONFIG_HOME}/git/ignore: git/ignore
     # tmux
-    ${XDG_CONFIG_HOME}/tmux/tmux.conf: tmux/tmux.conf.symlink
+    ${XDG_CONFIG_HOME}/tmux/tmux.conf: tmux/tmux.conf
     # vim
-    ${XDG_CONFIG_HOME}/vim/vimrc: vim/vimrc.symlink
-    ${XDG_CONFIG_HOME}/vim/general.vimrc: vim/general.vimrc.symlink
-    ${XDG_CONFIG_HOME}/vim/install.vimrc: vim/install.vimrc.symlink
-    ${XDG_CONFIG_HOME}/vim/plugins.vimrc: vim/plugins.vimrc.symlink
+    ${XDG_CONFIG_HOME}/vim/vimrc: vim/vimrc
+    ${XDG_CONFIG_HOME}/vim/general.vimrc: vim/general.vimrc
+    ${XDG_CONFIG_HOME}/vim/install.vimrc: vim/install.vimrc
+    ${XDG_CONFIG_HOME}/vim/plugins.vimrc: vim/plugins.vimrc
+    # asdf
+    ${XDG_CONFIG_HOME}/asdf/asdfrc: asdf/asdfrc
+    ~/.tool-versions: asdf/tool-versions
     # ruby
-    ${XDG_CONFIG_HOME}/ruby/irbrc: ruby/irbrc.symlink
-    ${XDG_CONFIG_HOME}/ruby/pryrc: ruby/pryrc.symlink
+    ${XDG_CONFIG_HOME}/ruby/irbrc: ruby/irbrc
+    ${XDG_CONFIG_HOME}/ruby/pryrc: ruby/pryrc
     # npm
-    ${XDG_CONFIG_HOME}/npm/config: npm/config.symlink
+    ${XDG_CONFIG_HOME}/npm/config: npm/config
