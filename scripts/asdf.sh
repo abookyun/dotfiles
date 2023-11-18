@@ -1,6 +1,16 @@
-asdf plugin add ruby https://github.com/asdf-vm/asdf-ruby.git
-asdf plugin add python https://github.com/asdf-community/asdf-python.git
-asdf plugin add nodejs https://github.com/asdf-vm/asdf-nodejs.git
-asdf plugin add golang https://github.com/asdf-community/asdf-golang.git
-asdf plugin add rust https://github.com/code-lever/asdf-rust.git
-asdf install
+#!/usr/bin/env bash
+
+echo 'setting up asdf'
+
+if [ -f ~/.tool-versions ]
+then
+  plugins=$(asdf plugin list)
+  installed=$(asdf list)
+  for tool in $(cut -d " " -f 1 ~/.tool-versions);
+  do
+    [[ ! $plugins =~ $tool ]] && asdf plugin add $tool
+    [[ ! $installed =~ $tool ]] && asdf install $tool
+  done
+fi
+
+echo 'asdf setup complete'

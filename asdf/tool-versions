@@ -3,3 +3,6 @@ python 3.12.0
 nodejs 21.1.0
 golang 1.21.3
 rust 1.73.0
+sqlite 3.44.0
+mysql 8.0.34
+redis 7.2.3
