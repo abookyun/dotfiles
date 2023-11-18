@@ -41,6 +41,7 @@ Plug 'mg979/vim-visual-multi'
 Plug 'godlygeek/tabular'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'tpope/vim-dispatch'
+Plug 'mbbill/undotree'
 
 " Syntax, Linter and Autocompletion
 Plug 'ervandew/supertab'
