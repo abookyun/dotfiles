@@ -20,11 +20,16 @@ export TIMEWARRIORDB=${XDG_DATA_HOME}/timewarrior
 export TEALDEER_CONFIG_DIR=${XDG_CONFIG_HOME}/tealdeer
 # autocompletion info:
 # https://github.com/dbrgn/tealdeer/blob/main/docs/src/installing.md#autocompletion
+# asdf install postgres needs pkg-config and icu4c
+export LDFLAGS="-L$(brew --prefix icu4c)/lib"
+export CPPFLAGS="-I$(brew --prefix icu4c)/include"
+export PKG_CONFIG_PATH="$(brew --prefix icu4c)/lib/pkgconfig"
 
 source ${XDG_CONFIG_HOME}/asdf/asdfrc
 source "${XDG_DATA_HOME}/asdf/installs/rust/1.73.0/env"
 
 # PATH and FPATH
+# PATH=~/.dotfiles/functions:$PATH
 FPATH=$(brew --prefix)/share/zsh-completions:$FPATH
 
 # Completion
