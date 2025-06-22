@@ -37,7 +37,9 @@
     ${XDG_CONFIG_HOME}/zsh/.p10k.zsh: zsh/p10k.zsh
     # git
     ${XDG_CONFIG_HOME}/git/config: git/config
-    ${XDG_CONFIG_HOME}/git/config.local: git/config.local
+    ${XDG_CONFIG_HOME}/git/config.local: 
+      ignore-missing: true
+      path: git/config.local
     ${XDG_CONFIG_HOME}/git/ignore: git/ignore
     # tmux
     ${XDG_CONFIG_HOME}/tmux/tmux.conf: tmux/tmux.conf
