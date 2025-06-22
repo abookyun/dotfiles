@@ -20,5 +20,11 @@ jobs:
           ./install
 
       - name: Verify shell config
+        shell: zsh -i {0}
         run: |
           test -f "$HOME/.zshenv"
+          if [ -n "$XDG_CONFIG_HOME" ]; then
+            echo "[OK] XDG_CONFIG_HOME: $XDG_CONFIG_HOME"
+          else
+            echo "[WARN] $XDG_CONFIG_HOME is not set"
+          fi
