@@ -1,0 +1,24 @@
+name: Test dotfiles on macOS
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test-dotfiles:
+    runs-on: macos-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Run setup script
+        run: |
+          chmod +x ./install
+          ./install
+
+      - name: Verify shell config
+        run: |
+          test -f "$HOME/.zshenv"
