@@ -17,6 +17,7 @@ git submodule update --init --recursive "${DOTBOT_DIR}"
 
 "${BASEDIR}/${DOTBOT_DIR}/${DOTBOT_BIN}" -d "${BASEDIR}" -c "${CONFIG}" "${@}"
 
+source ~/.zshenv
 # macos defaluts: https://macos-defaults.com
 # ref: https://github.com/mathiasbynens/dotfiles/blob/master/.macos
 "${BASEDIR}/scripts/macos.sh"
