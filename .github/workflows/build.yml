@@ -2,7 +2,7 @@ name: Test dotfiles on macOS
 
 on:
   push:
-    branches: [ main ]
+    branches: [ main, github-action ]
   pull_request:
     branches: [ main ]
 
