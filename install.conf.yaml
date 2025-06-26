@@ -1,11 +1,23 @@
 - defaults:
-  # spaces needed
+  # indent needed
     link:
       create: true
       relink: true
 
+- link:
+  # indent needed
+    ~/.zshenv: zsh/zshenv
+
+- shell:
+    - chsh -s $(which zsh)
+    -
+      command: read XDG_CONFIG_HOME && echo $XDG_CONFIG_HOME
+      stdin: true
+      stdout: true
+      quiet: true
+
 - create:
-  # spaces needed
+  # indent needed
     # XDG Paths
     - ${XDG_CONFIG_HOME}
     - ${XDG_CACHE_HOME}
@@ -22,14 +34,13 @@
     - ${XDG_STATE_HOME}/ruby
 
 - clean:
-  # spaces needed
+  # indent needed
     ${XDG_CONFIG_HOME}:
       recursive: true
 
 - link:
-  # spaces needed
+  # indent needed
     # zsh
-    ~/.zshenv: zsh/zshenv
     ${XDG_CONFIG_HOME}/zsh/.zshrc: zsh/zshrc
     ${XDG_CONFIG_HOME}/zsh/aliases.zsh: zsh/aliases.zsh
     ${XDG_CONFIG_HOME}/zsh/general.zsh: zsh/general.zsh
@@ -37,7 +48,7 @@
     ${XDG_CONFIG_HOME}/zsh/.p10k.zsh: zsh/p10k.zsh
     # git
     ${XDG_CONFIG_HOME}/git/config: git/config
-    ${XDG_CONFIG_HOME}/git/config.local: 
+    ${XDG_CONFIG_HOME}/git/config.local:
       ignore-missing: true
       path: git/config.local
     ${XDG_CONFIG_HOME}/git/ignore: git/ignore
