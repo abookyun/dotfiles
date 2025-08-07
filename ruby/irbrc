@@ -1,11 +1,7 @@
 #!/usr/bin/ruby
 
 require 'irb/completion'
-require 'irb/ext/save-history'
-require 'awesome_print'
 require 'pry'
-
-AwesomePrint.irb!
 
 IRB.conf[:PROMPT_MODE] = :DEFAULT
 IRB.conf[:AUTO_INDENT] = true

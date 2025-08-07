@@ -19,6 +19,7 @@
     - ${XDG_STATE_HOME}/vim
     - ${XDG_STATE_HOME}/tmux
     - ${XDG_STATE_HOME}/node
+    - ${XDG_STATE_HOME}/ruby
 
 - clean:
   # spaces needed
