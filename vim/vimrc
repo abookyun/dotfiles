@@ -1,6 +1,7 @@
 " Environment
 set runtimepath=$MY_VIM_DATA_DIR,$MY_VIM_DATA_DIR/after,$VIM,$VIMRUNTIME
 let $MYVIMRC=$MY_VIM_CONFIG_DIR.'/vimrc'
+set viminfofile=$XDG_DATA_HOME/vim/viminfo
 
 " Better vimrc
 source $MY_VIM_CONFIG_DIR/general.vimrc
