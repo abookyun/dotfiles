@@ -11,17 +11,23 @@ then
   fi
 
   # Check for Brewfile
-  if test $DOTFILES_ROOT/Brewfile
+  if test ../Brewfile
   then
-    echo "Brewfile detected, would you like to run brew bundle now?(y/n)"
-    read -n 1 action
+    if [ "$CI" = "true" ]; then
+      echo "CI environment detected, running brew bundle automatically"
+      cd .. && brew bundle
+      echo "brew bundle completed!"
+    else
+      echo "Brewfile detected, would you like to run brew bundle now?(y/n)"
+      read -n 1 action
 
-    case "$action" in
-      y )
-        brew bundle --no-lock
-        echo "brew bundle completed!";;
-      * )
-        echo "brew bundle aborted!";;
-    esac
+      case "$action" in
+        y )
+          cd .. && brew bundle
+          echo "brew bundle completed!";;
+        * )
+          echo "brew bundle aborted!";;
+      esac
+    fi
   fi
 fi
