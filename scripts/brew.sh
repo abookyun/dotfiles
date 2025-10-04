@@ -17,7 +17,11 @@ then
       echo "CI environment detected, running brew bundle automatically"
       SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
       BREWFILE_DIR="$(cd "$SCRIPT_DIR/.." && pwd)"
-      cd "$BREWFILE_DIR" && brew bundle
+      cd "$BREWFILE_DIR"
+      # Create CI Brewfile without mas commands
+      grep -v '^mas ' Brewfile > Brewfile.ci
+      brew bundle --file=Brewfile.ci
+      rm Brewfile.ci
       echo "brew bundle completed!"
     else
       echo "Brewfile detected, would you like to run brew bundle now?(y/n)"
