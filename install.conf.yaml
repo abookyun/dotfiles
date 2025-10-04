@@ -9,12 +9,9 @@
     ~/.zshenv: zsh/zshenv
 
 - shell:
-    - chsh -s $(which zsh)
     -
-      command: read XDG_CONFIG_HOME && echo $XDG_CONFIG_HOME
-      stdin: true
-      stdout: true
-      quiet: true
+      command: chsh -s $(which zsh)
+      if: '[ "$CI" != "true" ]'
 
 - create:
   # indent needed
