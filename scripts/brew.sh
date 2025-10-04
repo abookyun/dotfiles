@@ -15,7 +15,9 @@ then
   then
     if [ "$CI" = "true" ]; then
       echo "CI environment detected, running brew bundle automatically"
-      cd .. && brew bundle
+      SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+      BREWFILE_DIR="$(cd "$SCRIPT_DIR/.." && pwd)"
+      cd "$BREWFILE_DIR" && brew bundle
       echo "brew bundle completed!"
     else
       echo "Brewfile detected, would you like to run brew bundle now?(y/n)"
