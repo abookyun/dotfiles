@@ -48,7 +48,7 @@ test_and_report "\$VIMINIT should be $expected_vimrc" '[ "$VIMINIT" = "$expected
 
 # 7. $XDG_CONFIG_HOME/zsh/.zshrc symlink to .dotfiles/zsh/zshrc check
 zshrc_path="$XDG_CONFIG_HOME/zsh/.zshrc"
-dotfiles_zshrc_path="$HOME/.dotfiles/zsh/zshrc"
+dotfiles_zshrc_path="$PWD/zsh/zshrc"
 test_and_report "$zshrc_path should exist" '[ -e "$zshrc_path" ]'
 test_and_report "$zshrc_path should be a symbolic link" '[ -L "$zshrc_path" ]'
 if [ -L "$zshrc_path" ]; then
@@ -58,7 +58,7 @@ fi
 
 # 8. $XDG_CONFIG_HOME/vim/vimrc symlink to .dotfiles/vim/vimrc
 vimrc_path="$XDG_CONFIG_HOME/vim/vimrc"
-dotfiles_vimrc_path="$HOME/.dotfiles/vim/vimrc"
+dotfiles_vimrc_path="$PWD/vim/vimrc"
 test_and_report "$vimrc_path should exist" '[ -e "$vimrc_path" ]'
 test_and_report "$vimrc_path should be a symbolic link" '[ -L "$vimrc_path" ]'
 if [ -L "$vimrc_path" ]; then
@@ -68,7 +68,7 @@ fi
 
 # 9. $XDG_CONFIG_HOME/git/config symlink to .dotfiles/git/config
 gitconfig_path="$XDG_CONFIG_HOME/git/config"
-dotfiles_gitconfig_path="$HOME/.dotfiles/git/config"
+dotfiles_gitconfig_path="$PWD/git/config"
 test_and_report "$gitconfig_path should exist" '[ -e "$gitconfig_path" ]'
 test_and_report "$gitconfig_path should be a symbolic link" '[ -L "$gitconfig_path" ]'
 if [ -L "$gitconfig_path" ]; then
@@ -78,7 +78,7 @@ fi
 
 # 10. $XDG_CONFIG_HOME/tmux/tmux.conf symlink to .dotfiles/tmux/tmux.conf
 tmuxconf_path="$XDG_CONFIG_HOME/tmux/tmux.conf"
-dotfiles_tmuxconf_path="$HOME/.dotfiles/tmux/tmux.conf"
+dotfiles_tmuxconf_path="$PWD/tmux/tmux.conf"
 test_and_report "$tmuxconf_path should exist" '[ -e "$tmuxconf_path" ]'
 test_and_report "$tmuxconf_path should be a symbolic link" '[ -L "$tmuxconf_path" ]'
 if [ -L "$tmuxconf_path" ]; then
@@ -88,7 +88,7 @@ fi
 
 # 11. $XDG_CONFIG_HOME/asdf/asdfrc symlink to .dotfiles/asdf/asdfrc
 asdfrc_path="$XDG_CONFIG_HOME/asdf/asdfrc"
-dotfiles_asdfrc_path="$HOME/.dotfiles/asdf/asdfrc"
+dotfiles_asdfrc_path="$PWD/asdf/asdfrc"
 test_and_report "$asdfrc_path should exist" '[ -e "$asdfrc_path" ]'
 test_and_report "$asdfrc_path should be a symbolic link" '[ -L "$asdfrc_path" ]'
 if [ -L "$asdfrc_path" ]; then
