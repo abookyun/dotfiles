@@ -8,11 +8,6 @@
   # indent needed
     ~/.zshenv: zsh/zshenv
 
-- shell:
-    -
-      command: chsh -s $(which zsh)
-      if: '[ "$CI" != "true" ]'
-
 - create:
   # indent needed
     # XDG Paths

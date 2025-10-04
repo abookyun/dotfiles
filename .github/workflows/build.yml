@@ -15,12 +15,14 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Run setup script
+        shell: zsh {0}
         run: |
+          source ~/.zshenv
           chmod +x ./install
           ./install
 
       - name: Verify shell config
-        shell: zsh -i {0}
+        shell: zsh {0}
         run: |
           test -f "$HOME/.zshenv"
           source ~/.zshenv
