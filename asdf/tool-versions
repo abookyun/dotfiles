@@ -1,9 +1,7 @@
 ruby 3.4.5
 python 3.13.0
-nodejs 21.1.0
-golang 1.21.3
-rust 1.73.0
-sqlite 3.44.0
-mysql 8.0.34
-redis 7.2.3
+rust 1.83.0
+nodejs 22.13.0
 postgres 17.5
+sqlite 3.44.0
+redis 7.2.3
