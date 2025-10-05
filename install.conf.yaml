@@ -67,3 +67,4 @@
     ${XDG_CONFIG_HOME}/wget/wgetrc: wget/wgetrc
     # python
     ${XDG_CONFIG_HOME}/python/pythonrc: python/pythonrc
+    ${XDG_CONFIG_HOME}/python/matplotlibrc: python/matplotlibrc

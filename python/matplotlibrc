@@ -1,0 +1,23 @@
+# Matplotlib configuration file
+# This file controls the default behavior of matplotlib
+
+# Backend (for non-interactive plots)
+backend: Agg
+
+# Figure settings
+figure.figsize: 8, 6
+figure.dpi: 100
+figure.facecolor: white
+
+# Font settings
+font.size: 12
+font.family: sans-serif
+
+# Axes settings
+axes.grid: True
+axes.grid.alpha: 0.3
+
+# Save settings
+savefig.dpi: 300
+savefig.format: png
+savefig.bbox: tight
