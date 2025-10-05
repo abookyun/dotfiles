@@ -1,6 +1,3 @@
-tap "homebrew/bundle"
-tap "homebrew/services"
-
 # Essentials
 cask "iterm2"
 brew "zsh-vi-mode"
@@ -85,7 +82,7 @@ cask "maestral"  # open-source dropbox client
 cask "bike"
 cask "aerial"
 cask "transmission"
-cask "sequel-pro"
+# cask "sequel-pro"
 # cask "macs-fan-control"
 # cask "macvim"
 # cask "openbb-terminal"
