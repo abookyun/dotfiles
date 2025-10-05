@@ -37,7 +37,7 @@ export CPPFLAGS="-I$(brew --prefix icu4c)/include"
 export PKG_CONFIG_PATH="$(brew --prefix icu4c)/lib/pkgconfig"
 
 source ${XDG_CONFIG_HOME}/asdf/asdfrc
-source "${XDG_DATA_HOME}/asdf/installs/rust/1.73.0/env"
+source "${XDG_DATA_HOME}/asdf/installs/rust/1.83.0/env"
 
 # PATH and FPATH
 # PATH=~/.dotfiles/functions:$PATH
