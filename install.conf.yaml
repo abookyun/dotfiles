@@ -12,7 +12,9 @@
   # indent needed
     # XDG Paths
     - ${XDG_CONFIG_HOME}
+    - ${XDG_CONFIG_HOME}/wget
     - ${XDG_CACHE_HOME}
+    - ${XDG_CACHE_HOME}/wget
     - ${XDG_DATA_HOME}
     - ${XDG_DATA_HOME}/zsh
     - ${XDG_DATA_HOME}/vim
@@ -59,3 +61,5 @@
     ${XDG_CONFIG_HOME}/ruby/pryrc: ruby/pryrc
     # npm
     ${XDG_CONFIG_HOME}/npm/config: npm/config
+    # wget
+    ${XDG_CONFIG_HOME}/wget/wgetrc: wget/wgetrc
