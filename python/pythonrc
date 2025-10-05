@@ -1,0 +1,31 @@
+# Python startup file
+# This file is executed when Python starts in interactive mode
+
+import os
+import sys
+
+# Enable history and tab completion if available
+try:
+    import readline
+    import rlcompleter
+
+    # Enable tab completion
+    readline.parse_and_bind("tab: complete")
+
+    # Set history file location using XDG_STATE_HOME
+    xdg_state_home = os.environ.get('XDG_STATE_HOME', os.path.join(os.path.expanduser("~"), ".local", "state"))
+    histfile = os.path.join(xdg_state_home, "python", "history")
+    os.makedirs(os.path.dirname(histfile), exist_ok=True)
+
+    try:
+        readline.read_history_file(histfile)
+        # Default history file size
+        readline.set_history_length(1000)
+    except FileNotFoundError:
+        pass
+
+    import atexit
+    atexit.register(readline.write_history_file, histfile)
+
+except ImportError:
+    pass

@@ -13,6 +13,7 @@
     # XDG Paths
     - ${XDG_CONFIG_HOME}
     - ${XDG_CONFIG_HOME}/wget
+    - ${XDG_CONFIG_HOME}/python
     - ${XDG_CACHE_HOME}
     - ${XDG_CACHE_HOME}/wget
     - ${XDG_DATA_HOME}
@@ -26,6 +27,7 @@
     - ${XDG_STATE_HOME}/tmux
     - ${XDG_STATE_HOME}/node
     - ${XDG_STATE_HOME}/ruby
+    - ${XDG_STATE_HOME}/python
 
 - clean:
   # indent needed
@@ -63,3 +65,5 @@
     ${XDG_CONFIG_HOME}/npm/config: npm/config
     # wget
     ${XDG_CONFIG_HOME}/wget/wgetrc: wget/wgetrc
+    # python
+    ${XDG_CONFIG_HOME}/python/pythonrc: python/pythonrc
