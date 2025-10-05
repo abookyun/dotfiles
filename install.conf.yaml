@@ -8,6 +8,9 @@
   # indent needed
     ~/.zshenv: zsh/zshenv
 
+- shell:
+    - source ~/.zshenv
+
 - create:
   # indent needed
     # XDG Paths
