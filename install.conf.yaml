@@ -14,6 +14,9 @@
     - ${XDG_CONFIG_HOME}
     - ${XDG_CONFIG_HOME}/wget
     - ${XDG_CONFIG_HOME}/python
+    - ${XDG_CONFIG_HOME}/matplotlib
+    - ${XDG_CONFIG_HOME}/ipython
+    - ${XDG_CONFIG_HOME}/jupyter
     - ${XDG_CACHE_HOME}
     - ${XDG_CACHE_HOME}/wget
     - ${XDG_DATA_HOME}
@@ -67,4 +70,9 @@
     ${XDG_CONFIG_HOME}/wget/wgetrc: wget/wgetrc
     # python
     ${XDG_CONFIG_HOME}/python/pythonrc: python/pythonrc
-    ${XDG_CONFIG_HOME}/python/matplotlibrc: python/matplotlibrc
+    # matplotlib
+    ${XDG_CONFIG_HOME}/matplotlib/matplotlibrc: matplotlib/matplotlibrc
+    # ipython
+    ${XDG_CONFIG_HOME}/ipython/ipython_config.py: ipython/ipython_config.py
+    # jupyter
+    ${XDG_CONFIG_HOME}/jupyter/jupyter_config.py: jupyter/jupyter_config.py
