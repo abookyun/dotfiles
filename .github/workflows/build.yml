@@ -14,6 +14,17 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v4
 
+      - name: Set environment variables from zshenv
+        shell: zsh {0}
+        run: |
+          source zsh/zshenv
+          echo "XDG_CONFIG_HOME=$XDG_CONFIG_HOME" >> $GITHUB_ENV
+          echo "XDG_CACHE_HOME=$XDG_CACHE_HOME" >> $GITHUB_ENV
+          echo "XDG_DATA_HOME=$XDG_DATA_HOME" >> $GITHUB_ENV
+          echo "XDG_STATE_HOME=$XDG_STATE_HOME" >> $GITHUB_ENV
+          echo "ZDOTDIR=$ZDOTDIR" >> $GITHUB_ENV
+          echo "VIMINIT=$VIMINIT" >> $GITHUB_ENV
+
       - name: Run setup script
         shell: zsh {0}
         run: |
