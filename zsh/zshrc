@@ -48,6 +48,11 @@ source ${ZDOTDIR}/completion.zsh
 
 source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+# zsh-vi-mode 回調函數：在 vi-mode 初始化後重新設定歷史搜尋
+function zvm_after_init() {
+  bindkey "^[[A" history-beginning-search-backward
+  bindkey "^[[B" history-beginning-search-forward
+}
 source $(brew --prefix)/opt/zsh-vi-mode/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh
 source $(brew --prefix asdf)/libexec/asdf.sh
 source $(brew --prefix)/share/powerlevel10k/powerlevel10k.zsh-theme
