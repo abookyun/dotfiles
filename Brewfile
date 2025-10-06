@@ -12,8 +12,9 @@ brew "mas"
 # mas "1Password 7"                    , id: 1333542190  # 1Password 7
 cask "alfred"
 cask "obsidian"
-cask "logseq"
-cask "mark-text"
+# cask "logseq"
+# cask "mark-text"
+cask "markedit"
 cask "sublime-text"
 cask "telegram"
 cask "welly"  # BBS client
@@ -33,6 +34,8 @@ mas "Amphetamine"                  , id: 937984704  # keep computer awake
 brew "openssl"
 brew "ag"  # the silver searcher
 brew "fzf"  # fuzzy finder
+brew "fd"  # better find
+brew "ripgrep"  # better grep
 brew "bat"  # better cat
 brew "eza"  # better ls
 brew "tree"  # show folder as tree
@@ -40,7 +43,8 @@ brew "tealdeer"  # fast tldr written in rust
 brew "readline"
 brew "universal-ctags"
 brew "mobile-shell"  # better ssh
-brew "hub"  # github cli
+# brew "hub"  # github cli
+brew "gh"  # github official cli app
 brew "curl"
 # not fast for man: https://github.com/zdharma-continuum/fast-syntax-highlighting/issues/27
 # brew "zsh-fast-syntax-highlighting"
@@ -54,7 +58,7 @@ brew "timewarrior"
 brew "wget"
 # brew "sqlite"
 # brew "postgresql@16"
-brew "pgcli"
+# brew "pgcli"
 # brew "mysql"
 # brew "redis"
 # brew "perl"
@@ -69,19 +73,19 @@ brew "pgcli"
 # brew "ffmpeg"
 # brew "handbrake"
 # brew "youtube-dl"
-# brew "yt-dlp"
+brew "yt-dlp"
 
 # More cask
-cask "istat-menus"
+# cask "istat-menus"
 cask "firefox"
 cask "adguard"
-cask "hiddenbar"
+# cask "hiddenbar"
 cask "transmit"
 cask "plex"
 cask "maestral"  # open-source dropbox client
-cask "bike"
+# cask "bike"
 cask "aerial"
-cask "transmission"
+# cask "transmission"
 # cask "sequel-pro"
 # cask "macs-fan-control"
 # cask "macvim"
@@ -114,14 +118,13 @@ mas "PCalc", id: 403504866
 # mas "Pocket", id: 568494494
 # mas "Reeder", id: 1449412482
 mas "Save to Matter", id: 1548677272
-mas "Save to Pocket", id: 1477385213
+# mas "Save to Pocket", id: 1477385213
 mas "Trello", id: 1278508951
 # mas "Tweetbot", id: 1384080005
 # mas "Tweetbot", id: 557168941
 # mas "Vimari", id: 1480933944
 # mas "Xcode"                      , id: 497799835
-# mas "Bear", id: 1091189122
-# mas "Drafts", id: 1435957248
+mas "Drafts", id: 1435957248
 # mas "Hush", id: 1544743900
 # mas "Instapaper", id: 288545208
 # mas "Instapaper Save", id: 1481302432
