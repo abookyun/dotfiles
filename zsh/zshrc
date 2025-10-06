@@ -48,10 +48,21 @@ source ${ZDOTDIR}/completion.zsh
 
 source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-# zsh-vi-mode 回調函數：在 vi-mode 初始化後重新設定歷史搜尋
+
+# zsh-autocomplete must load before zsh-vi-mode
+source $(brew --prefix zsh-autocomplete)/share/zsh-autocomplete/zsh-autocomplete.plugin.zsh
+
+# zsh-vi-mode after vi-mode initialized re-bindkey
 function zvm_after_init() {
+  # history search bindkey
   bindkey "^[[A" history-beginning-search-backward
   bindkey "^[[B" history-beginning-search-forward
+
+  # Completion menu navigation
+  bindkey -M menuselect 'h' vi-backward-char
+  bindkey -M menuselect 'k' vi-up-line-or-history
+  bindkey -M menuselect 'j' vi-down-line-or-history
+  bindkey -M menuselect 'l' vi-forward-char
 }
 source $(brew --prefix)/opt/zsh-vi-mode/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh
 source $(brew --prefix asdf)/libexec/asdf.sh

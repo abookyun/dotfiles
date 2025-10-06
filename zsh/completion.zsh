@@ -14,8 +14,11 @@ compinit -d ${XDG_CACHE_HOME}/zsh/zcompdump-$ZSH_VERSION-by-$(whoami)
 # matches case insensitive for lowercase
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
 # pasting with tabs doesn't perform completion
-zstyle ':completion:*' insert-tab pending
-zstyle ':completion:*' menu select
+
+# Conflict with zsh-autocomplete
+# zstyle ':completion:*' insert-tab pending
+# zstyle ':completion:*' menu select
+
 # Use cache for commands using cache
 zstyle ':completion:*' use-cache on
 zstyle ':completion:*' cache-path "$XDG_CACHE_HOME/zsh/.zcompcache"
@@ -23,7 +26,8 @@ zstyle ':completion:*' cache-path "$XDG_CACHE_HOME/zsh/.zcompcache"
 zstyle ':completion:*' complete true
 
 zmodload zsh/complist
-bindkey -M menuselect 'h' vi-backward-char
-bindkey -M menuselect 'k' vi-up-line-or-history
-bindkey -M menuselect 'j' vi-down-line-or-history
-bindkey -M menuselect 'l' vi-forward-char
+# Move bindkey to .zshrc zvm_after_init()
+# bindkey -M menuselect 'h' vi-backward-char
+# bindkey -M menuselect 'k' vi-up-line-or-history
+# bindkey -M menuselect 'j' vi-down-line-or-history
+# bindkey -M menuselect 'l' vi-forward-char
