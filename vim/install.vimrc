@@ -44,6 +44,7 @@ Plug 'tpope/vim-dispatch'
 Plug 'mbbill/undotree'
 
 " Syntax, Linter and Autocompletion
+Plug 'dense-analysis/ale'
 Plug 'ervandew/supertab'
 Plug 'vim-ruby/vim-ruby'
 Plug 'tpope/vim-rails'
