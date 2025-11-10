@@ -7,3 +7,4 @@ set viminfofile=$XDG_DATA_HOME/vim/viminfo
 source $MY_VIM_CONFIG_DIR/general.vimrc
 source $MY_VIM_CONFIG_DIR/install.vimrc
 source $MY_VIM_CONFIG_DIR/plugins.vimrc
+source $MY_VIM_CONFIG_DIR/ale.vimrc
