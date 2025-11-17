@@ -41,6 +41,7 @@ source "${XDG_DATA_HOME}/asdf/installs/rust/1.83.0/env"
 
 # PATH and FPATH
 # PATH=~/.dotfiles/functions:$PATH
+PATH=${HOME}/.local/bin:${XDG_DATA_HOME}/asdf/shims:$PATH
 FPATH=$(brew --prefix)/share/zsh-completions:$FPATH
 
 # Completion
