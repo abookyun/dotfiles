@@ -59,7 +59,7 @@ let g:ale_python_pylsp_config = {
 \     'plugins': {
 \       'pycodestyle': {
 \         'enabled': v:true,
-\         'maxLineLength': 88
+\         'maxLineLength': 120
 \       },
 \       'pyflakes': {
 \         'enabled': v:true
@@ -110,37 +110,37 @@ let g:ale_python_pylsp_use_global = 1
 " ----------------------------------------------------------------------------
 
 " Code Navigation
-nmap <silent> gd <Plug>(ale_go_to_definition)
-nmap <silent> gD <Plug>(ale_go_to_type_definition)
-nmap <silent> gr <Plug>(ale_find_references)
-nmap <silent> gi <Plug>(ale_go_to_implementation)
+nnoremap gd <Plug>(ale_go_to_definition)
+nnoremap gD <Plug>(ale_go_to_type_definition)
+nnoremap gr <Plug>(ale_find_references)
+nnoremap gi <Plug>(ale_go_to_implementation)
 
 " Hover and Documentation
-nmap <silent> K <Plug>(ale_hover)
-nmap <silent> <leader>d <Plug>(ale_detail)
+nnoremap K <Plug>(ale_hover)
+nnoremap <leader>ad <Plug>(ale_detail)
 
 " Code Actions and Refactoring
-nmap <silent> <leader>rn <Plug>(ale_rename)
-nmap <silent> <leader>ca <Plug>(ale_code_action)
+nnoremap <leader>rn <Plug>(ale_rename)
+nnoremap <leader>ca <Plug>(ale_code_action)
 
 " Formatting
-nmap <silent> <leader>f <Plug>(ale_fix)
+nnoremap <leader>af <Plug>(ale_fix)
 " Toggle auto-fix on save
-nmap <silent> <leader>F :ALEToggleFixer<CR>
+nnoremap <leader>aF :ALEToggleFixer<CR>
 
 " Navigation between diagnostics
-nmap <silent> [e <Plug>(ale_previous_wrap)
-nmap <silent> ]e <Plug>(ale_next_wrap)
-nmap <silent> [E <Plug>(ale_first)
-nmap <silent> ]E <Plug>(ale_last)
+nnoremap [e <Plug>(ale_previous_wrap)
+nnoremap ]e <Plug>(ale_next_wrap)
+nnoremap [E <Plug>(ale_first)
+nnoremap ]E <Plug>(ale_last)
 
 " Show all diagnostics
-nmap <silent> <leader>al <Plug>(ale_lint)
-nmap <silent> <leader>ad :ALEDetail<CR>
-nmap <silent> <leader>ai :ALEInfo<CR>
+" nnoremap <leader>al <Plug>(ale_lint)
+" nnoremap <leader>ad :ALEDetail<CR>
+" nnoremap <leader>ai :ALEInfo<CR>
 
 " Symbol search
-nmap <silent> <leader>s :ALESymbolSearch<Space>
+nnoremap <leader>s :ALESymbolSearch<Space>
 
 " ----------------------------------------------------------------------------
 " Integration with Supertab
