@@ -44,5 +44,6 @@ nnoremap <leader>] :bnext<CR>
 nnoremap <leader>[ :bprevious<CR>
 nnoremap <leader>9 :blast<CR>
 nnoremap <leader>x :bdelete<CR>
+nnoremap <leader>u :UndotreeToggle<CR>
 
 " noremap <leader>a :Ag<space>
