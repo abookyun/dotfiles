@@ -38,7 +38,6 @@ noremap <silent> <leader>r :source ${XDG_CONFIG_HOME}/vim/vimrc<CR>:filetype det
 nnoremap <leader>d :NERDTreeToggle<CR>
 nnoremap <leader>l :NERDTreeFind<CR>
 nnoremap <leader>f :FZF<CR>
-nnoremap <leader>g :GitGutterToggle<CR>
 nnoremap <leader>} :TagbarToggle<CR>
 nnoremap <leader>1 :bfirst<CR>
 nnoremap <leader>] :bnext<CR>
@@ -46,4 +45,4 @@ nnoremap <leader>[ :bprevious<CR>
 nnoremap <leader>9 :blast<CR>
 nnoremap <leader>x :bdelete<CR>
 
-noremap <leader>a :Ag<space>
+" noremap <leader>a :Ag<space>

@@ -8,7 +8,7 @@ let g:markdown_syntax_conceal = 0
 let g:indentLine_setColors = 1
 let g:indentLine_char_list = ['|', '¦', '┆', '┊']
 
-let g:gitgutter_enabled = 0
+let g:gitgutter_enabled = 1
 
 let g:airline#extensions#disable_rtp_load = 1
 let g:airline#extensions#tabline#enabled = 1
