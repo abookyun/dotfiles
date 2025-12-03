@@ -15,6 +15,8 @@ set cursorline cursorcolumn
 set tabstop=2
 set shiftwidth=2
 set expandtab
+" Enable folding
+set foldmethod=indent
 
 " https://vi.stackexchange.com/questions/23110/pasting-text-on-vim-inside-tmux-breaks-indentation
 " fix pasting code in tmux breaks indentation
@@ -47,3 +49,5 @@ nnoremap <leader>x :bdelete<CR>
 nnoremap <leader>u :UndotreeToggle<CR>
 
 " noremap <leader>a :Ag<space>
+
+au BufNewFile,BufRead *.py set tabstop=4 softtabstop=4 shiftwidth=4
