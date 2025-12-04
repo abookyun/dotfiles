@@ -14,9 +14,7 @@
     - ${XDG_CONFIG_HOME}
     - ${XDG_CONFIG_HOME}/wget
     - ${XDG_CONFIG_HOME}/python
-    - ${XDG_CONFIG_HOME}/matplotlib
-    - ${XDG_CONFIG_HOME}/ipython
-    - ${XDG_CONFIG_HOME}/jupyter
+    - ${XDG_CONFIG_HOME}/ghostty
     - ${XDG_CACHE_HOME}
     - ${XDG_CACHE_HOME}/wget
     - ${XDG_DATA_HOME}
@@ -53,6 +51,8 @@
     ${XDG_CONFIG_HOME}/git/ignore: git/ignore
     # tmux
     ${XDG_CONFIG_HOME}/tmux/tmux.conf: tmux/tmux.conf
+    # ghostty
+    ${XDG_CONFIG_HOME}/ghostty/config: ghostty/config
     # vim
     ${XDG_CONFIG_HOME}/vim/vimrc: vim/vimrc
     ${XDG_CONFIG_HOME}/vim/general.vimrc: vim/general.vimrc
@@ -71,9 +71,3 @@
     ${XDG_CONFIG_HOME}/wget/wgetrc: wget/wgetrc
     # python
     ${XDG_CONFIG_HOME}/python/pythonrc: python/pythonrc
-    # matplotlib
-    ${XDG_CONFIG_HOME}/matplotlib/matplotlibrc: matplotlib/matplotlibrc
-    # ipython
-    ${XDG_CONFIG_HOME}/ipython/ipython_config.py: ipython/ipython_config.py
-    # jupyter
-    ${XDG_CONFIG_HOME}/jupyter/jupyter_config.py: jupyter/jupyter_config.py

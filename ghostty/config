@@ -1,0 +1,64 @@
+# Ghostty Terminal Configuration
+
+# ============================================================================
+# macOS-Specific Settings
+# ============================================================================
+
+# Option key as Alt for terminal applications (essential for tmux, vim, etc.)
+macos-option-as-alt = true
+
+# Hide titlebar while keeping native window borders and rounded corners
+# macos-titlebar-style = hidden
+
+# ============================================================================
+# Terminal Compatibility
+# ============================================================================
+
+# Use Ghostty's terminfo for best compatibility
+term = xterm-ghostty
+
+# ============================================================================
+# Window Settings
+# ============================================================================
+
+# Remember window size and position
+window-save-state = always
+
+# Vertical sync (prevents kernel panics on macOS 14.4+)
+window-vsync = true
+
+# ============================================================================
+# Font Settings
+# ============================================================================
+
+# Thicken font rendering (macOS-only feature)
+font-thicken = true
+
+font-family = "SF Mono Regular"
+font-size = 14
+
+# ============================================================================
+# Visual Effects
+# ============================================================================
+
+# Background transparency (disabled in native fullscreen)
+# background-opacity = 0.9
+
+# Background blur effect
+# background-blur = 16
+
+# ============================================================================
+# Theme
+# ============================================================================
+
+# Use `ghostty +list-themes` to see all available themes
+# theme = catppuccin-mocha
+theme = Catppuccin Frappe
+
+# ============================================================================
+# Keybindings
+# ============================================================================
+
+# Quick Terminal: Cmd + ` (backtick) - built-in feature
+# Config reload: Cmd + Shift + ,
+# Open config: Cmd + ,
