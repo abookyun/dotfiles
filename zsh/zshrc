@@ -1,3 +1,7 @@
+#TERM
+export TERMINFO="$XDG_DATA_HOME"/zsh/terminfo
+export TERMINFO_DIRS="$XDG_DATA_HOME"/zsh/terminfo:/usr/share/terminfo
+
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.config/zsh/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
@@ -6,6 +10,7 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
 fi
 
 # General Settings
+# export TERM='xterm-ghostty'
 source ${ZDOTDIR}/aliases.zsh
 source ${ZDOTDIR}/general.zsh
 
@@ -16,8 +21,6 @@ source ${ZDOTDIR}/general.zsh
 export TIMEWARRIORDB=${XDG_DATA_HOME}/timewarrior
 export TEALDEER_CONFIG_DIR=${XDG_CONFIG_HOME}/tealdeer
 export DOCKER_CONFIG="$XDG_CONFIG_HOME"/docker
-export TERMINFO="$XDG_DATA_HOME"/terminfo
-export TERMINFO_DIRS="$XDG_DATA_HOME"/terminfo:/usr/share/terminfo
 export IRBRC="$XDG_CONFIG_HOME/ruby/irbrc"
 export BUNDLE_USER_CONFIG="$XDG_CONFIG_HOME"/bundle
 export BUNDLE_USER_CACHE="$XDG_CACHE_HOME"/bundle
