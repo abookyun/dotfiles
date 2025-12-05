@@ -12,6 +12,8 @@
   # indent needed
     # XDG Paths
     - ${XDG_CONFIG_HOME}
+    - ${XDG_CONFIG_HOME}/zsh
+    - ${XDG_CONFIG_HOME}/zsh/functions
     - ${XDG_CONFIG_HOME}/wget
     - ${XDG_CONFIG_HOME}/python
     - ${XDG_CONFIG_HOME}/ghostty
@@ -43,6 +45,10 @@
     ${XDG_CONFIG_HOME}/zsh/general.zsh: zsh/general.zsh
     ${XDG_CONFIG_HOME}/zsh/completion.zsh: zsh/completion.zsh
     ${XDG_CONFIG_HOME}/zsh/.p10k.zsh: zsh/p10k.zsh
+    ${XDG_CONFIG_HOME}/zsh/functions/asdfup: zsh/functions/asdfup
+    ${XDG_CONFIG_HOME}/zsh/functions/brewup: zsh/functions/brewup
+    ${XDG_CONFIG_HOME}/zsh/functions/gitclean: zsh/functions/gitclean
+    ${XDG_CONFIG_HOME}/zsh/functions/mkcd: zsh/functions/mkcd
     # git
     ${XDG_CONFIG_HOME}/git/config: git/config
     ${XDG_CONFIG_HOME}/git/config.local:

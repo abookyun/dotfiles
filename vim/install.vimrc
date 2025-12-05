@@ -10,9 +10,11 @@ autocmd VimEnter * if len(filter(values(g:plugs), '!isdirectory(v:val.dir)'))
 \| endif
 
 call plug#begin()
+
+" === Foundation ===
 Plug 'tpope/vim-sensible'
 
-" User Interface
+" === UI & Appearance ===
 Plug 'dracula/vim', { 'as': 'dracula' }
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
@@ -22,34 +24,38 @@ Plug 'junegunn/goyo.vim'
 Plug 'junegunn/limelight.vim'
 Plug 'mhinz/vim-startify'
 
-" Project Navigation
+" === Navigation & File Finding ===
 Plug 'preservim/nerdtree'
 Plug 'PhilRunninger/nerdtree-visual-selection'
 Plug 'ryanoasis/vim-devicons'
 Plug 'junegunn/fzf'
 Plug 'junegunn/fzf.vim'
 
-" Git, Search, Replace and Utils
-Plug 'christoomey/vim-tmux-navigator'
-Plug 'rking/ag.vim'
+" === Git Integration ===
 Plug 'tpope/vim-fugitive'
+
+" === Text Editing & Movement ===
+Plug 'christoomey/vim-tmux-navigator'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-repeat'
-Plug 'preservim/tagbar'
 Plug 'tpope/vim-commentary'
 Plug 'mg979/vim-visual-multi'
+
+" === Tools & Utilities ===
+Plug 'rking/ag.vim'
+Plug 'preservim/tagbar'
 Plug 'godlygeek/tabular'
 Plug 'editorconfig/editorconfig-vim'
 Plug 'tpope/vim-dispatch'
 Plug 'mbbill/undotree'
 
-" Syntax, Linter and Autocompletion
+" === Syntax, Linting & Completion ===
 Plug 'dense-analysis/ale'
 Plug 'ervandew/supertab'
 Plug 'vim-ruby/vim-ruby'
 Plug 'tpope/vim-rails'
+Plug 'tpope/vim-endwise'
 Plug 'elzr/vim-json'
 Plug 'preservim/vim-markdown'
-Plug 'tpope/vim-endwise'
 
 call plug#end()

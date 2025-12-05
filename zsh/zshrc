@@ -28,33 +28,41 @@ export BUNDLE_USER_PLUGIN="$XDG_DATA_HOME"/bundle
 export WGETRC="$XDG_CONFIG_HOME/wget/wgetrc"
 export PYTHONHISTFILE="$XDG_STATE_HOME/python/history"
 export PYTHONSTARTUP="$XDG_CONFIG_HOME/python/pythonrc"
-export MPLCONFIGDIR="$XDG_CONFIG_HOME/matplotlib"
-export IPYTHONDIR="$XDG_CONFIG_HOME/ipython"
-export JUPYTER_CONFIG_DIR="$XDG_CONFIG_HOME/jupyter"
 
-# autocompletion info:
-# https://github.com/dbrgn/tealdeer/blob/main/docs/src/installing.md#autocompletion
+# Compiler
 # asdf install postgres needs pkg-config and icu4c
-export LDFLAGS="-L$(brew --prefix icu4c)/lib"
-export CPPFLAGS="-I$(brew --prefix icu4c)/include"
-export PKG_CONFIG_PATH="$(brew --prefix icu4c)/lib/pkgconfig"
+export LDFLAGS="-L${HOMEBREW_PREFIX}/opt/icu4c/lib"
+export CPPFLAGS="-I${HOMEBREW_PREFIX}/opt/icu4c/include"
+export PKG_CONFIG_PATH="${HOMEBREW_PREFIX}/opt/icu4c/lib/pkgconfig"
+# curl
+export LDFLAGS="-L/opt/homebrew/opt/curl/lib"
+export CPPFLAGS="-I/opt/homebrew/opt/curl/include"
+export PKG_CONFIG_PATH="/opt/homebrew/opt/curl/lib/pkgconfig"
 
 source ${XDG_CONFIG_HOME}/asdf/asdfrc
-source "${XDG_DATA_HOME}/asdf/installs/rust/1.83.0/env"
 
 # PATH and FPATH
-# PATH=~/.dotfiles/functions:$PATH
+# Load custom functions
+if [[ -d "$ZDOTDIR/functions" ]]; then
+  fpath=($ZDOTDIR/functions $fpath)
+  autoload -Uz $ZDOTDIR/functions/*(:t)
+fi
+
+# use brewed curl first
+PATH=${HOMEBREW_PREFIX}/opt/curl/bin:$PATH
 PATH=${HOME}/.local/bin:${XDG_DATA_HOME}/asdf/shims:$PATH
-FPATH=$(brew --prefix)/share/zsh-completions:$FPATH
+FPATH=${HOMEBREW_PREFIX}/share/zsh-completions:$FPATH
 
 # Completion
 source ${ZDOTDIR}/completion.zsh
+# tealdeer: https://github.com/dbrgn/tealdeer/blob/main/docs/src/installing.md#autocompletion
 
-source $(brew --prefix)/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-source $(brew --prefix)/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-
+source ${HOMEBREW_PREFIX}/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source ${HOMEBREW_PREFIX}/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+# fzf shell integration: https://github.com/junegunn/fzf#setting-up-shell-integration
+source <(fzf --zsh)
 # zsh-autocomplete must load before zsh-vi-mode
-source $(brew --prefix zsh-autocomplete)/share/zsh-autocomplete/zsh-autocomplete.plugin.zsh
+# source ${HOMEBREW_PREFIX}/opt/zsh-autocomplete/share/zsh-autocomplete/zsh-autocomplete.plugin.zsh
 
 # zsh-vi-mode after vi-mode initialized re-bindkey
 function zvm_after_init() {
@@ -68,9 +76,9 @@ function zvm_after_init() {
   bindkey -M menuselect 'j' vi-down-line-or-history
   bindkey -M menuselect 'l' vi-forward-char
 }
-source $(brew --prefix)/opt/zsh-vi-mode/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh
-source $(brew --prefix asdf)/libexec/asdf.sh
-source $(brew --prefix)/share/powerlevel10k/powerlevel10k.zsh-theme
+source ${HOMEBREW_PREFIX}/opt/zsh-vi-mode/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh
+source ${HOMEBREW_PREFIX}/opt/asdf/libexec/asdf.sh
+source ${HOMEBREW_PREFIX}/share/powerlevel10k/powerlevel10k.zsh-theme
 
 # zoxide
 export _ZO_DATA_DIR=$XDG_DATA_HOME/zsh

@@ -1,0 +1,3 @@
+#!/usr/bin/env zsh
+# Update Homebrew and all packages
+brew update && brew upgrade && brew cleanup
