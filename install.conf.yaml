@@ -17,6 +17,7 @@
     - ${XDG_CONFIG_HOME}/wget
     - ${XDG_CONFIG_HOME}/python
     - ${XDG_CONFIG_HOME}/ghostty
+    - ${XDG_CONFIG_HOME}/visidata
     - ${XDG_CACHE_HOME}
     - ${XDG_CACHE_HOME}/wget
     - ${XDG_DATA_HOME}
@@ -31,6 +32,8 @@
     - ${XDG_STATE_HOME}/node
     - ${XDG_STATE_HOME}/ruby
     - ${XDG_STATE_HOME}/python
+    # macOS specific
+    - ~/Library/Preferences/visidata
 
 - clean:
   # indent needed
@@ -77,3 +80,5 @@
     ${XDG_CONFIG_HOME}/wget/wgetrc: wget/wgetrc
     # python
     ${XDG_CONFIG_HOME}/python/pythonrc: python/pythonrc
+    # visidata (macOS uses ~/Library/Preferences, redirect to XDG)
+    ~/Library/Preferences/visidata/config.py: visidata/config.py
