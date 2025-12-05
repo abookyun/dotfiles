@@ -18,3 +18,56 @@ Inspired by @holman/dotfiles, and [XDG Base Directory Specification](https://spe
 git clone https://github.com/abookyun/dotfiles ~/.dotfiles
 ~/.dotfiles/scripts/bootstrap
 ```
+
+## What's Installed
+
+### Terminal & Shell
+- **Terminal:** Ghostty with Catppuccin Frappe theme
+- **Shell:** Zsh with Powerlevel10k prompt
+- **Plugins:** vi-mode, syntax-highlighting, autosuggestions, fzf
+- **Tools:** zoxide (smart cd), eza (better ls), bat, ripgrep
+
+### Development Tools
+- **Version Manager:** asdf (Ruby, Python, Rust, Node, Postgres, Redis, SQLite)
+- **Editor:** Vim with 26 plugins (Dracula theme, ALE linter, fugitive, fzf.vim)
+- **Multiplexer:** Tmux with Catppuccin theme
+- **Git:** Custom aliases and configuration
+
+### Key Features
+- XDG Base Directory compliant - clean home directory
+- Declarative setup with Dotbot
+- Automated Homebrew package management
+
+## Post-Installation
+
+After running `./install`:
+1. Restart terminal or run `exec zsh`
+2. Vim plugins auto-install on first launch
+3. Tmux plugins: Press `Alt+Space + I` to install
+4. Configure machine-specific git settings in `~/.config/git/config.local`
+
+## Updating
+
+Update dotfiles:
+```bash
+cd ~/.dotfiles && git pull && ./install
+```
+
+Update Homebrew packages:
+```bash
+brewup
+```
+
+Update asdf plugins and tools:
+```bash
+asdfup
+asdf install
+```
+
+## Custom Functions
+
+Located in `functions/` directory:
+- `brewup` - Update all Homebrew packages
+- `asdfup` - Update all asdf plugins
+- `gitclean` - Remove merged git branches
+- `mkcd` - Create directory and cd into it

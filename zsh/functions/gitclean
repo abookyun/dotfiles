@@ -1,0 +1,3 @@
+#!/usr/bin/env zsh
+# Remove merged local branches
+git branch --merged | grep -v '\*\|main\|master' | xargs -n 1 git branch -d

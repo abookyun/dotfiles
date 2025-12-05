@@ -26,8 +26,3 @@ zstyle ':completion:*' cache-path "$XDG_CACHE_HOME/zsh/.zcompcache"
 zstyle ':completion:*' complete true
 
 zmodload zsh/complist
-# Move bindkey to .zshrc zvm_after_init()
-# bindkey -M menuselect 'h' vi-backward-char
-# bindkey -M menuselect 'k' vi-up-line-or-history
-# bindkey -M menuselect 'j' vi-down-line-or-history
-# bindkey -M menuselect 'l' vi-forward-char
