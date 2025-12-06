@@ -47,7 +47,10 @@ nnoremap <leader>[ :bprevious<CR>
 nnoremap <leader>9 :blast<CR>
 nnoremap <leader>x :bdelete<CR>
 nnoremap <leader>u :UndotreeToggle<CR>
-
 " noremap <leader>a :Ag<space>
+
+" System Clipboard
+vnoremap <leader>y "+y
+nnoremap <leader>p "+p
 
 au BufNewFile,BufRead *.py set tabstop=4 softtabstop=4 shiftwidth=4
