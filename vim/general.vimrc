@@ -36,10 +36,12 @@ augroup END
 " Keyboard Shortcuts
 let mapleader = ' '
 noremap  <leader>r :source $MYVIMRC<CR>
-nnoremap <leader>d :NERDTreeToggle<CR>
-nnoremap <leader>l :NERDTreeFind<CR>
-nnoremap <leader>f :FZF<CR>
+nnoremap <leader>t :NERDTreeToggle<CR>
+nnoremap <leader>d :NERDTreeFind<CR>
 nnoremap <leader>} :TagbarToggle<CR>
+nnoremap <leader>f :FZF<CR>
+nnoremap <leader>l :BLines<CR>
+nnoremap <leader>b :Buffers<CR>
 nnoremap <leader>1 :bfirst<CR>
 nnoremap <leader>] :bnext<CR>
 nnoremap <leader>[ :bprevious<CR>
@@ -47,6 +49,9 @@ nnoremap <leader>9 :blast<CR>
 nnoremap <leader>x :bdelete<CR>
 nnoremap <leader>u :UndotreeToggle<CR>
 " noremap <leader>a :Ag<space>
+nnoremap <CR> za
+vnoremap <CR> zf
+
 
 " System Clipboard
 vnoremap <leader>y "+y
