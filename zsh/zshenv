@@ -13,7 +13,7 @@ export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
 export VIMINIT='let $MYVIMRC="$XDG_CONFIG_HOME/vim/vimrc" | source $MYVIMRC'
 
 # Homebrew paths (only cache if brew is available)
-if (( ${+commands[brew]} )); then
+if command -v brew >/dev/null 2>&1; then
   export HOMEBREW_PREFIX="$(brew --prefix)"
 else
   export HOMEBREW_PREFIX="/opt/homebrew"

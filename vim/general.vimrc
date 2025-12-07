@@ -52,7 +52,6 @@ nnoremap <leader>u :UndotreeToggle<CR>
 nnoremap <CR> za
 vnoremap <CR> zf
 
-
 " System Clipboard
 vnoremap <leader>y "+y
 nnoremap <leader>p "+p
