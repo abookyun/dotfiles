@@ -6,6 +6,8 @@
 " Global ALE Settings
 " ----------------------------------------------------------------------------
 
+let g:ale_use_global_executables = 1
+
 " Enable ALE LSP support
 let g:ale_completion_enabled = 1
 let g:ale_completion_autoimport = 1
@@ -42,9 +44,10 @@ set signcolumn=yes
 " Python-specific Configuration
 " ----------------------------------------------------------------------------
 
-" Configure linters for Python
+" Configure linters for Python and Vim
 let g:ale_linters = {
-\   'python': ['pylsp', 'mypy'],
+\   'python': ['pylsp'],
+\   'vim': ['vimls'],
 \}
 
 " Configure fixers for Python
@@ -101,9 +104,6 @@ let g:ale_python_pylsp_config = {
 \   }
 \}
 
-" Use Python 3 explicitly
-let g:ale_python_pylsp_executable = 'pylsp'
-let g:ale_python_pylsp_use_global = 1
 
 " ----------------------------------------------------------------------------
 " Key Mappings
@@ -146,11 +146,9 @@ nnoremap <leader>s :ALESymbolSearch<Space>
 " Integration with Supertab
 " ----------------------------------------------------------------------------
 
-" Make Supertab use ALE's omni completion for Python files
-augroup SupertabALE
-  autocmd!
-  autocmd FileType python let b:SuperTabDefaultCompletionType = '<c-x><c-o>'
-augroup END
+let g:SuperTabDefaultCompletionType = "context"
+" Fallback to omni completion when context detection fails
+let g:SuperTabContextDefaultCompletionType = "<c-x><c-o>"
 
 " ----------------------------------------------------------------------------
 " Visual Customization

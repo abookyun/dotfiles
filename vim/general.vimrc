@@ -35,8 +35,7 @@ augroup END
 
 " Keyboard Shortcuts
 let mapleader = ' '
-noremap <silent> <leader>r :source ${XDG_CONFIG_HOME}/vim/vimrc<CR>:filetype detect<CR>:exe ":echo 'vimrc reloaded'"<CR>
-
+noremap  <leader>r :source $MYVIMRC<CR>
 nnoremap <leader>d :NERDTreeToggle<CR>
 nnoremap <leader>l :NERDTreeFind<CR>
 nnoremap <leader>f :FZF<CR>
