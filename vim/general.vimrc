@@ -17,6 +17,9 @@ set shiftwidth=2
 set expandtab
 " Enable folding
 set foldmethod=indent
+set foldlevel=2
+set hlsearch
+set incsearch
 
 " https://vi.stackexchange.com/questions/23110/pasting-text-on-vim-inside-tmux-breaks-indentation
 " fix pasting code in tmux breaks indentation
