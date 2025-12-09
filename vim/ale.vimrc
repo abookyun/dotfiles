@@ -15,9 +15,10 @@ let g:ale_completion_autoimport = 1
 " Set ALE to use the omni completion source
 set omnifunc=ale#completion#OmniFunc
 
-" Show hover information in preview window
-let g:ale_hover_to_preview = 1
-let g:ale_detail_to_floating_preview = 1
+" Show hover information in floating window (popup)
+let g:ale_hover_cursor = 0  " Don't auto-show on cursor hover (too noisy)
+let g:ale_floating_preview = 1  " Use floating windows for preview
+let g:ale_floating_window_border = ['│', '─', '╭', '╮', '╯', '╰']  " Pretty borders
 
 " Configure signs for errors and warnings
 let g:ale_sign_error = '✘'
