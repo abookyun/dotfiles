@@ -21,9 +21,12 @@ set foldlevel=2
 set hlsearch
 set incsearch
 
+" Enable bracketed paste mode to fix auto-indent issues when pasting in INSERT mode
+" - t_BE/t_BD: control bracketed paste on/off
+" - t_PS/t_PE: mark paste start/end
+" When enabled, Vim detects paste operations and temporarily disables auto-indent
 " https://vi.stackexchange.com/questions/23110/pasting-text-on-vim-inside-tmux-breaks-indentation
-" fix pasting code in tmux breaks indentation
-if &term =~ "screen"
+if &term =~ "screen" || &term =~ "tmux"
   let &t_BE = "\e[?2004h"
   let &t_BD = "\e[?2004l"
   exec "set t_PS=\e[200~"
