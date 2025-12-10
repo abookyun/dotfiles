@@ -41,6 +41,7 @@ augroup END
 
 " Keyboard Shortcuts
 let mapleader = ' '
+nnoremap <Esc><Esc> :nohlsearch<CR>
 noremap  <leader>r :source $MYVIMRC<CR>
 nnoremap <leader>t :NERDTreeToggle<CR>
 nnoremap <leader>d :NERDTreeFind<CR>
