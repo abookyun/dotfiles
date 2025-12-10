@@ -1,43 +1,55 @@
-" User Interface
+" === UI & Appearance ===
+
+" dracula
 set termguicolors
 colorscheme dracula
 
-" indentline
-let g:vim_json_conceal = 0
-let g:markdown_syntax_conceal = 0
-let g:indentLine_setColors = 1
-let g:indentLine_char_list = ['|', '¦', '┆', '┊']
+" vim-devicons
+set guifont=DroidSansMono_Nerd_Font:h11
 
-let g:gitgutter_enabled = 1
-
+" airline
+let g:airline_powerline_fonts = 1
 let g:airline#extensions#disable_rtp_load = 1
 let g:airline#extensions#tabline#enabled = 1
 let g:airline#extensions#tabline#fnamemod = ':t'
 let g:airline#extensions#ale#enabled = 1
 
-" vim-devicons
-set guifont=:h
-set guifont=DroidSansMono_Nerd_Font:h11
-let g:airline_powerline_fonts = 1
+" indentline
+let g:indentLine_setColors = 1
+let g:indentLine_char_list = ['|', '¦', '┆', '┊']
 
-" goyo + limelight = zen mode
+" gitgutter
+let g:gitgutter_enabled = 1
+
+" easymotion
+nnoremap <leader><leader>s <Plug>(easymotion-s2)
+map / <Plug>(incsearch-easymotion-/)
+map ? <Plug>(incsearch-easymotion-?)
+map g/ <Plug>(incsearch-easymotion-stay)
+
+" goyo + limelight (zen mode)
 autocmd! User GoyoEnter Limelight
 autocmd! User GoyoLeave Limelight!
-" Color name (:help cterm-colors) or ANSI code
 let g:limelight_conceal_ctermfg = 'gray'
 let g:limelight_conceal_ctermfg = 240
 
-" Project Navigation
+" === Navigation & File Finding ===
+
+" nerdtree
 let g:NERDTreeBookmarksFile = $MY_VIM_STATE_DIR.'/NERDTreeBookmarks'
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip
 
-" Git, Search, Replace and Utils
+" === Syntax, Linting & Completion ===
 
-" Syntax, Linter and Autocompletion
+" vim-markdown
 let g:vim_markdown_folding_disabled = 1
 let g:vim_markdown_conceal_code_blocks = 0
 autocmd BufRead,BufNewFile *.md set filetype=markdown
 autocmd BufRead,BufNewFile *.md set spell spelllang=en_us,cjk
+
+" vim-json
+let g:vim_json_conceal = 0
+let g:markdown_syntax_conceal = 0
 
 " vim-ruby
 let g:rubycomplete_buffer_loading = 1
