@@ -6,20 +6,23 @@
 " Global ALE Settings
 " ----------------------------------------------------------------------------
 
-let g:ale_use_global_executables = 1
-
-" Enable ALE LSP support
-let g:ale_completion_enabled = 1
-let g:ale_completion_autoimport = 1
+let g:ale_use_global_executables = 0
 
 " Set ALE to use the omni completion source
 set omnifunc=ale#completion#OmniFunc
 
+" Enable ALE LSP support
+let g:ale_disable_lsp = 0
+let g:ale_completion_enabled = 1
+let g:ale_completion_autoimport = 1
+
 " Show hover information in floating window (popup)
 let g:ale_hover_cursor = 0  " Don't auto-show on cursor hover (too noisy)
 let g:ale_floating_preview = 1  " Use floating windows for preview
-let g:ale_floating_window_border = ['│', '─', '╭', '╮', '╯', '╰']  " Pretty borders
+let g:ale_floating_window_border = ['│', '─', '╭', '╮', '╯', '╰', '│', '─'] " Pretty borders
 
+" Keep the sign column always visible
+set signcolumn=yes
 " Configure signs for errors and warnings
 let g:ale_sign_error = '✘'
 let g:ale_sign_warning = '⚠'
@@ -38,77 +41,27 @@ let g:ale_lint_on_text_changed = 'normal'
 let g:ale_lint_on_insert_leave = 1
 let g:ale_lint_on_save = 1
 
-" Keep the sign column always visible
-set signcolumn=yes
-
 " ----------------------------------------------------------------------------
 " Python-specific Configuration
 " ----------------------------------------------------------------------------
 
-" Configure linters for Python and Vim
+" Configure linters
 let g:ale_linters = {
-\   'python': ['pylsp'],
+\   'python': [],
 \   'vim': ['vimls'],
 \}
 
-" Configure fixers for Python
+" Configure fixers
 let g:ale_fixers = {
 \   '*': ['remove_trailing_lines', 'trim_whitespace'],
-\   'python': ['black', 'isort'],
+\   'python': [],
 \}
-
-" Python LSP Server (pylsp) configuration
-let g:ale_python_pylsp_config = {
-\   'pylsp': {
-\     'plugins': {
-\       'pycodestyle': {
-\         'enabled': v:true,
-\         'maxLineLength': 120
-\       },
-\       'pyflakes': {
-\         'enabled': v:true
-\       },
-\       'pylint': {
-\         'enabled': v:false
-\       },
-\       'rope_completion': {
-\         'enabled': v:true,
-\         'eager': v:false
-\       },
-\       'jedi_completion': {
-\         'enabled': v:true,
-\         'include_params': v:true,
-\         'include_class_objects': v:true,
-\         'fuzzy': v:true
-\       },
-\       'jedi_hover': {
-\         'enabled': v:true
-\       },
-\       'jedi_references': {
-\         'enabled': v:true
-\       },
-\       'jedi_signature_help': {
-\         'enabled': v:true
-\       },
-\       'jedi_symbols': {
-\         'enabled': v:true,
-\         'all_scopes': v:true
-\       },
-\       'black': {
-\         'enabled': v:true
-\       },
-\       'mypy': {
-\         'enabled': v:true,
-\         'live_mode': v:false
-\       }
-\     }
-\   }
-\}
-
 
 " ----------------------------------------------------------------------------
 " Key Mappings
 " ----------------------------------------------------------------------------
+
+nnoremap <leader>I :ALEInfo<CR>
 
 " Code Navigation
 nnoremap gd <Plug>(ale_go_to_definition)
@@ -117,17 +70,15 @@ nnoremap gr <Plug>(ale_find_references)
 nnoremap gi <Plug>(ale_go_to_implementation)
 
 " Hover and Documentation
-nnoremap K <Plug>(ale_hover)
-nnoremap <leader>ad <Plug>(ale_detail)
+nnoremap <leader>h <Plug>(ale_hover)
+nnoremap <leader>k <Plug>(ale_detail)
 
 " Code Actions and Refactoring
-nnoremap <leader>rn <Plug>(ale_rename)
-nnoremap <leader>ca <Plug>(ale_code_action)
+nnoremap <leader>R <Plug>(ale_rename)
+nnoremap <leader>A <Plug>(ale_code_action)
 
 " Formatting
-nnoremap <leader>af <Plug>(ale_fix)
-" Toggle auto-fix on save
-nnoremap <leader>aF :ALEToggleFixer<CR>
+nnoremap <leader>F <Plug>(ale_fix)
 
 " Navigation between diagnostics
 nnoremap [e <Plug>(ale_previous_wrap)
@@ -136,12 +87,10 @@ nnoremap [E <Plug>(ale_first)
 nnoremap ]E <Plug>(ale_last)
 
 " Show all diagnostics
-" nnoremap <leader>al <Plug>(ale_lint)
-" nnoremap <leader>ad :ALEDetail<CR>
-" nnoremap <leader>ai :ALEInfo<CR>
+nnoremap <leader>L <Plug>(ale_lint)
 
 " Symbol search
-nnoremap <leader>s :ALESymbolSearch<Space>
+" nnoremap <leader>s :ALESymbolSearch<Space>
 
 " ----------------------------------------------------------------------------
 " Integration with Supertab
