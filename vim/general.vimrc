@@ -18,8 +18,9 @@ set expandtab
 " Enable folding
 set foldmethod=indent
 set foldlevel=2
-set hlsearch
-set incsearch
+set hlsearch incsearch
+set completeopt=menu,menuone,popup,noselect
+
 
 " Enable bracketed paste mode to fix auto-indent issues when pasting in INSERT mode
 " - t_BE/t_BD: control bracketed paste on/off
@@ -41,7 +42,6 @@ augroup END
 
 " Keyboard Shortcuts
 let mapleader = ' '
-nnoremap <Esc><Esc> :nohlsearch<CR>
 noremap  <leader>r :source $MYVIMRC<CR>
 nnoremap <leader>t :NERDTreeToggle<CR>
 nnoremap <leader>d :NERDTreeFind<CR>

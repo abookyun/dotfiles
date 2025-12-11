@@ -23,6 +23,7 @@ Plug 'airblade/vim-gitgutter'
 Plug 'junegunn/goyo.vim'
 Plug 'junegunn/limelight.vim'
 Plug 'mhinz/vim-startify'
+Plug 'romainl/vim-cool'
 Plug 'ryanoasis/vim-devicons'
 
 " === Navigation & File Finding ===
