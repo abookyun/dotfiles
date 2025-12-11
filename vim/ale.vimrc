@@ -45,16 +45,47 @@ let g:ale_lint_on_save = 1
 " Python-specific Configuration
 " ----------------------------------------------------------------------------
 
-" Configure linters
+" Use basedpyright as LSP (provides type checking, hover, go-to-definition)
+" Point pyright linter to basedpyright-langserver executable
+let g:ale_python_pyright_executable = 'basedpyright-langserver'
+
+" Configure basedpyright LSP settings
+let g:ale_python_pyright_config = {
+\   'basedpyright': {
+\     'analysis': {
+\       'diagnosticMode': 'workspace',
+\       'typeCheckingMode': 'recommended',
+\     }
+\   },
+\   'python': {
+\     'pythonVersion': '3.13',
+\   }
+\}
+
+" Configure ruff linter options (PEP8 rules: E=errors, F=pyflakes, W=warnings)
+let g:ale_python_ruff_options = '--line-length 120 --target-version py313 --select E,F,W'
+
+" Configure ruff format options
+let g:ale_python_ruff_format_options = '--line-length 120 --target-version py313'
+
+" Auto-detect uv/poetry/pipenv virtual environments
+let g:ale_python_pyright_auto_uv = 1
+let g:ale_python_ruff_auto_uv = 1
+
+" configure linters
+" - pyright (basedpyright): lsp for type checking, hover, completions
+" - ruff: fast linter for code style issues
 let g:ale_linters = {
-\   'python': [],
+\   'python': ['pyright', 'ruff'],
 \   'vim': ['vimls'],
 \}
 
-" Configure fixers
+" configure fixers
+" - ruff: auto-fix linting issues (ruff check --fix)
+" - ruff_format: code formatting (ruff format)
 let g:ale_fixers = {
 \   '*': ['remove_trailing_lines', 'trim_whitespace'],
-\   'python': [],
+\   'python': ['ruff', 'ruff_format'],
 \}
 
 " ----------------------------------------------------------------------------
