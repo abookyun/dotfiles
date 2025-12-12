@@ -41,3 +41,27 @@ keymap("n", "N", "Nzzzv")
 -- Quick save/quit
 keymap("n", "<leader>w", ":w<CR>")
 keymap("n", "<leader>q", ":q<CR>")
+
+-- Reload config
+keymap("n", "<leader>r", "<cmd>source $MYVIMRC<cr>", { desc = "Reload config" })
+
+-- File tree find
+keymap("n", "<leader>o", "<cmd>NvimTreeFindFile<cr>", { desc = "Find file in tree" })
+
+-- Search in buffer
+keymap("n", "<leader>l", "<cmd>Telescope current_buffer_fuzzy_find<cr>", { desc = "Search in buffer" })
+
+-- Buffer navigation
+keymap("n", "<leader>1", "<cmd>bfirst<cr>", { desc = "First buffer" })
+keymap("n", "<leader>]", "<cmd>bnext<cr>", { desc = "Next buffer" })
+keymap("n", "<leader>[", "<cmd>bprevious<cr>", { desc = "Previous buffer" })
+keymap("n", "<leader>9", "<cmd>blast<cr>", { desc = "Last buffer" })
+keymap("n", "<leader>c", "<cmd>bdelete<cr>", { desc = "Delete buffer" })
+
+-- Folding
+keymap("n", "<leader>=", "za", { desc = "Toggle fold" })
+keymap("n", "<leader>+", "zR", { desc = "Open all folds" })
+keymap("n", "<leader>_", "zM", { desc = "Close all folds" })
+keymap("v", "<leader>=", "za", { desc = "Toggle fold" })
+keymap("v", "<leader>+", "zR", { desc = "Open all folds" })
+keymap("v", "<leader>_", "zM", { desc = "Close all folds" })
