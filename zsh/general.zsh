@@ -9,9 +9,6 @@ SHELL_SESSIONS_DISABLE=1
 # vim
 export EDITOR='vim'
 export VISUAL='vim'
-export MY_VIM_CONFIG_DIR="${XDG_CONFIG_HOME}/vim"
-export MY_VIM_DATA_DIR="${XDG_DATA_HOME}/vim"
-export MY_VIM_STATE_DIR="${XDG_STATE_HOME}/vim"
 
 # node and npm
 export NODE_REPL_HISTORY=$XDG_STATE_HOME/node/node_repl_history

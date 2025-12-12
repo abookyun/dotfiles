@@ -1,11 +1,13 @@
 " General Settings
 " use sensible.vim basic settings: https://github.com/tpope/vim-sensible/blob/master/plugin/sensible.vim
 
-set directory=$MY_VIM_STATE_DIR,~/,/tmp
-set backupdir=$MY_VIM_STATE_DIR,~/,/tmp
-if !has('nvim')
-  set viminfo+=n$MY_VIM_STATE_DIR/viminfo
-endif
+" State files (swap, backup, undo, viminfo)
+let s:vim_state = $XDG_STATE_HOME.'/vim'
+let &directory = s:vim_state.',~/,/tmp'
+let &backupdir = s:vim_state.',~/,/tmp'
+let &undodir   = s:vim_state
+set undofile
+let &viminfofile = s:vim_state.'/viminfo'
 
 set encoding=utf-8
 set nobackup noswapfile autowriteall hidden
