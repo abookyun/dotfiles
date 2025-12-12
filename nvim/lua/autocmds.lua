@@ -22,3 +22,28 @@ vim.api.nvim_create_autocmd("TextYankPost", {
     vim.highlight.on_yank({ timeout = 200 })
   end,
 })
+
+-- Dynamic smartcase: disable smartcase in command line for easier substitution
+vim.api.nvim_create_autocmd("CmdLineEnter", {
+  pattern = ":",
+  callback = function()
+    vim.opt.smartcase = false
+  end,
+})
+
+vim.api.nvim_create_autocmd("CmdLineLeave", {
+  pattern = ":",
+  callback = function()
+    vim.opt.smartcase = true
+  end,
+})
+
+-- Python 4-space indentation
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "python",
+  callback = function()
+    vim.opt_local.tabstop = 4
+    vim.opt_local.softtabstop = 4
+    vim.opt_local.shiftwidth = 4
+  end,
+})

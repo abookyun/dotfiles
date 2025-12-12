@@ -39,6 +39,15 @@ opt.undofile = true
 opt.swapfile = false
 opt.backup = false
 
+-- Buffer
+opt.autowriteall = true
+opt.hidden = true
+
+-- Folding (treesitter)
+opt.foldmethod = "expr"
+opt.foldexpr = "nvim_treesitter#foldexpr()"
+opt.foldlevel = 99
+
 -- Update time
 opt.updatetime = 250
 opt.timeoutlen = 300
