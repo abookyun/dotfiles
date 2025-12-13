@@ -37,6 +37,9 @@ font-thicken = true
 font-family = "SF Mono Regular"
 font-size = 14
 
+# Disable programming ligatures (-->, >=, != etc.)
+font-feature = -calt
+
 # ============================================================================
 # Visual Effects
 # ============================================================================
