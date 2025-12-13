@@ -1,33 +1,93 @@
-return {
-  "neovim/nvim-lspconfig",
-  event = { "BufReadPre", "BufNewFile" },
-  config = function()
-    local lspconfig = require("lspconfig")
+-- LSP Configuration for Neovim 0.11+
+-- Using native vim.lsp.config API (no plugin dependency needed)
 
-    -- Custom diagnostic signs (uncomment to enable)
-    -- local signs = { Error = "✘", Warn = "⚠", Hint = "⚑", Info = "ℹ" }
-    -- for type, icon in pairs(signs) do
-    --   local hl = "DiagnosticSign" .. type
-    --   vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
-    -- end
+-- Custom diagnostic signs
+local signs = { Error = "✘", Warn = "⚠", Hint = "⚑", Info = "ℹ" }
+for type, icon in pairs(signs) do
+  local hl = "DiagnosticSign" .. type
+  vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
+end
 
-    local on_attach = function(client, bufnr)
-      local opts = { buffer = bufnr }
-      vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
-      vim.keymap.set("n", "gD", vim.lsp.buf.type_definition, opts)
-      vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
-      vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
-      vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
-      vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
-      vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
-      vim.keymap.set("n", "[e", vim.diagnostic.goto_prev, opts)
-      vim.keymap.set("n", "]e", vim.diagnostic.goto_next, opts)
-      vim.keymap.set("n", "<leader>F", function() require("conform").format() end, opts)
-    end
+-- Global border style for floating windows
+local border = "double" -- single, double, solid, shadow, rounded
 
-    lspconfig.lua_ls.setup({ on_attach = on_attach })
-    lspconfig.basedpyright.setup({ on_attach = on_attach })
-    lspconfig.ruby_lsp.setup({ on_attach = on_attach })
-    lspconfig.vimls.setup({ on_attach = on_attach })
+-- Diagnostic float border
+vim.diagnostic.config({
+  float = { border = border },
+})
+
+-- LSP floating windows border (hover, signature help, etc.)
+local orig_open_floating_preview = vim.lsp.util.open_floating_preview
+vim.lsp.util.open_floating_preview = function(contents, syntax, opts, ...)
+  opts = opts or {}
+  opts.border = opts.border or border
+  return orig_open_floating_preview(contents, syntax, opts, ...)
+end
+
+-- LspAttach autocmd for custom keymaps
+vim.api.nvim_create_autocmd("LspAttach", {
+  callback = function(args)
+    local opts = { buffer = args.buf }
+    vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
+    vim.keymap.set("n", "gD", vim.lsp.buf.type_definition, opts)
+    vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
+    vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
+    vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
+    vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
+    vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
+    vim.keymap.set("n", "[e", function() vim.diagnostic.jump({ count = -1 }) end, opts)
+    vim.keymap.set("n", "]e", function() vim.diagnostic.jump({ count = 1 }) end, opts)
+    vim.keymap.set("n", "<leader>d", vim.diagnostic.open_float, opts)
+    vim.keymap.set("n", "<leader>F", function() require("conform").format() end, opts)
   end,
-}
+})
+
+-- Default config for all LSP servers
+vim.lsp.config("*", {
+  root_markers = { ".git" },
+})
+
+-- Lua (with Neovim runtime support)
+vim.lsp.config("lua_ls", {
+  cmd = { "lua-language-server" },
+  filetypes = { "lua" },
+  root_markers = { ".luarc.json", ".luarc.jsonc", ".stylua.toml", ".git" },
+  settings = {
+    Lua = {
+      runtime = { version = "LuaJIT" },
+      workspace = {
+        library = { vim.env.VIMRUNTIME },
+        checkThirdParty = false,
+      },
+      diagnostics = {
+        globals = { "vim" },
+      },
+    },
+  },
+})
+
+-- Python
+vim.lsp.config("basedpyright", {
+  cmd = { "basedpyright-langserver", "--stdio" },
+  filetypes = { "python" },
+  root_markers = { "pyproject.toml", "setup.py", "requirements.txt", ".git" },
+})
+
+-- Ruby
+vim.lsp.config("ruby_lsp", {
+  cmd = { "ruby-lsp" },
+  filetypes = { "ruby", "eruby" },
+  root_markers = { "Gemfile", ".ruby-version", ".git" },
+})
+
+-- Vim
+vim.lsp.config("vimls", {
+  cmd = { "vim-language-server", "--stdio" },
+  filetypes = { "vim" },
+})
+
+-- Enable all configured LSP servers
+vim.lsp.enable({ "lua_ls", "basedpyright", "ruby_lsp", "vimls" })
+
+-- Return empty table (no plugin dependency needed for native LSP)
+return {}
