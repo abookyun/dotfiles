@@ -16,7 +16,6 @@ return {
         "json",
         "yaml",
         "bash",
-        "zsh",
         "markdown",
         "rust",
         "sql",

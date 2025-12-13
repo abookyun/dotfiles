@@ -7,8 +7,8 @@ SAVEHIST=10000
 SHELL_SESSIONS_DISABLE=1
 
 # vim
-export EDITOR='vim'
-export VISUAL='vim'
+export EDITOR='nvim'
+export VISUAL='nvim'
 
 # node and npm
 export NODE_REPL_HISTORY=$XDG_STATE_HOME/node/node_repl_history

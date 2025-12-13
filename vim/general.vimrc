@@ -46,7 +46,6 @@ augroup END
 let mapleader = ' '
 noremap  <leader>r :source $MYVIMRC<CR>
 nnoremap <leader>t :NERDTreeToggle<CR>
-nnoremap <leader>d :NERDTreeFind<CR>
 nnoremap <leader>} :TagbarToggle<CR>
 nnoremap <leader>f :FZF<CR>
 nnoremap <leader>l :BLines<CR>

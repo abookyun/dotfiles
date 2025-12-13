@@ -42,9 +42,6 @@ keymap("n", "N", "Nzzzv")
 keymap("n", "<leader>w", ":w<CR>")
 keymap("n", "<leader>q", ":q<CR>")
 
--- Reload config
-keymap("n", "<leader>r", "<cmd>source $MYVIMRC<cr>", { desc = "Reload config" })
-
 -- File tree find
 keymap("n", "<leader>o", "<cmd>NvimTreeFindFile<cr>", { desc = "Find file in tree" })
 
