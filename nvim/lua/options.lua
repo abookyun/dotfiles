@@ -53,8 +53,8 @@ opt.foldexpr = "nvim_treesitter#foldexpr()"
 opt.foldlevel = 99
 
 -- Update time
-opt.updatetime = 250
-opt.timeoutlen = 300
+opt.updatetime = 500
+opt.timeoutlen = 500
 
 -- Scrolloff
 opt.scrolloff = 8

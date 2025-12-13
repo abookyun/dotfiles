@@ -25,6 +25,13 @@ vim.lsp.util.open_floating_preview = function(contents, syntax, opts, ...)
   return orig_open_floating_preview(contents, syntax, opts, ...)
 end
 
+-- Auto-show diagnostic float after CursorHold (idle for updatetime ms)
+vim.api.nvim_create_autocmd("CursorHold", {
+  callback = function()
+    vim.diagnostic.open_float({ focusable = false })
+  end,
+})
+
 -- LspAttach autocmd for custom keymaps
 vim.api.nvim_create_autocmd("LspAttach", {
   callback = function(args)
@@ -72,6 +79,14 @@ vim.lsp.config("basedpyright", {
   cmd = { "basedpyright-langserver", "--stdio" },
   filetypes = { "python" },
   root_markers = { "pyproject.toml", "setup.py", "requirements.txt", ".git" },
+  settings = {
+    basedpyright = {
+      typeCheckingMode = "recommended",
+      reportGeneralTypeIssues = true,
+      reportUnusedImport = false,
+      reportUnusedVariable = false,
+    },
+  },
 })
 
 -- Ruby
