@@ -42,12 +42,6 @@ keymap("n", "N", "Nzzzv")
 keymap("n", "<leader>w", ":w<CR>")
 keymap("n", "<leader>q", ":q<CR>")
 
--- File tree find
-keymap("n", "<leader>o", "<cmd>NvimTreeFindFile<cr>", { desc = "Find file in tree" })
-
--- Search in buffer
-keymap("n", "<leader>l", "<cmd>Telescope current_buffer_fuzzy_find<cr>", { desc = "Search in buffer" })
-
 -- Buffer navigation
 keymap("n", "<leader>1", "<cmd>bfirst<cr>", { desc = "First buffer" })
 keymap("n", "<leader>]", "<cmd>bnext<cr>", { desc = "Next buffer" })
