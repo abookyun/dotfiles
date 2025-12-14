@@ -5,8 +5,17 @@ return {
   config = function()
     require("lualine").setup({
       options = {
-        theme = "dracula",
+        theme = "auto",
       },
+      sections = {
+        lualine_c = {
+          {
+            'filename',
+            path = 1,
+            file_status = true,
+          }
+        }
+      }
     })
   end,
 }

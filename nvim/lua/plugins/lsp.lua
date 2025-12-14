@@ -25,13 +25,6 @@ vim.lsp.util.open_floating_preview = function(contents, syntax, opts, ...)
   return orig_open_floating_preview(contents, syntax, opts, ...)
 end
 
--- Auto-show diagnostic float after CursorHold (idle for updatetime ms)
-vim.api.nvim_create_autocmd("CursorHold", {
-  callback = function()
-    vim.diagnostic.open_float({ focusable = false })
-  end,
-})
-
 -- LspAttach autocmd for custom keymaps
 vim.api.nvim_create_autocmd("LspAttach", {
   callback = function(args)
@@ -43,8 +36,6 @@ vim.api.nvim_create_autocmd("LspAttach", {
     vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
     vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
     vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
-    vim.keymap.set("n", "[e", function() vim.diagnostic.jump({ count = -1 }) end, opts)
-    vim.keymap.set("n", "]e", function() vim.diagnostic.jump({ count = 1 }) end, opts)
     vim.keymap.set("n", "<leader>d", vim.diagnostic.open_float, opts)
     vim.keymap.set("n", "<leader>F", function() require("conform").format() end, opts)
   end,

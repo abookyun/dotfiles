@@ -4,6 +4,7 @@ return {
   lazy = false,
   keys = {
     { "<leader>t", "<cmd>NvimTreeToggle<cr>", desc = "Toggle file tree" },
+    { "<leader>o", "<cmd>NvimTreeFindFile<cr>", desc = "Find file in tree" },
   },
   config = function()
     require("nvim-tree").setup({
