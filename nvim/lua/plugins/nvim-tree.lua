@@ -14,6 +14,16 @@ return {
       filters = {
         dotfiles = false,
       },
+      on_attach = function(bufnr)
+        local api = require("nvim-tree.api")
+        -- default mappings
+        api.config.mappings.default_on_attach(bufnr)
+        local function opts(desc)
+          return { desc = "nvim-tree: " .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true }
+        end
+        -- custom mappings
+        vim.keymap.set("n", "<C-i>", api.node.show_info_popup, opts("File Info"))
+      end,
     })
   end,
 }
