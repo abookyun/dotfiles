@@ -1,10 +1,25 @@
-" Environment
-set runtimepath=$MY_VIM_DATA_DIR,$MY_VIM_DATA_DIR/after,$VIM,$VIMRUNTIME
-let $MYVIMRC=$MY_VIM_CONFIG_DIR.'/vimrc'
-set viminfofile=$XDG_DATA_HOME/vim/viminfo
+" Skip for neovim (use native nvim config)
+if has('nvim')
+  finish
+endif
 
-" Better vimrc
-source $MY_VIM_CONFIG_DIR/general.vimrc
-source $MY_VIM_CONFIG_DIR/install.vimrc
-source $MY_VIM_CONFIG_DIR/plugins.vimrc
-source $MY_VIM_CONFIG_DIR/ale.vimrc
+" XDG Base Directory paths
+if empty($XDG_CONFIG_HOME) | let $XDG_CONFIG_HOME = $HOME.'/.config'       | endif
+if empty($XDG_DATA_HOME)   | let $XDG_DATA_HOME   = $HOME.'/.local/share'  | endif
+if empty($XDG_STATE_HOME)  | let $XDG_STATE_HOME  = $HOME.'/.local/state'  | endif
+if empty($XDG_CACHE_HOME)  | let $XDG_CACHE_HOME  = $HOME.'/.local/cache'  | endif
+
+let s:vim_config = $XDG_CONFIG_HOME.'/vim'
+let s:vim_data   = $XDG_DATA_HOME.'/vim'
+let s:vim_state  = $XDG_STATE_HOME.'/vim'
+let s:vim_cache  = $XDG_CACHE_HOME.'/vim'
+
+" Runtime and pack paths
+let &runtimepath = s:vim_data.','.s:vim_config.','.&runtimepath.','.s:vim_config.'/after'
+let &packpath = &runtimepath
+
+" Source config files
+source <sfile>:h/general.vimrc
+source <sfile>:h/install.vimrc
+source <sfile>:h/plugins.vimrc
+source <sfile>:h/ale.vimrc

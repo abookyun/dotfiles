@@ -36,7 +36,7 @@ let g:limelight_conceal_ctermfg = 240
 " === Navigation & File Finding ===
 
 " nerdtree
-let g:NERDTreeBookmarksFile = $MY_VIM_STATE_DIR.'/NERDTreeBookmarks'
+let g:NERDTreeBookmarksFile = $XDG_STATE_HOME.'/vim/NERDTreeBookmarks'
 set wildignore+=*/tmp/*,*.so,*.swp,*.zip
 
 " === Syntax, Linting & Completion ===

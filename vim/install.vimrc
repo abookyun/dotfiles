@@ -1,7 +1,8 @@
 " Install vim-plug if not found
-if empty(glob('$MY_VIM_DATA_DIR/autoload/plug.vim'))
-  silent !curl -fLo $MY_VIM_DATA_DIR/autoload/plug.vim --create-dirs
-    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+let s:vim_data = $XDG_DATA_HOME.'/vim'
+let s:plug_path = s:vim_data.'/autoload/plug.vim'
+if empty(glob(s:plug_path))
+  execute 'silent !curl -fLo '.s:plug_path.' --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
 endif
 
 " Run PlugInstall if there are missing plugins
