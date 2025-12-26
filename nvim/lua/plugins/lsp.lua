@@ -93,8 +93,14 @@ vim.lsp.config("vimls", {
   filetypes = { "vim" },
 })
 
+-- Harper (prose linter)
+vim.lsp.config("harper_ls", {
+  cmd = { "harper-ls", "--stdio" },
+  filetypes = { "markdown", "text", "plaintext", "rst", "asciidoc", "gitcommit" },
+})
+
 -- Enable all configured LSP servers
-vim.lsp.enable({ "lua_ls", "basedpyright", "ruby_lsp", "vimls" })
+vim.lsp.enable({ "lua_ls", "basedpyright", "ruby_lsp", "vimls", "harper_ls" })
 
 -- Return empty table (no plugin dependency needed for native LSP)
 return {}
