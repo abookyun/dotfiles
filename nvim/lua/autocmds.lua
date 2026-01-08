@@ -48,6 +48,13 @@ vim.api.nvim_create_autocmd("FileType", {
   end,
 })
 
+-- TCSS (Textual CSS) - use CSS syntax highlighting
+vim.filetype.add({
+  extension = {
+    tcss = "css"
+  }
+})
+
 -- Markdown spell check
 vim.api.nvim_create_autocmd("FileType", {
   pattern = "markdown",
