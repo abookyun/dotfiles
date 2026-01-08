@@ -80,6 +80,13 @@ vim.lsp.config("basedpyright", {
   },
 })
 
+-- CSS / TCSS
+vim.lsp.config("cssls", {
+  cmd = { "vscode-css-language-server", "--stdio" },
+  filetypes = { "css", "tcss" },
+  root_markers = { ".git" },
+})
+
 -- Ruby
 vim.lsp.config("ruby_lsp", {
   cmd = { "ruby-lsp" },
@@ -100,7 +107,7 @@ vim.lsp.config("harper_ls", {
 })
 
 -- Enable all configured LSP servers
-vim.lsp.enable({ "lua_ls", "basedpyright", "ruby_lsp", "vimls", "harper_ls" })
+vim.lsp.enable({ "lua_ls", "basedpyright", "cssls", "ruby_lsp", "vimls", "harper_ls" })
 
 -- Return empty table (no plugin dependency needed for native LSP)
 return {}
