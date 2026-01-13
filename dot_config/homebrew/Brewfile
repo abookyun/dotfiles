@@ -1,0 +1,203 @@
+# ====================================================================
+# Essentials
+# ====================================================================
+brew "zsh"
+brew "chezmoi"
+brew "asdf"
+brew "mas"
+brew "git"
+brew "vim"
+brew "neovim"
+brew "tmux"
+brew "lazygit"
+
+cask "iterm2"
+cask "ghostty"
+cask "alfred"
+cask "obsidian"
+cask "telegram"
+cask "appcleaner"
+cask "the-unarchiver"
+cask "iina"
+cask "aldente"  # prevent overcharge your mac
+cask "moom"
+
+# Mac App Store version of 1Password 7 doesn't support lifetime license
+# download via https://app-updates.agilebits.com/download/OPM7
+# mas "1Password 7"                    , id: 1333542190  # 1Password 7
+mas "Day One"                      , id: 1055511498
+mas "Money Pro"                    , id: 972572731
+mas "Magnet"                       , id: 441258766
+mas "Irvue"                        , id: 1039633667 # beautiful wallpaper
+mas "Amphetamine"                  , id: 937984704  # keep computer awake
+
+# ====================================================================
+# Shell Enhancement
+# ====================================================================
+# Zsh plugins
+brew "powerlevel10k"  # zsh theme
+brew "zsh-vi-mode"  # vi mode for zsh
+brew "zsh-syntax-highlighting"  # syntax highlighting
+brew "zsh-autosuggestions"  # command suggestions
+brew "zsh-completions"  # additional completions
+# brew "zsh-autocomplete"
+# not fast for man: https://github.com/zdharma-continuum/fast-syntax-highlighting/issues/27
+# brew "zsh-fast-syntax-highlighting"
+
+# Interactive search & navigation
+brew "fzf"  # fuzzy finder
+brew "zoxide"  # smarter cd
+brew "ripgrep"  # better grep
+brew "gh"  # GitHub CLI
+
+# Better standard commands (daily use)
+brew "bat"  # better cat
+brew "eza"  # better ls
+brew "fd"  # better find
+brew "tree"  # directory tree
+brew "tealdeer"  # fast tldr (command examples)
+
+# ====================================================================
+# Dependencies
+# ====================================================================
+brew "curl"  # HTTP client (newer version than macOS built-in)
+brew "openssl@3"  # SSL/TLS toolkit
+brew "readline"  # line editing library
+brew "universal-ctags"  # code indexing (for editors)
+brew "libyaml"  # YAML parser
+brew "pkgconf"  # package config helper
+
+# ====================================================================
+# Development Tools
+# ====================================================================
+brew "lua-language-server"  # Lua LSP
+brew "uv"  # fast Python package installer
+brew "harper"  # grammar checker
+brew "pgcli"  # PostgreSQL CLI with autocomplete
+brew "ruby"  # Ruby programming language
+# brew "perl"
+# brew "redis"
+# brew "memcached"
+# brew "mitmproxy"  # network traffic intercepter
+# brew "elasticsearch"
+# cask "docker"
+
+# ====================================================================
+# Command Line Tools
+# ====================================================================
+# Network
+brew "wget"  # file downloader
+brew "mosh"  # mobile shell (better SSH)
+brew "nmap"  # network scanner
+
+# System utilities
+brew "mactop"  # macOS system monitor
+brew "ncdu"  # disk usage analyzer
+brew "gdu"  # better ncdu
+brew "duf"  # better df
+brew "fswatch"  # file system watcher
+# brew "xdg-ninja"  # XDG compliance checker
+
+# Data processing
+brew "visidata"  # terminal spreadsheet viewer
+brew "opencc"  # Chinese text converter
+brew "fdupes"  # find duplicate files
+# brew "timewarrior"  # time tracking
+
+# Media
+brew "yt-dlp"  # YouTube downloader
+# brew "imagemagick"  # image processor
+# brew "graphicsmagick"  # better imagemagick
+# brew "exiftool"
+# brew "ffmpeg"
+# brew "handbrake"
+
+# Other
+brew "figlet"  # ASCII art text
+# brew "sherlock"  # username search tool
+
+# ====================================================================
+# Desktop Applications
+# ====================================================================
+cask "firefox"
+cask "maestral"  # open-source dropbox client
+cask "betterdisplay"
+cask "jordanbaird-ice"
+cask "markedit"
+cask "sublime-text"
+cask "google-chrome"
+cask "adguard"
+cask "welly"  # BBS client
+cask "qlmarkdown"  # markdown quicklook support
+cask "transmit"
+cask "plex"
+cask "aerial"
+cask "proton-mail"
+cask "chatgpt"
+cask "claude"
+cask "claude-code"
+# cask "raycast"
+# cask "bike"
+# cask "whatsapp"
+# cask "yt-music"
+# cask "java"
+# cask "ollama-app"
+# cask "istat-menus"
+# cask "logseq"
+# cask "mark-text"
+# cask "sequel-pro"
+# cask "macvim"
+# cask "openbb-terminal"
+# cask "slack"
+# cask "skype"
+# cask "discord"
+# cask "dropbox"
+# cask "vlc"
+# cask "mactracker"  # apple products catalog
+# cask "transmission"
+
+mas "Drafts", id: 1435957248
+mas "Pages", id: 409201541
+mas "Numbers", id: 409203825
+mas "Keynote", id: 409183694
+mas "iMovie", id: 408981434
+mas "Bears", id: 1536711520
+mas "Cardhop", id: 1290358394
+mas "PCalc", id: 403504866
+mas "AdGuard for Safari", id: 1440147259
+mas "Instapaper Save", id: 1481302432
+# mas "Reeder", id: 1449412482
+# mas "Save to Matter", id: 1548677272  # Not currently installed
+# mas "Trello", id: 1278508951  # Not currently installed
+# mas "Xcode", id: 497799835
+# mas "Hush", id: 1544743900
+# mas "Little Snitch Mini", id: 1629008763
+
+# ====================================================================
+# Archives
+# ====================================================================
+# brew "heroku"
+# brew "the_silver_searcher"  # ag
+# brew "youtube-dl"
+# cask "ngrok"
+# cask "cloud"  # file sharing
+# cask "plex-media-server"
+# cask "imageoptim"
+# cask "psequel"
+# cask "macs-fan-control"
+# cask "hiddenbar"
+# cask "telegram-desktop"
+# cask "launchrocket"  # homebrew services macOS manager
+# mas "Blackmagic Disk Speed Test" , id: 425264550
+# mas "Cobook", id: 525225808  # contacts management
+# mas "Vimari", id: 1480933944
+# mas "OpenConv", id: 892308325
+# mas "Tweetbot", id: 1384080005
+# mas "Tweetbot", id: 557168941
+# mas "Pocket", id: 568494494
+# mas "Save to Pocket", id: 1477385213
+# mas "Exporter", id: 1099120373,  # exporter for Apple Notes
+# mas "Type Fu", id: 509818877  # typing game
+# mas "Instapaper", id: 288545208
+# mas "Sip", id: 507257563  # color capture
+# mas "JustExifViewer", id: 980953143
