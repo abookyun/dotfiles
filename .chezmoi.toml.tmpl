@@ -1,0 +1,9 @@
+{{- $email := promptStringOnce . "email" "Git email address" -}}
+{{- $name := promptStringOnce . "name" "Git full name" -}}
+
+sourceDir = "{{ .chezmoi.homeDir }}/.dotfiles"
+mode = "symlink"
+
+[data]
+    email = {{ $email | quote }}
+    name = {{ $name | quote }}

@@ -1,0 +1,6 @@
+.DS_Store
+.git/
+.claude/
+chezmoi.toml
+LICENSE
+README.md
