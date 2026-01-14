@@ -1,0 +1,5 @@
+# Global npm packages to install automatically with each Node.js version
+# https://github.com/asdf-vm/asdf-nodejs#default-npm-packages
+
+vim-language-server
+vscode-langservers-extracted
