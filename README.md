@@ -15,9 +15,19 @@ Inspired by @holman/dotfiles, and [XDG Base Directory Specification](https://spe
 **Warning**: You should not directly use this repo as your setting unless you fully reviewed the code.
 
 ```sh
+# Clone the repository
 git clone https://github.com/abookyun/dotfiles ~/.dotfiles
-~/.dotfiles/scripts/bootstrap
+
+# Initialize chezmoi and apply dotfiles
+chezmoi init --source ~/.dotfiles
+chezmoi apply -v
 ```
+
+On first run, chezmoi will:
+1. Prompt for your git email and full name
+2. Create XDG directory structure
+3. Install Homebrew packages automatically
+4. Symlink all configuration files
 
 ## What's Installed
 
@@ -35,23 +45,74 @@ git clone https://github.com/abookyun/dotfiles ~/.dotfiles
 
 ### Key Features
 - XDG Base Directory compliant - clean home directory
-- Declarative setup with Dotbot
+- Managed with chezmoi for flexible dotfiles deployment
 - Automated Homebrew package management
+- Template-based configuration for machine-specific settings
 
 ## Post-Installation
 
-After running `./install`:
+After applying dotfiles:
 1. Restart terminal or run `exec zsh`
 2. Vim plugins auto-install on first launch
 3. Tmux plugins: Press `Alt+Space + I` to install
-4. Configure machine-specific git settings in `~/.config/git/config.local`
+4. Machine-specific git settings are configured via chezmoi templates
+
+## Managing Dotfiles with chezmoi
+
+### Basic Operations
+
+```bash
+# Check what changes chezmoi would make
+chezmoi diff
+
+# Apply changes from source directory
+chezmoi apply -v
+
+# Edit a file managed by chezmoi (opens in $EDITOR)
+chezmoi edit ~/.zshenv
+
+# Add a new file to be managed
+chezmoi add ~/.config/newapp/config.yml
+
+# Update dotfiles from repository
+cd ~/.dotfiles
+git pull
+chezmoi apply -v
+
+# See what files chezmoi is managing
+chezmoi managed
+
+# Verify the state of managed files
+chezmoi verify
+```
+
+### Working with Templates
+
+The following files use chezmoi templates for machine-specific configuration:
+- `.chezmoi.toml.tmpl` - Main configuration with git email/name prompts
+- `run_once_before_01-create-xdg-directories.sh.tmpl` - XDG directory setup
+- `run_once_after_02-install-brew-packages.sh.tmpl` - Homebrew package installation
+
+### Common Workflows
+
+```bash
+# Add a new config file and edit it
+chezmoi add ~/.config/app/config.yml
+chezmoi edit ~/.config/app/config.yml
+
+# Make changes and commit to git
+cd ~/.dotfiles
+git add .
+git commit -m "Update app config"
+git push
+
+# Apply on another machine
+cd ~/.dotfiles
+git pull
+chezmoi apply -v
+```
 
 ## Updating
-
-Update dotfiles:
-```bash
-cd ~/.dotfiles && git pull && ./install
-```
 
 Update Homebrew packages:
 ```bash
