@@ -1,0 +1,30 @@
+# Compare current Brewfile with installed packages
+# Usage: brewdiff
+
+# Dump current installed packages
+brew bundle dump --file=/tmp/Brewfile.current --force || return 1
+
+# Normalize function: remove comments, normalize whitespace, blank lines, sort
+normalize_brewfile() {
+    sed 's/#.*$//' "$1" | \
+    sed 's/[[:space:]]*$//' | \
+    sed 's/[[:space:]]*,/, /g' | \
+    sed 's/[[:space:]]\+/ /g' | \
+    grep -v '^[[:space:]]*$' | \
+    sort -u
+}
+
+# Normalize both files
+normalize_brewfile "$XDG_CONFIG_HOME/homebrew/Brewfile" > /tmp/Brewfile.normalized
+normalize_brewfile /tmp/Brewfile.current > /tmp/Brewfile.current.normalized
+
+# Show packages not in Brewfile
+echo "==> Packages installed but NOT in your Brewfile:"
+comm -13 /tmp/Brewfile.normalized /tmp/Brewfile.current.normalized
+
+echo ""
+echo "==> Packages in your Brewfile but NOT installed:"
+comm -23 /tmp/Brewfile.normalized /tmp/Brewfile.current.normalized
+
+# Cleanup
+rm -f /tmp/Brewfile.current /tmp/Brewfile.normalized /tmp/Brewfile.current.normalized
