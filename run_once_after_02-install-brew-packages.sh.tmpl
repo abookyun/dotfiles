@@ -1,0 +1,31 @@
+#!/bin/bash
+# Install Homebrew packages from Brewfile
+# This runs once after applying dotfiles
+
+{{- if eq .chezmoi.os "darwin" }}
+set -e
+
+echo "Installing Homebrew packages..."
+
+# Check if Homebrew is installed
+if ! command -v brew &> /dev/null; then
+    echo "Error: Homebrew is not installed"
+    echo "Please install Homebrew first: https://brew.sh"
+    exit 1
+fi
+
+# Check if Brewfile exists
+BREWFILE="${XDG_CONFIG_HOME:-$HOME/.config}/homebrew/Brewfile"
+if [ ! -f "$BREWFILE" ]; then
+    echo "Error: Brewfile not found at $BREWFILE"
+    exit 1
+fi
+
+# Run brew bundle
+echo "Running: brew bundle --file=$BREWFILE"
+brew bundle --file="$BREWFILE"
+
+echo "✓ Homebrew packages installed"
+{{- else }}
+echo "Skipping Homebrew installation (not macOS)"
+{{- end }}
