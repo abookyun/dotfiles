@@ -91,7 +91,8 @@ brew "mosh"  # mobile shell (better SSH)
 brew "nmap"  # network scanner
 
 # System utilities
-brew "mactop"  # macOS system monitor
+# brew "mactop"  # macOS system monitor
+brew "btop"  # better mactop
 brew "ncdu"  # disk usage analyzer
 brew "gdu"  # better ncdu
 brew "duf"  # better df
