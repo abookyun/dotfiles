@@ -1,0 +1,52 @@
+#!/bin/bash
+# Install asdf plugins and tools from .tool-versions
+# This runs once after applying dotfiles
+
+{{- if eq .chezmoi.os "darwin" }}
+set -e
+
+echo "Installing asdf plugins and tools..."
+
+# Check if asdf is installed
+if ! command -v asdf &> /dev/null; then
+    echo "Error: asdf is not installed"
+    echo "Please install asdf first via Homebrew"
+    exit 1
+fi
+
+# Check if .tool-versions exists
+TOOL_VERSIONS="${HOME}/.tool-versions"
+if [ ! -f "$TOOL_VERSIONS" ]; then
+    echo "Error: .tool-versions not found at $TOOL_VERSIONS"
+    exit 1
+fi
+
+# Add all plugins from .tool-versions
+echo "Adding asdf plugins..."
+while IFS= read -r line; do
+    # Skip empty lines and comments
+    [[ -z "$line" || "$line" =~ ^#.*$ ]] && continue
+
+    # Extract plugin name (first field)
+    plugin=$(echo "$line" | awk '{print $1}')
+
+    # Check if plugin is already added
+    if asdf plugin list | grep -q "^${plugin}$"; then
+        echo "  ✓ Plugin '$plugin' already added"
+    else
+        echo "  + Adding plugin '$plugin'..."
+        asdf plugin add "$plugin"
+    fi
+done < "$TOOL_VERSIONS"
+
+# Install all tools specified in .tool-versions
+echo ""
+echo "Installing tools from .tool-versions..."
+asdf install
+
+echo ""
+echo "✓ asdf plugins and tools installed"
+echo "Run 'asdf current' to verify installations"
+{{- else }}
+echo "Skipping asdf installation (not macOS)"
+{{- end }}
