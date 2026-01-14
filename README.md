@@ -114,12 +114,27 @@ chezmoi apply -v
 
 ## Updating
 
-Update Homebrew packages:
+### Update Homebrew Packages
 ```bash
 brewup
 ```
 
-Update asdf plugins and tools:
+### Sync Brewfile with Installed Packages
+
+When you install new packages, keep your Brewfile in sync:
+
+```bash
+# Compare Brewfile with currently installed packages
+brewdiff
+
+# The output shows:
+# - Packages installed but not in Brewfile (add these to your Brewfile)
+# - Packages in Brewfile but not installed (either install or remove from Brewfile)
+```
+
+Manually add new packages to your Brewfile in the appropriate section with comments to maintain organization.
+
+### Update asdf Plugins and Tools
 ```bash
 asdfup
 asdf install
@@ -129,6 +144,7 @@ asdf install
 
 Located in `functions/` directory:
 - `brewup` - Update all Homebrew packages
+- `brewdiff` - Compare Brewfile with installed packages
 - `asdfup` - Update all asdf plugins
 - `gitclean` - Remove merged git branches
 - `mkcd` - Create directory and cd into it
