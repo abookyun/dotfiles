@@ -1,0 +1,7 @@
+# Default pip packages to install automatically with each Python version
+# https://github.com/asdf-community/asdf-python#default-python-packages
+
+# Keep this minimal - install project-specific packages in virtual environments
+pip
+setuptools
+wheel

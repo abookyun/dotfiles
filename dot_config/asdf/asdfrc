@@ -4,3 +4,6 @@ export ASDF_DATA_DIR=${XDG_DATA_HOME}/asdf
 
 # asdf-nodejs: default npm packages
 export ASDF_NPM_DEFAULT_PACKAGES_FILE=${XDG_CONFIG_HOME}/asdf/default-npm-packages
+
+# asdf-python: default pip packages
+export ASDF_PYTHON_DEFAULT_PACKAGES_FILE=${XDG_CONFIG_HOME}/asdf/default-python-packages

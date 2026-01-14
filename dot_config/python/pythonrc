@@ -1,31 +1,34 @@
-# Python startup file
-# This file is executed when Python starts in interactive mode
+# Python interactive shell startup file
+# This file is executed when you run `python` interactively
 
-import os
 import sys
+import os
 
-# Enable history and tab completion if available
+# Enable tab completion in interactive Python shell
 try:
     import readline
     import rlcompleter
-
-    # Enable tab completion
     readline.parse_and_bind("tab: complete")
+except ImportError:
+    pass
 
-    # Set history file location using XDG_STATE_HOME
-    xdg_state_home = os.environ.get('XDG_STATE_HOME', os.path.join(os.path.expanduser("~"), ".local", "state"))
-    histfile = os.path.join(xdg_state_home, "python", "history")
-    os.makedirs(os.path.dirname(histfile), exist_ok=True)
+# Set up history file in XDG-compliant location
+history_file = os.path.join(
+    os.environ.get('XDG_STATE_HOME', os.path.expanduser('~/.local/state')),
+    'python',
+    'python_history'
+)
 
-    try:
-        readline.read_history_file(histfile)
-        # Default history file size
-        readline.set_history_length(1000)
-    except FileNotFoundError:
-        pass
+# Create directory if it doesn't exist
+os.makedirs(os.path.dirname(history_file), exist_ok=True)
+
+# Load and save history
+try:
+    import readline
+    if os.path.exists(history_file):
+        readline.read_history_file(history_file)
 
     import atexit
-    atexit.register(readline.write_history_file, histfile)
-
-except ImportError:
+    atexit.register(readline.write_history_file, history_file)
+except (ImportError, OSError):
     pass
