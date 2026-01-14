@@ -62,6 +62,7 @@ brew "tealdeer"  # fast tldr (command examples)
 # ====================================================================
 brew "curl"  # HTTP client (newer version than macOS built-in)
 brew "openssl@3"  # SSL/TLS toolkit
+brew "icu4c@78"  # International Components for Unicode for C/C++
 brew "readline"  # line editing library
 brew "universal-ctags"  # code indexing (for editors)
 brew "libyaml"  # YAML parser
@@ -89,6 +90,7 @@ brew "ruby"  # Ruby programming language
 brew "wget"  # file downloader
 brew "mosh"  # mobile shell (better SSH)
 brew "nmap"  # network scanner
+brew "snitch"  # network tcp/udp port monitor
 
 # System utilities
 # brew "mactop"  # macOS system monitor
