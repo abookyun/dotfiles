@@ -14,6 +14,16 @@ export VISUAL='nvim'
 export NODE_REPL_HISTORY=$XDG_STATE_HOME/node/node_repl_history
 export NPM_CONFIG_USERCONFIG=$XDG_CONFIG_HOME/npm/config
 
+# python
+export PYTHONSTARTUP=$XDG_CONFIG_HOME/python/pythonrc
+export PYTHONPYCACHEPREFIX=$XDG_CACHE_HOME/python
+export PYTHONUSERBASE=$XDG_DATA_HOME/python
+
+# uv (fast Python package installer)
+export UV_TOOL_DIR=$XDG_DATA_HOME/uv/tools
+export UV_TOOL_BIN_DIR=$XDG_DATA_HOME/uv/bin
+export UV_CACHE_DIR=$XDG_CACHE_HOME/uv
+
 # less
 export LESSHISTFILE="${XDG_STATE_HOME}/zsh/lesshst"
 
