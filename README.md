@@ -19,8 +19,7 @@ Inspired by @holman/dotfiles, and [XDG Base Directory Specification](https://spe
 git clone https://github.com/abookyun/dotfiles ~/.dotfiles
 
 # Initialize chezmoi and apply dotfiles
-chezmoi init --source ~/.dotfiles
-chezmoi apply -v
+sh -c "$(curl -fsLS get.chezmoi.io)" -- init --apply ~/.dotfiles
 ```
 
 On first run, chezmoi will:

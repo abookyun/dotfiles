@@ -9,9 +9,10 @@ echo "Installing Homebrew packages..."
 
 # Check if Homebrew is installed
 if ! command -v brew &> /dev/null; then
-    echo "Error: Homebrew is not installed"
-    echo "Please install Homebrew first: https://brew.sh"
-    exit 1
+    echo "Homebrew is not installed"
+    echo "Installing Homebrew for you."
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    echo "Homebrew installed!"
 fi
 
 # Check if Brewfile exists
