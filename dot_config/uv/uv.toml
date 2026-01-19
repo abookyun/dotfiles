@@ -1,17 +1,5 @@
 # uv configuration
 # https://docs.astral.sh/uv/concepts/configuration-files/
 
-[tool]
-# Use XDG-compliant directories for uv tools
-# Tools will be installed to UV_TOOL_DIR and binaries symlinked to UV_TOOL_BIN_DIR
-# These are set via environment variables in shell config
-
-[pip]
-# Use system certificates
-system = true
-
-# Prefer binary distributions for faster installation
-prefer-binary = true
-
-# Use the cache when possible
-no-cache = false
+# Note: Tool directories are configured via environment variables in shell config:
+# UV_TOOL_DIR, UV_TOOL_BIN_DIR, UV_CACHE_DIR
