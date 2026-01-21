@@ -22,7 +22,7 @@ return {
           return { desc = "nvim-tree: " .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true }
         end
         -- custom mappings
-        vim.keymap.set("n", "<C-i>", api.node.show_info_popup, opts("File Info"))
+        vim.keymap.set("n", "<leader>i", api.node.show_info_popup, opts("File Info"))
       end,
     })
   end,
