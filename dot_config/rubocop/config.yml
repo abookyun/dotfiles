@@ -1,0 +1,154 @@
+# RuboCop Configuration - Relaxed Settings
+# This config disables most style cops and focuses on actual code issues
+# Each setting includes the default value in comments for easy restoration
+
+AllCops:
+  NewCops: enable  # Default: enable
+  SuggestExtensions: false  # Default: true
+  Exclude:
+    - 'vendor/**/*'
+    - 'node_modules/**/*'
+    - 'db/schema.rb'
+    - 'bin/**/*'
+    - 'tmp/**/*'
+
+# ============================================================================
+# Metrics - Relaxed limits
+# ============================================================================
+
+Metrics/AbcSize:
+  Max: 30  # Default: 17
+
+Metrics/BlockLength:
+  Enabled: false  # Default: true, Max: 25
+
+Metrics/ClassLength:
+  Max: 200  # Default: 100
+
+Metrics/CyclomaticComplexity:
+  Max: 15  # Default: 7
+
+Metrics/MethodLength:
+  Max: 30  # Default: 10
+
+Metrics/ModuleLength:
+  Max: 200  # Default: 100
+
+Metrics/ParameterLists:
+  Max: 6  # Default: 5
+
+Metrics/PerceivedComplexity:
+  Max: 15  # Default: 8
+
+# ============================================================================
+# Layout - Keep minimal formatting rules
+# ============================================================================
+
+Layout/LineLength:
+  Max: 120  # Default: 120
+  Enabled: true  # Default: true
+
+# ============================================================================
+# Style - Disable most opinionated rules
+# ============================================================================
+
+Style/Documentation:
+  Enabled: false  # Default: true - Require class/module documentation
+
+Style/FrozenStringLiteralComment:
+  Enabled: false  # Default: true - Require # frozen_string_literal: true
+
+Style/StringLiterals:
+  Enabled: false  # Default: true, EnforcedStyle: single_quotes
+
+Style/SymbolArray:
+  Enabled: false  # Default: true, EnforcedStyle: percent
+
+Style/WordArray:
+  Enabled: false  # Default: true, EnforcedStyle: percent
+
+Style/ClassAndModuleChildren:
+  Enabled: false  # Default: true, EnforcedStyle: nested
+
+Style/GuardClause:
+  Enabled: false  # Default: true - Suggest guard clauses
+
+Style/IfUnlessModifier:
+  Enabled: false  # Default: true - Suggest one-line if/unless
+
+Style/NumericPredicate:
+  Enabled: false  # Default: true - Prefer .zero? over == 0
+
+Style/SignalException:
+  Enabled: false  # Default: true, EnforcedStyle: only_raise
+
+Style/SingleLineBlockParams:
+  Enabled: false  # Default: true - Enforce |a, e| for reduce
+
+Style/TrailingCommaInArrayLiteral:
+  Enabled: false  # Default: true, EnforcedStyleForMultiline: no_comma
+
+Style/TrailingCommaInHashLiteral:
+  Enabled: false  # Default: true, EnforcedStyleForMultiline: no_comma
+
+Style/TrailingCommaInArguments:
+  Enabled: false  # Default: true, EnforcedStyleForMultiline: no_comma
+
+Style/PercentLiteralDelimiters:
+  Enabled: false  # Default: true - Enforce consistent delimiters
+
+Style/CommentedKeyword:
+  Enabled: false  # Default: true - Don't put comments after keywords
+
+Style/HashSyntax:
+  EnforcedStyle: ruby19_no_mixed_keys  # Default: ruby19, allow both styles
+
+Style/EmptyMethod:
+  Enabled: false  # Default: true, EnforcedStyle: compact
+
+Style/BlockDelimiters:
+  Enabled: false  # Default: true - Enforce {} vs do..end
+
+Style/Lambda:
+  Enabled: false  # Default: true - Enforce -> vs lambda
+
+Style/AsciiComments:
+  Enabled: false  # Default: true - Allow non-ASCII in comments
+
+# ============================================================================
+# Naming
+# ============================================================================
+
+Naming/AccessorMethodName:
+  Enabled: false  # Default: true - Avoid get_/set_ prefixes
+
+Naming/PredicateName:
+  Enabled: false  # Default: true - Avoid is_ prefix
+
+Naming/VariableNumber:
+  Enabled: false  # Default: true, EnforcedStyle: normalcase
+
+Naming/MethodParameterName:
+  Enabled: false  # Default: true, MinNameLength: 3
+
+# ============================================================================
+# Lint - Keep important error detection
+# ============================================================================
+
+Lint/AmbiguousOperator:
+  Enabled: true  # Default: true
+
+Lint/AmbiguousRegexpLiteral:
+  Enabled: true  # Default: true
+
+Lint/UselessAssignment:
+  Enabled: true  # Default: true
+
+Lint/ShadowingOuterLocalVariable:
+  Enabled: false  # Default: true
+
+Lint/UnusedMethodArgument:
+  Enabled: false  # Default: true
+
+Lint/UnusedBlockArgument:
+  Enabled: false  # Default: true
