@@ -21,6 +21,8 @@ return {
         local function opts(desc)
           return { desc = "nvim-tree: " .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true }
         end
+        -- unbind C-k
+        vim.keymap.del("n", "<C-k>", { buffer = bufnr })
         -- custom mappings
         vim.keymap.set("n", "<leader>i", api.node.show_info_popup, opts("File Info"))
       end,
