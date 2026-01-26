@@ -1,0 +1,8 @@
+#!vd -p
+{"sheet": "", "col": "", "row": "", "longname": "select-rows", "input": "", "keystrokes": "gs", "comment": "select all rows", "replayable": true}
+{"sheet": "", "col": "Amount", "row": "", "longname": "setcol-regex-subst", "input": {"before": "\\(", "after": "-"}, "keystrokes": "g*", "comment": "modify selected rows in current column, replacing `search` regex with `replace`, (may include backreferences \\1 etc)", "replayable": true}
+{"sheet": "", "col": "Amount", "row": "", "longname": "setcol-regex-subst", "input": {"before": "\\)", "after": ""}, "keystrokes": "g*", "comment": "modify selected rows in current column, replacing `search` regex with `replace`, (may include backreferences \\1 etc)", "replayable": true}
+{"sheet": "", "col": "Amount", "row": "", "longname": "setcol-regex-subst", "input": {"before": "US", "after": ""}, "keystrokes": "g*", "comment": "modify selected rows in current column, replacing `search` regex with `replace`, (may include backreferences \\1 etc)", "replayable": true}
+{"sheet": "", "col": "Amount", "row": "", "longname": "setcol-regex-subst", "input": {"before": "\u00a5", "after": "\\$"}, "keystrokes": "g*", "comment": "modify selected rows in current column, replacing `search` regex with `replace`, (may include backreferences \\1 etc)", "replayable": true}
+{"sheet": "", "col": "", "row": "", "longname": "unselect-rows", "input": "", "keystrokes": "gu", "comment": "unselect all rows", "replayable": true}
+{"sheet": "", "col": "Amount", "row": "", "longname": "type-currency", "input": "", "keystrokes": "$", "comment": "set type of current column to currency", "replayable": true}

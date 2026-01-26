@@ -1,0 +1,20 @@
+#!vd -p
+{"sheet": "", "col": "Date", "row": "", "longname": "addcol-split", "input": ", ", "keystrokes": ":", "comment": "add column split by regex", "replayable": true}
+{"sheet": "", "col": "Date_re", "row": "", "longname": "expand-col", "input": "", "keystrokes": "(", "comment": "expand current column of containers one level", "replayable": true}
+{"sheet": "", "col": "Date_re[0]", "row": "", "longname": "type-date", "input": "", "keystrokes": "@", "comment": "set type of current column to date", "replayable": true}
+{"sheet": "", "col": "", "row": "", "longname": "go-left", "input": "", "keystrokes": "Left", "comment": "go left", "replayable": false}
+{"sheet": "", "col": "Date", "row": "", "longname": "rename-col", "input": "Datetime", "keystrokes": "^", "comment": "rename current column", "replayable": true}
+{"sheet": "", "col": "", "row": "", "longname": "go-right", "input": "", "replayable": false}
+{"sheet": "", "col": "Date_re[0]", "row": "", "longname": "rename-col", "input": "Date", "replayable": true}
+{"sheet": "", "col": "", "row": "", "longname": "go-right", "input": "", "replayable": false}
+{"sheet": "", "col": "Date_re[1]", "row": "", "longname": "rename-col", "input": "Time", "replayable": true}
+{"sheet": "", "col": "", "row": "", "longname": "go-left", "input": "", "keystrokes": "Left", "comment": "go left", "replayable": false}
+{"sheet": "", "col": "Date", "row": "", "longname": "addcol-split", "input": "\\-", "keystrokes": ":", "comment": "add column split by regex", "replayable": true}
+{"sheet": "", "col": "Date_re", "row": "", "longname": "expand-col", "input": "", "keystrokes": "(", "comment": "expand current column of containers one level", "replayable": true}
+{"sheet": "", "col": "Date_re[0]", "row": "", "longname": "rename-col", "input": "Year", "keystrokes": "^", "comment": "rename current column", "replayable": true}
+{"sheet": "", "col": "", "row": "", "longname": "go-right", "input": "", "replayable": false}
+{"sheet": "", "col": "Date_re[1]", "row": "", "longname": "rename-col", "input": "Month", "replayable": true}
+{"sheet": "", "col": "", "row": "", "longname": "go-right", "input": "", "replayable": false}
+{"sheet": "", "col": "Date_re[2]", "row": "", "longname": "rename-col", "input": "Day", "replayable": true}
+{"sheet": "", "col": "Day", "row": "", "longname": "addcol-expr", "input": "Date.isocalendar().week", "keystrokes": "=", "comment": "create new column from Python expression, with column names as variables", "replayable": true}
+{"sheet": "", "col": "Date.isocalendar().week", "row": "", "longname": "rename-col", "input": "Week", "keystrokes": "^", "comment": "rename current column", "replayable": true}

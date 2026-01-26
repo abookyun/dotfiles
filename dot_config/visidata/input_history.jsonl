@@ -1,0 +1,40 @@
+{"type": "longname", "input": "seperate_datetime", "n": 1}
+{"type": "regex-split", "input": ", ", "n": 1}
+{"type": "regex-split", "input": "\\-", "n": 1}
+{"type": "expr", "input": "Date.isocalendar().week", "n": 1}
+{"type": "longname", "input": "cast_amount", "n": 1}
+{"type": "filename", "input": "../Transactions v3.3 - 20250730.csv", "n": 1}
+{"type": "longname", "input": "type-datetime", "n": 1}
+{"type": "longname", "input": "clean-names", "n": 1}
+{"type": "jointype", "input": "concat", "n": 1}
+{"type": "jointype", "input": "append", "n": 1}
+{"type": "filename", "input": "../Transactions_v3_4_20251205.csv", "n": 1}
+{"type": "expr", "input": "Yearmonth", "n": 1}
+{"type": "expr", "input": "YearMonth", "n": 1}
+{"type": "expr", "input": "Year+Month", "n": 1}
+{"type": "jointype", "input": "concat", "n": 2}
+{"type": "longname", "input": "seperate_datetime", "n": 2}
+{"type": "regex-split", "input": ", ", "n": 2}
+{"type": "regex-split", "input": "\\-", "n": 2}
+{"type": "expr", "input": "Date.isocalendar().week", "n": 2}
+{"type": "longname", "input": "cast_amount", "n": 2}
+{"type": "expr", "input": "Year+Month", "n": 2}
+{"type": "longname", "input": "type-datetime", "n": 2}
+{"type": "jointype", "input": "extend", "n": 1}
+{"type": "jointype", "input": "concat", "n": 3}
+{"type": "jointype", "input": "append", "n": 2}
+{"type": "filename", "input": "Transactions v3.4 - 20251130.csv", "n": 1}
+{"type": "jointype", "input": "diff", "n": 1}
+{"type": "regex", "input": "2025-07-30", "n": 1}
+{"type": "regex_flags", "input": "I", "n": 1}
+{"type": "regex", "input": "2025-07-31", "n": 1}
+{"type": "filename", "input": "Cathy20250731_20251130.csv", "n": 1}
+{"type": "filename", "input": "DAWHO.csv", "n": 1}
+{"type": "regex", "input": "\u4fdd\u8b49\u91d1", "n": 1}
+{"type": "aggregators", "input": "sum", "n": 1}
+{"type": "regex", "input": "2025-07-01", "n": 1}
+{"type": "longname", "input": "seperate_datetime", "n": 3}
+{"type": "regex-split", "input": ", ", "n": 3}
+{"type": "regex-split", "input": "\\-", "n": 3}
+{"type": "expr", "input": "Date.isocalendar().week", "n": 3}
+{"type": "longname", "input": "cast_amount", "n": 3}
