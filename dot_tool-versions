@@ -5,3 +5,4 @@ nodejs 25.3.0
 postgres 18.0
 sqlite 3.51.1
 redis 8.4.0
+golang 1.25.6
