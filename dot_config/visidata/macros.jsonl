@@ -1,3 +1,4 @@
-{"binding": "seperate_datetime", "source": "~/.config/visidata/seperate_datetime.vdj"}
-{"binding": "cast_amount", "source": "~/.config/visidata/cast_amount.vdj"}
-{"binding": "", "source": "~/.config/visidata.vdj"}
+{"binding": "seperate_datetime", "source": "/Users/abookyun/.config/visidata/seperate_datetime.vdj"}
+{"binding": "cast_amount", "source": "/Users/abookyun/.config/visidata/cast_amount.vdj"}
+{"binding": "", "source": "/Users/abookyun/.config/visidata.vdj"}
+{"binding": "format-transactions", "source": "/Users/abookyun/.config/visidata/format-transactions.vdj"}

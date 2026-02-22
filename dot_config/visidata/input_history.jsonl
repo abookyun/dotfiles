@@ -38,3 +38,99 @@
 {"type": "regex-split", "input": "\\-", "n": 3}
 {"type": "expr", "input": "Date.isocalendar().week", "n": 3}
 {"type": "longname", "input": "cast_amount", "n": 3}
+{"type": "longname", "input": "seperate_datetime", "n": 4}
+{"type": "regex-split", "input": ", ", "n": 4}
+{"type": "regex-split", "input": "\\-", "n": 4}
+{"type": "longname", "input": "cast_amount", "n": 4}
+{"type": "longname", "input": "seperate_datetime", "n": 5}
+{"type": "regex-split", "input": ", ", "n": 5}
+{"type": "regex-split", "input": "\\-", "n": 5}
+{"type": "longname", "input": "cast_amount", "n": 5}
+{"type": "longname", "input": "type-datetime", "n": 3}
+{"type": "longname", "input": "type-date", "n": 1}
+{"type": "longname", "input": "seperate_datetime", "n": 6}
+{"type": "regex-split", "input": ", ", "n": 6}
+{"type": "regex-split", "input": "\\-", "n": 6}
+{"type": "longname", "input": "cast_amount", "n": 6}
+{"type": "longname", "input": "type-datetime", "n": 4}
+{"type": "expr", "input": "Year+Month", "n": 3}
+{"type": "expr", "input": "Date+' '+Time", "n": 1}
+{"type": "expr", "input": "Date+Time", "n": 1}
+{"type": "longname", "input": "sort-asc", "n": 1}
+{"type": "longname", "input": "type-datetime", "n": 5}
+{"type": "filename", "input": "Transactions.csv", "n": 1}
+{"type": "longname", "input": "seperate_datetime", "n": 7}
+{"type": "regex-split", "input": ", ", "n": 7}
+{"type": "regex-split", "input": "\\-", "n": 7}
+{"type": "expr", "input": "Date.isocalendar().week", "n": 4}
+{"type": "longname", "input": "cast_amount", "n": 7}
+{"type": "expr", "input": "Year+Month", "n": 4}
+{"type": "longname", "input": "type-datetime", "n": 6}
+{"type": "filename", "input": "Transactions 2026-1-31, 17:12.csv", "n": 1}
+{"type": "jointype", "input": "append", "n": 3}
+{"type": "filename", "input": "Transactions 2026-1-31, 17:12&Transactions.tsv", "n": 1}
+{"type": "filename", "input": "Transactions 2026-1-31, 17:12&Transactions.csv", "n": 1}
+{"type": "filename", "input": "Transactions_new.csv", "n": 1}
+{"type": "filename", "input": "Transactions.csv", "n": 2}
+{"type": "filename", "input": "Transactions_new_a.csv", "n": 1}
+{"type": "longname", "input": "seperate_datetime", "n": 8}
+{"type": "regex-split", "input": ", ", "n": 8}
+{"type": "regex-split", "input": "\\-", "n": 8}
+{"type": "expr", "input": "Date.isocalendar().week", "n": 5}
+{"type": "longname", "input": "cast_amount", "n": 8}
+{"type": "expr", "input": "Year+Month", "n": 5}
+{"type": "longname", "input": "type-datetime", "n": 7}
+{"type": "filename", "input": "Transactions 2026-1-31.csv", "n": 1}
+{"type": "filename", "input": "Transactions_merged.csv", "n": 1}
+{"type": "longname", "input": "seperate_datetime", "n": 9}
+{"type": "regex-split", "input": ", ", "n": 9}
+{"type": "regex-split", "input": "\\-", "n": 9}
+{"type": "expr", "input": "Date.isocalendar().week", "n": 6}
+{"type": "expr", "input": "Year+Month", "n": 6}
+{"type": "longname", "input": "cast_amount", "n": 9}
+{"type": null, "input": "format-transactions", "n": 1}
+{"type": "longname", "input": "seperate_datetime", "n": 10}
+{"type": "regex-split", "input": ", ", "n": 10}
+{"type": "regex-split", "input": "\\-", "n": 10}
+{"type": "expr", "input": "Date.isocalendar().week", "n": 7}
+{"type": "expr", "input": "Year+Month", "n": 7}
+{"type": "longname", "input": "type-datetime", "n": 8}
+{"type": "longname", "input": "cast_amount", "n": 10}
+{"type": "longname", "input": "format-transactions", "n": 1}
+{"type": "longname", "input": "seperate_datetime", "n": 11}
+{"type": "regex-split", "input": ", ", "n": 11}
+{"type": "regex-split", "input": "\\-", "n": 11}
+{"type": "expr", "input": "Date.isocalendar().week", "n": 8}
+{"type": "expr", "input": "Year+Month", "n": 8}
+{"type": "longname", "input": "type-datetime", "n": 9}
+{"type": "longname", "input": "cast_amount", "n": 11}
+{"type": "filename", "input": "Transactions 2026-1-31, 22:47.csv", "n": 1}
+{"type": "filename", "input": "Transactions&Transactions 2026-1-31, 22:47.csv", "n": 1}
+{"type": "filename", "input": "6.Futures_Options Transactions-20250707.csv", "n": 1}
+{"type": "filename", "input": "3.Stock Summary-20250707.csv", "n": 1}
+{"type": "regex", "input": "2019", "n": 1}
+{"type": "filename", "input": "Stock_USD Transactions 2019.csv", "n": 1}
+{"type": "regex", "input": "2020", "n": 1}
+{"type": "filename", "input": "Stock_TWD Transactions 2020.csv", "n": 1}
+{"type": "regex", "input": "2021", "n": 1}
+{"type": "filename", "input": "Futures_USD Transactions 2021.csv", "n": 1}
+{"type": "regex", "input": "2018", "n": 1}
+{"type": "regex", "input": "2019", "n": 2}
+{"type": "regex", "input": "2018", "n": 2}
+{"type": "filename", "input": "Futures_TWD Transactions 2018.csv", "n": 1}
+{"type": "regex", "input": "\\[", "n": 1}
+{"type": "regex-split", "input": "q", "n": 1}
+{"type": null, "input": "0", "n": 1}
+{"type": "filename", "input": "data/stock_twd.csv", "n": 1}
+{"type": "filename", "input": "Stock_TWD Transactions.csv", "n": 1}
+{"type": "filename", "input": "data/stock_twd.csv", "n": 2}
+{"type": "longname", "input": "copy-cell", "n": 1}
+{"type": null, "input": "AAPL", "n": 1}
+{"type": null, "input": "TSLA", "n": 1}
+{"type": null, "input": "TWTR", "n": 1}
+{"type": "filename", "input": "data/stock_usd.csv", "n": 1}
+{"type": "regex", "input": "TSM", "n": 1}
+{"type": "longname", "input": "melt-regex", "n": 1}
+{"type": "filename", "input": "data/stock_twd.csv", "n": 3}
+{"type": null, "input": "0", "n": 2}
+{"type": "filename", "input": "Stock_TWD Transactions.csv", "n": 2}
