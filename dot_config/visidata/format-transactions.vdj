@@ -1,0 +1,47 @@
+#!vd -p
+{"sheet": "", "col": "", "row": "", "longname": "exec-longname", "input": "seperate_datetime", "keystrokes": "Space", "comment": "execute command by its longname", "replayable": true}
+{"sheet": "", "col": "", "row": "", "longname": "redraw", "input": "", "keystrokes": "KEY_RESIZE", "comment": "Refresh screen", "replayable": true}
+{"sheet": "", "col": "Time", "row": "", "longname": "freeze-col", "input": "", "keystrokes": "'", "comment": "add a frozen copy of current column with all cells evaluated", "replayable": true}
+{"sheet": "", "col": "Time_frozen", "row": "", "longname": "rename-col", "input": "Time", "keystrokes": "^", "comment": "rename current column", "replayable": true}
+{"sheet": "", "col": "Time", "row": "", "longname": "hide-col", "input": "", "keystrokes": "-", "comment": "hide the current column", "replayable": true}
+{"sheet": "", "col": "Week", "row": "", "longname": "hide-col", "input": "", "keystrokes": "-", "comment": "hide the current column", "replayable": true}
+{"sheet": "", "col": "Day", "row": "", "longname": "hide-col", "input": "", "keystrokes": "-", "comment": "hide the current column", "replayable": true}
+{"sheet": "", "col": "Time", "row": "", "longname": "addcol-expr", "input": "Year+Month", "keystrokes": "=", "comment": "create new column from Python expression, with column names as variables", "replayable": true}
+{"sheet": "", "col": "Year+Month", "row": "", "longname": "rename-col", "input": "yyyymm", "keystrokes": "^", "comment": "rename current column", "replayable": true}
+{"sheet": "", "col": "Month", "row": "", "longname": "hide-col", "input": "", "keystrokes": "-", "comment": "hide the current column", "replayable": true}
+{"sheet": "", "col": "Year", "row": "", "longname": "hide-col", "input": "", "keystrokes": "-", "comment": "hide the current column", "replayable": true}
+{"sheet": "", "col": "", "row": "", "longname": "exec-longname", "input": "type-datetime", "keystrokes": "Space", "comment": "execute command by its longname", "replayable": true}
+{"sheet": "", "col": "Datetime", "row": "", "longname": "type-datetime", "input": "", "comment": "set type of current column to datetime", "replayable": true}
+{"sheet": "", "col": "Datetime", "row": "", "longname": "sort-asc", "input": "\u241f<Datetime", "keystrokes": "[", "comment": "sort ascending by current column; replace any existing sort criteria", "replayable": true}
+{"sheet": "", "col": "Transaction Type", "row": "", "longname": "slide-left", "input": "", "keystrokes": "Shift+H", "comment": "slide the current column left **one position**", "replayable": true}
+{"sheet": "", "col": "Transaction Type", "row": "", "longname": "slide-left", "input": "", "keystrokes": "Shift+H", "comment": "slide the current column left **one position**", "replayable": true}
+{"sheet": "", "col": "Transaction Type", "row": "", "longname": "slide-left", "input": "", "keystrokes": "Shift+H", "comment": "slide the current column left **one position**", "replayable": true}
+{"sheet": "", "col": "Transaction Type", "row": "", "longname": "slide-left", "input": "", "keystrokes": "Shift+H", "comment": "slide the current column left **one position**", "replayable": true}
+{"sheet": "", "col": "Transaction Type", "row": "", "longname": "slide-left", "input": "", "keystrokes": "Shift+H", "comment": "slide the current column left **one position**", "replayable": true}
+{"sheet": "", "col": "Transaction Type", "row": "", "longname": "slide-left", "input": "", "keystrokes": "Shift+H", "comment": "slide the current column left **one position**", "replayable": true}
+{"sheet": "", "col": "Transaction Type", "row": "", "longname": "slide-left", "input": "", "keystrokes": "Shift+H", "comment": "slide the current column left **one position**", "replayable": true}
+{"sheet": "", "col": "Transaction Type", "row": "", "longname": "slide-left", "input": "", "keystrokes": "Shift+H", "comment": "slide the current column left **one position**", "replayable": true}
+{"sheet": "", "col": "Category", "row": "", "longname": "slide-left", "input": "", "keystrokes": "Shift+H", "comment": "slide the current column left **one position**", "replayable": true}
+{"sheet": "", "col": "Category", "row": "", "longname": "slide-left", "input": "", "keystrokes": "Shift+H", "comment": "slide the current column left **one position**", "replayable": true}
+{"sheet": "", "col": "Category", "row": "", "longname": "slide-left", "input": "", "keystrokes": "Shift+H", "comment": "slide the current column left **one position**", "replayable": true}
+{"sheet": "", "col": "Category", "row": "", "longname": "slide-left", "input": "", "keystrokes": "Shift+H", "comment": "slide the current column left **one position**", "replayable": true}
+{"sheet": "", "col": "Category", "row": "", "longname": "slide-left", "input": "", "keystrokes": "Shift+H", "comment": "slide the current column left **one position**", "replayable": true}
+{"sheet": "", "col": "Category", "row": "", "longname": "slide-left", "input": "", "keystrokes": "Shift+H", "comment": "slide the current column left **one position**", "replayable": true}
+{"sheet": "", "col": "Description", "row": "", "longname": "slide-left", "input": "", "keystrokes": "Shift+H", "comment": "slide the current column left **one position**", "replayable": true}
+{"sheet": "", "col": "Description", "row": "", "longname": "slide-left", "input": "", "keystrokes": "Shift+H", "comment": "slide the current column left **one position**", "replayable": true}
+{"sheet": "", "col": "Description", "row": "", "longname": "slide-left", "input": "", "keystrokes": "Shift+H", "comment": "slide the current column left **one position**", "replayable": true}
+{"sheet": "", "col": "Description", "row": "", "longname": "slide-left", "input": "", "keystrokes": "Shift+H", "comment": "slide the current column left **one position**", "replayable": true}
+{"sheet": "", "col": "Description", "row": "", "longname": "slide-left", "input": "", "keystrokes": "Shift+H", "comment": "slide the current column left **one position**", "replayable": true}
+{"sheet": "", "col": "Description", "row": "", "longname": "slide-left", "input": "", "keystrokes": "Shift+H", "comment": "slide the current column left **one position**", "replayable": true}
+{"sheet": "", "col": "yyyymm", "row": "", "longname": "slide-right", "input": "", "keystrokes": "Shift+L", "comment": "slide the current column right **one position**", "replayable": true}
+{"sheet": "", "col": "yyyymm", "row": "", "longname": "slide-right", "input": "", "keystrokes": "Shift+L", "comment": "slide the current column right **one position**", "replayable": true}
+{"sheet": "", "col": "yyyymm", "row": "", "longname": "slide-right", "input": "", "keystrokes": "Shift+L", "comment": "slide the current column right **one position**", "replayable": true}
+{"sheet": "", "col": "yyyymm", "row": "", "longname": "slide-right", "input": "", "keystrokes": "Shift+L", "comment": "slide the current column right **one position**", "replayable": true}
+{"sheet": "", "col": "yyyymm", "row": "", "longname": "slide-right", "input": "", "keystrokes": "Shift+L", "comment": "slide the current column right **one position**", "replayable": true}
+{"sheet": "", "col": "yyyymm", "row": "", "longname": "slide-right", "input": "", "keystrokes": "Shift+L", "comment": "slide the current column right **one position**", "replayable": true}
+{"sheet": "", "col": "yyyymm", "row": "", "longname": "slide-right", "input": "", "keystrokes": "Shift+L", "comment": "slide the current column right **one position**", "replayable": true}
+{"sheet": "", "col": "yyyymm", "row": "", "longname": "slide-right", "input": "", "keystrokes": "Shift+L", "comment": "slide the current column right **one position**", "replayable": true}
+{"sheet": "", "col": "yyyymm", "row": "", "longname": "slide-right", "input": "", "keystrokes": "Shift+L", "comment": "slide the current column right **one position**", "replayable": true}
+{"sheet": "", "col": "yyyymm", "row": "", "longname": "slide-left", "input": "", "keystrokes": "Shift+H", "comment": "slide the current column left **one position**", "replayable": true}
+{"sheet": "", "col": 15, "row": "", "longname": "hide-col", "input": "", "keystrokes": "-", "comment": "hide the current column", "replayable": true}
+{"sheet": "", "col": "", "row": "", "longname": "exec-longname", "input": "cast_amount", "keystrokes": "Space", "comment": "execute command by its longname", "replayable": true}
