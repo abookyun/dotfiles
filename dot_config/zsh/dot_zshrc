@@ -53,6 +53,9 @@ PATH=${HOMEBREW_PREFIX}/opt/curl/bin:$PATH
 PATH=${HOME}/.local/bin:${XDG_DATA_HOME}/asdf/shims:$PATH
 FPATH=${HOMEBREW_PREFIX}/share/zsh-completions:$FPATH
 
+# Added for obsidian cli
+export PATH="$PATH:/Applications/Obsidian.app/Contents/MacOS"
+
 # Completion
 source ${ZDOTDIR}/completion.zsh
 # tealdeer: https://github.com/dbrgn/tealdeer/blob/main/docs/src/installing.md#autocompletion
@@ -77,7 +80,6 @@ function zvm_after_init() {
   bindkey -M menuselect 'l' vi-forward-char
 }
 source ${HOMEBREW_PREFIX}/opt/zsh-vi-mode/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh
-source ${HOMEBREW_PREFIX}/opt/asdf/libexec/asdf.sh
 source ${HOMEBREW_PREFIX}/share/powerlevel10k/powerlevel10k.zsh-theme
 
 # zoxide
