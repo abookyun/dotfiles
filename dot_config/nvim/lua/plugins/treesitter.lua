@@ -1,9 +1,10 @@
 return {
   "nvim-treesitter/nvim-treesitter",
+  branch = 'main',
   build = ":TSUpdate",
   event = { "BufReadPost", "BufNewFile" },
   config = function()
-    require("nvim-treesitter.configs").setup({
+    require("nvim-treesitter").setup({
       ensure_installed = {
         "lua",
         "vim",
