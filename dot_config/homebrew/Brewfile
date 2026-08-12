@@ -6,20 +6,23 @@ brew "chezmoi"
 brew "asdf"
 brew "mas"
 brew "git"
+# brew "git-filter-repo"  # rewrite git repo history (e.g. purge secrets/large files)
 brew "vim"
 brew "neovim"
+brew "helix"
 brew "tmux"
+# brew "smug"  # automate tmux workflows via config files
 brew "lazygit"
 
 cask "iterm2"
 cask "ghostty"
+# cask "wezterm"  # GPU-accelerated terminal emulator/multiplexer
 cask "alfred"
 cask "obsidian"
 cask "telegram"
 cask "appcleaner"
 cask "the-unarchiver"
 cask "iina"
-cask "aldente"  # prevent overcharge your mac
 cask "moom"
 
 # Mac App Store version of 1Password 7 doesn't support lifetime license
@@ -53,6 +56,7 @@ brew "gh"  # GitHub CLI
 # Better standard commands (daily use)
 brew "bat"  # better cat
 brew "eza"  # better ls
+brew "lsd"  # better ls (icons)
 brew "fd"  # better find
 brew "tree"  # directory tree
 brew "tealdeer"  # fast tldr (command examples)
@@ -67,6 +71,7 @@ brew "readline"  # line editing library
 brew "universal-ctags"  # code indexing (for editors)
 brew "libyaml"  # YAML parser
 brew "pkgconf"  # package config helper
+# brew "poppler"  # PDF rendering library (dependency for PDF tools)
 
 # ====================================================================
 # Development Tools
@@ -76,6 +81,7 @@ brew "uv"  # fast Python package installer
 brew "harper"  # grammar checker
 brew "pgcli"  # PostgreSQL CLI with autocomplete
 brew "ruby"  # Ruby programming language
+brew "tree-sitter-cli"  # tree-sitter parser compiler (needed by nvim-treesitter)
 # brew "perl"
 # brew "redis"
 # brew "memcached"
@@ -102,6 +108,7 @@ brew "fswatch"  # file system watcher
 # brew "xdg-ninja"  # XDG compliance checker
 
 # Data processing
+brew "csvkit"  # CSV command-line tools
 brew "visidata"  # terminal spreadsheet viewer
 brew "opencc"  # Chinese text converter
 brew "fdupes"  # find duplicate files
@@ -109,10 +116,11 @@ brew "fdupes"  # find duplicate files
 
 # Media
 brew "yt-dlp"  # YouTube downloader
-# brew "imagemagick"  # image processor
+brew "mpv"  # media player
+brew "imagemagick"  # image processor
 # brew "graphicsmagick"  # better imagemagick
 # brew "exiftool"
-# brew "ffmpeg"
+brew "ffmpeg"
 # brew "handbrake"
 
 # Other
@@ -125,7 +133,6 @@ brew "figlet"  # ASCII art text
 cask "firefox"
 cask "maestral"  # open-source dropbox client
 cask "betterdisplay"
-cask "jordanbaird-ice"
 cask "markedit"
 cask "sublime-text"
 cask "google-chrome"
@@ -137,7 +144,6 @@ cask "plex"
 cask "aerial"
 cask "proton-mail"
 cask "chatgpt"
-cask "claude"
 cask "claude-code"
 # cask "raycast"
 # cask "bike"
@@ -173,7 +179,8 @@ mas "Instapaper Save", id: 1481302432
 # mas "Save to Matter", id: 1548677272  # Not currently installed
 # mas "Trello", id: 1278508951  # Not currently installed
 # mas "Xcode", id: 497799835
-# mas "Hush", id: 1544743900
+mas "Hush", id: 1544743900
+mas "Telegram Lite", id: 946399090
 # mas "Little Snitch Mini", id: 1629008763
 
 # ====================================================================
