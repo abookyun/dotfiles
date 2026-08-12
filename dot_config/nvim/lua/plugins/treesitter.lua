@@ -21,9 +21,22 @@ return {
         "rust",
         "sql",
       },
-      highlight = { enable = true },
-      indent = { enable = true },
-      endwise = { enable = true },
     })
+
+    local function try_attach(buf)
+      local ok = pcall(vim.treesitter.start, buf)
+      if ok then
+        vim.bo[buf].indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+      end
+    end
+
+    vim.api.nvim_create_autocmd("FileType", {
+      pattern = "*",
+      callback = function(args)
+        try_attach(args.buf)
+      end,
+    })
+
+    try_attach(vim.api.nvim_get_current_buf())
   end,
 }
