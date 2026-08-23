@@ -206,6 +206,36 @@ punch_hours() {
   print -r -- $h
 }
 
+# The hourly rate for a tag, or nothing. Two lookups: punch_rate is keyed by
+# the tag itself, which is the only form that works for names that cannot be
+# shell identifiers; PUNCH_RATE_<NAME> stays supported for ASCII names.
+punch_rate_for() {
+  local tag=$1
+  local rate=${punch_rate[$tag]}
+  if [[ -z $rate ]]; then
+    local suffix=${${tag:u}//[^A-Z0-9]/_}
+    # A suffix of nothing but underscores means the name was entirely
+    # non-ASCII, and every such project would read the same variable.
+    [[ $suffix == *[A-Z0-9]* ]] && rate=${(P)${:-PUNCH_RATE_$suffix}}
+  fi
+  print -r -- $rate
+}
+
+# One report row, padded by display width rather than byte count. printf pads
+# by bytes, so a CJK name -- three bytes per two columns -- would drag every
+# column after it out of line.
+punch_row() {
+  local label=${1-} width=24
+  local pad=$(( width - ${(m)#label} ))
+  (( pad < 1 )) && pad=1
+  local line="${label}${(l:$pad:: :)}"
+  # Quoted: an unquoted empty argument is dropped from the list entirely,
+  # sliding every later column one place to the left.
+  line+=$(printf '%8s %8s %10s' "${2-}" "${3-}" "${4-}")
+  # Trailing blanks are just noise in a terminal, and they break copy-paste.
+  print -r -- "${line%%[[:space:]]##}"
+}
+
 # Human-readable duration of the active interval.
 punch_elapsed() {
   local secs
@@ -345,7 +375,7 @@ punch_cmd_init() {
 }
 
 punch_cmd_bill() {
-  local month="" project="" format="table"
+  local month="" project="" format="table" detail=0
 
   while (( $# )); do
     case $1 in
@@ -353,6 +383,7 @@ punch_cmd_bill() {
       --project|-p) project=$(punch_slug $2); shift 2 ;;
       --csv)        format="csv"; shift ;;
       --markdown)   format="markdown"; shift ;;
+      --detail|-d)  detail=1; shift ;;
       *)            print -u2 "punch bill: unknown option $1"; return 1 ;;
     esac
   done
@@ -405,68 +436,142 @@ punch_cmd_bill() {
     return 0
   fi
 
-  local -a rows
-  local total_secs=0 total_amount=0 has_unrated=0
-  for tag in ${(ko)seconds}; do
-    local s=${seconds[$tag]}
-    local hours=$(punch_hours $s)
-    # PUNCH_RATES is keyed by the tag itself, so names that cannot form a
-    # shell identifier -- Chinese ones especially -- still get their own rate
-    # instead of collapsing onto a shared PUNCH_RATE_____ variable. The
-    # PUNCH_RATE_<NAME> form stays supported for plain ASCII names.
-    local rate=${punch_rate[$tag]}
-    if [[ -z $rate ]]; then
-      local suffix=${${tag:u}//[^A-Z0-9]/_}
-      # A suffix with nothing but underscores means the name was entirely
-      # non-ASCII and every such project would read the same variable.
-      [[ $suffix == *[A-Z0-9]* ]] && rate=${(P)${:-PUNCH_RATE_$suffix}}
+  # The document's title belongs above everything, including the detail table
+  # that follows -- this output gets handed to a client as-is.
+  [[ $format == markdown ]] && print "# Time report — $month${project:+ — $project}\n"
+
+  # Detail is what gets attached to an invoice: every interval, not a month's
+  # total. Printed before the summary so the summary stays the last thing read.
+  if (( detail )); then
+    local -a lines
+    lines=("${(@f)$(print -r -- $json | jq -r --arg only "$project" '
+      map(select(has("end")))
+      | map(select($only == "" or (.tags[0] // "untagged") == $only))
+      | sort_by(.start)
+      | .[]
+      | [ (.start | strptime("%Y%m%dT%H%M%SZ") | mktime),
+          (.end   | strptime("%Y%m%dT%H%M%SZ") | mktime),
+          (.tags[0] // "untagged") ]
+      | @tsv
+    ' 2>/dev/null)}")
+
+    if (( ${#lines} )); then
+      case $format in
+        markdown) print "## Detail\n"
+                  print "| Date | From | To | Hours | Project |"
+                  print "| --- | --- | --- | ---: | --- |" ;;
+        csv)      print "date,from,to,hours,project" ;;
+        *)        printf '%-12s %-13s %7s  %s\n' DATE WHEN HOURS PROJECT ;;
+      esac
+
+      local l
+      for l in $lines; do
+        [[ -n $l ]] || continue
+        local -a f=(${(ps:\t:)l})
+        # jq emits UTC epochs; render them in local time, as they were worked.
+        local day=$(date -r ${f[1]} '+%Y-%m-%d')
+        local from=$(date -r ${f[1]} '+%H:%M')
+        local to=$(date -r ${f[2]} '+%H:%M')
+        local h=$(punch_hours $(( f[2] - f[1] )))
+        case $format in
+          markdown) print -r -- "| $day | $from | $to | $h | ${f[3]} |" ;;
+          csv)      print -r -- "$day,$from,$to,$h,${f[3]}" ;;
+          *)        printf '%-12s %-13s %7s  %s\n' "$day" "$from-$to" "$h" "${f[3]}" ;;
+        esac
+      done
+      print
     fi
-    local amount=""
+  fi
+
+  # Split by whether a rate exists. A rate is what makes work billable, so
+  # nothing extra has to be remembered at clock-in time to classify it.
+  local -a billable internal
+  local billed_secs=0 internal_secs=0 total_amount=0
+  for tag in ${(k)seconds}; do
+    local s=${seconds[$tag]}
+    local rate=$(punch_rate_for $tag)
     if [[ -n $rate ]]; then
       # Round to the nearest whole unit of currency, integer-only.
-      amount=$(( (s * rate + 1800) / 3600 ))
+      local amount=$(( (s * rate + 1800) / 3600 ))
       (( total_amount += amount ))
+      (( billed_secs += s ))
+      billable+=("${s}"$'\t'"${tag}"$'\t'"${rate}"$'\t'"${amount}")
     else
-      has_unrated=1
+      (( internal_secs += s ))
+      internal+=("${s}"$'\t'"${tag}")
     fi
-    rows+=("${tag}"$'\t'"${hours}"$'\t'"${rate:-}"$'\t'"${amount:-}")
-    (( total_secs += s ))
   done
 
-  local total_hours=$(punch_hours $total_secs)
+  # Longest hours first, so the biggest slice of the month reads first.
+  billable=(${(On)billable})
+  internal=(${(On)internal})
+
+  local total_secs=$(( billed_secs + internal_secs ))
 
   case $format in
     csv)
-      print "project,hours,rate,amount,currency"
+      print "project,hours,rate,amount,currency,billable"
       local row
-      for row in $rows; do
+      for row in $billable; do
         local -a f=(${(ps:\t:)row})
-        print -r -- "${f[1]},${f[2]},${f[3]},${f[4]},$PUNCH_CURRENCY"
+        print -r -- "${f[2]},$(punch_hours ${f[1]}),${f[3]},${f[4]},$PUNCH_CURRENCY,yes"
+      done
+      for row in $internal; do
+        local -a f=(${(ps:\t:)row})
+        print -r -- "${f[2]},$(punch_hours ${f[1]}),,,$PUNCH_CURRENCY,no"
       done
       ;;
     markdown)
-      print "# Time report — $month${project:+ — $project}"
-      print
-      print "| Project | Hours | Rate | Amount |"
-      print "| --- | ---: | ---: | ---: |"
       local row
-      for row in $rows; do
-        local -a f=(${(ps:\t:)row})
-        print -r -- "| ${f[1]} | ${f[2]} | ${f[3]:-—} | ${f[4]:-—} |"
-      done
-      print -r -- "| **Total** | **${total_hours}** | | **${total_amount}** |"
+      if (( ${#billable} )); then
+        print
+        print "## Billable"
+        print
+        print "| Project | Hours | Rate | Amount |"
+        print "| --- | ---: | ---: | ---: |"
+        for row in $billable; do
+          local -a f=(${(ps:\t:)row})
+          print -r -- "| ${f[2]} | $(punch_hours ${f[1]}) | ${f[3]} | ${f[4]} |"
+        done
+        print -r -- "| **Subtotal** | **$(punch_hours $billed_secs)** | | **${total_amount}** |"
+      fi
+      if (( ${#internal} )); then
+        print
+        print "## Internal"
+        print
+        print "| Project | Hours |"
+        print "| --- | ---: |"
+        for row in $internal; do
+          local -a f=(${(ps:\t:)row})
+          print -r -- "| ${f[2]} | $(punch_hours ${f[1]}) |"
+        done
+        print -r -- "| **Subtotal** | **$(punch_hours $internal_secs)** |"
+      fi
       print
-      print "Currency: $PUNCH_CURRENCY"
+      print -r -- "**Total: $(punch_hours $total_secs) h — ${total_amount} ${PUNCH_CURRENCY}**"
       ;;
     *)
-      printf '%-24s %8s %8s %10s\n' PROJECT HOURS RATE AMOUNT
       local row
-      for row in $rows; do
-        local -a f=(${(ps:\t:)row})
-        printf '%-24s %8s %8s %10s\n' ${f[1]} ${f[2]} ${f[3]:-–} ${f[4]:-–}
-      done
-      printf '%-24s %8s %8s %10s\n' TOTAL $total_hours '' $total_amount
-      (( has_unrated )) && print "\n(projects without a rate are listed with no amount; set rates in $PUNCH_RATES_FILE)"
+      if (( ${#billable} )); then
+        punch_row BILLABLE HOURS RATE AMOUNT
+        for row in $billable; do
+          local -a f=(${(ps:\t:)row})
+          punch_row ${f[2]} $(punch_hours ${f[1]}) ${f[3]} ${f[4]}
+        done
+        punch_row '' "$(punch_hours $billed_secs)" '' "$total_amount"
+      fi
+      if (( ${#internal} )); then
+        (( ${#billable} )) && print
+        punch_row INTERNAL HOURS
+        for row in $internal; do
+          local -a f=(${(ps:\t:)row})
+          punch_row ${f[2]} $(punch_hours ${f[1]})
+        done
+        punch_row '' "$(punch_hours $internal_secs)"
+      fi
+      print
+      punch_row TOTAL "$(punch_hours $total_secs)" '' "$total_amount"
+      (( ${#internal} )) && print "\n(internal work has no rate set in $PUNCH_RATES_FILE)"
       ;;
   esac
 }
@@ -479,8 +584,8 @@ punch — timewarrior, with projects inferred from the filesystem.
   punch out                     clock out
   punch status [short]          one-line state, for prompts and status bars
   punch init [name]             mark $PWD as a project (.punch-card)
-  punch bill [--month YYYY-MM] [--project X] [--csv|--markdown]
-                                hours and amounts for completed intervals
+  punch bill [--month YYYY-MM] [--project X] [--detail] [--csv|--markdown]
+                                billable and internal hours, and amounts
 
 `start` and `stop` are synonyms for `in` and `out`.
 
