@@ -3,3 +3,5 @@
 .claude/
 LICENSE
 README.md
+# Hourly rates stay on the machine, never in the repo.
+.config/punch/rates

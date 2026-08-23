@@ -34,7 +34,7 @@ PUNCH_MAX_INTERVAL_HOURS=12
 PUNCH_IGNORE_PATHS=$HOME/.dotfiles:$HOME/Downloads
 
 # --- Billing ----------------------------------------------------------------
-# Hourly rates per project, used by `punch bill`. Anything not listed here is
+# Hourly rates per project, used by `punch bill`. Anything without a rate is
 # reported with no amount, so unbilled work stays visible instead of being
 # silently priced at zero.
 #
@@ -42,6 +42,9 @@ PUNCH_IGNORE_PATHS=$HOME/.dotfiles:$HOME/Downloads
 #
 # Project names are uppercased with non-alphanumerics turned into `_`,
 # so project `client-a` reads its rate from PUNCH_RATE_CLIENT_A.
+#
+# Rates themselves go in `rates` beside this file, which is deliberately not
+# tracked: this config is a symlink into the dotfiles repo, and what a client
+# is charged per hour does not belong in version control.
 
 PUNCH_CURRENCY=TWD
-# PUNCH_RATE_CLIENT_A=2000

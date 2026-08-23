@@ -66,8 +66,15 @@ A max-hours cap catches machines left running overnight.
 
 ## Billing
 
-Rates go in `config` as `PUNCH_RATE_<PROJECT>`, uppercased with
-non-alphanumerics turned into `_` (project `client-a` → `PUNCH_RATE_CLIENT_A`).
+Rates go in `~/.config/punch/rates`, which is deliberately untracked — `config`
+is a symlink into the dotfiles repo, and hourly rates do not belong in version
+control. Copy `rates.example` to start.
+
+Two forms are read: `PUNCH_RATE_CLIENT_A=2000` for ASCII names, and
+`punch_rate[內部工具]=800` keyed by the tag itself. Chinese names need the
+second form — they cannot form a shell identifier, so every one of them would
+otherwise collapse onto the same variable and silently share a rate.
+
 Projects without a rate are reported with no amount rather than a zero, so
 unbilled work stays visible.
 

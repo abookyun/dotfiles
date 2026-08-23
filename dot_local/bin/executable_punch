@@ -39,6 +39,15 @@ typeset -g PUNCH_IDLE_ENABLED=1
 
 [[ -r $PUNCH_CONFIG ]] && source $PUNCH_CONFIG
 
+# Rates live outside version control. The config file above is a symlink into
+# the dotfiles repo; hourly rates are not something to commit.
+#
+# The file may set either PUNCH_RATE_<NAME>=n for ASCII project names, or
+# punch_rate[<tag>]=n for any name at all.
+readonly PUNCH_RATES_FILE="${PUNCH_CONFIG:h}/rates"
+typeset -gA punch_rate
+[[ -r $PUNCH_RATES_FILE ]] && source $PUNCH_RATES_FILE
+
 for _punch_setting in ${(k)_punch_env_overrides}; do
   typeset -g $_punch_setting=${_punch_env_overrides[$_punch_setting]}
 done
@@ -401,8 +410,17 @@ punch_cmd_bill() {
   for tag in ${(ko)seconds}; do
     local s=${seconds[$tag]}
     local hours=$(punch_hours $s)
-    local rate_var="PUNCH_RATE_${${tag:u}//[^A-Z0-9]/_}"
-    local rate=${(P)rate_var}
+    # PUNCH_RATES is keyed by the tag itself, so names that cannot form a
+    # shell identifier -- Chinese ones especially -- still get their own rate
+    # instead of collapsing onto a shared PUNCH_RATE_____ variable. The
+    # PUNCH_RATE_<NAME> form stays supported for plain ASCII names.
+    local rate=${punch_rate[$tag]}
+    if [[ -z $rate ]]; then
+      local suffix=${${tag:u}//[^A-Z0-9]/_}
+      # A suffix with nothing but underscores means the name was entirely
+      # non-ASCII and every such project would read the same variable.
+      [[ $suffix == *[A-Z0-9]* ]] && rate=${(P)${:-PUNCH_RATE_$suffix}}
+    fi
     local amount=""
     if [[ -n $rate ]]; then
       # Round to the nearest whole unit of currency, integer-only.
@@ -448,7 +466,7 @@ punch_cmd_bill() {
         printf '%-24s %8s %8s %10s\n' ${f[1]} ${f[2]} ${f[3]:-–} ${f[4]:-–}
       done
       printf '%-24s %8s %8s %10s\n' TOTAL $total_hours '' $total_amount
-      (( has_unrated )) && print "\n(projects without a rate are listed with no amount; set PUNCH_RATE_* in $PUNCH_CONFIG)"
+      (( has_unrated )) && print "\n(projects without a rate are listed with no amount; set rates in $PUNCH_RATES_FILE)"
       ;;
   esac
 }
