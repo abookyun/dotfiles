@@ -1,0 +1,401 @@
+#!/usr/bin/env zsh
+# punch -- a thin wrapper around timewarrior, shaped like a punch clock.
+#
+# timewarrior already models time the way I work: one timeline, one active
+# interval, punching in somewhere punches you out of everywhere else. What it
+# lacks is knowing *which* project a directory belongs to, and what an hour of
+# it is worth. That is all this adds.
+#
+# Everything here degrades to plain timewarrior: `punch` with an unknown
+# command forwards to `timew`, so nothing is locked away behind the wrapper.
+
+emulate -L zsh
+setopt extended_glob
+set -o pipefail
+
+readonly PUNCH_CONFIG="${XDG_CONFIG_HOME:-$HOME/.config}/punch/config"
+
+# --- config -----------------------------------------------------------------
+
+# Defaults live here so punch keeps working if the config file is deleted.
+typeset -g PUNCH_IDLE_MINUTES=15
+typeset -g PUNCH_MAX_INTERVAL_HOURS=12
+typeset -g PUNCH_IGNORE_PATHS=""
+typeset -g PUNCH_CURRENCY="TWD"
+
+[[ -r $PUNCH_CONFIG ]] && source $PUNCH_CONFIG
+
+# --- project identity -------------------------------------------------------
+
+# Resolve the project for a directory, in order of how deliberate the signal is:
+# an explicit .punch-card file beats a git remote, which beats the directory
+# name. Prints nothing when the directory is ignored or has no identity.
+punch_project_for() {
+  local dir=${1:-$PWD}
+  [[ -d $dir ]] || return 1
+
+  local resolved=${dir:A}
+
+  local ignored
+  for ignored in ${(s.:.)PUNCH_IGNORE_PATHS}; do
+    [[ -n $ignored ]] || continue
+    local expanded=${~ignored}
+    [[ $resolved == ${expanded:A}(|/*) ]] && return 1
+  done
+
+  # An explicit marker anywhere up the tree wins.
+  local probe=$resolved
+  while [[ -n $probe && $probe != / ]]; do
+    if [[ -r $probe/.punch-card ]]; then
+      local name
+      # Ignore blank lines and comments so the file can explain itself.
+      name=$(grep -v -e '^[[:space:]]*$' -e '^[[:space:]]*#' $probe/.punch-card 2>/dev/null | head -1)
+      name=${name##[[:space:]]#}
+      name=${name%%[[:space:]]#}
+      if [[ -n $name ]]; then
+        print -r -- $(punch_slug $name)
+        return 0
+      fi
+    fi
+    probe=${probe:h}
+  done
+
+  # Otherwise fall back to the git repository this directory belongs to.
+  local toplevel
+  toplevel=$(git -C $resolved rev-parse --show-toplevel 2>/dev/null)
+  if [[ -n $toplevel ]]; then
+    local remote
+    remote=$(git -C $resolved remote get-url origin 2>/dev/null)
+    if [[ -n $remote ]]; then
+      remote=${remote%.git}
+      print -r -- $(punch_slug ${remote:t})
+      return 0
+    fi
+    print -r -- $(punch_slug ${toplevel:t})
+    return 0
+  fi
+
+  return 1
+}
+
+# Normalise a name into a tag that survives shells, reports and filenames.
+# Non-ASCII is kept as-is: project names are often Chinese, and mangling them
+# into dashes would make every such project collide under the same tag.
+punch_slug() {
+  local raw=${1//[[:space:]]##/-}
+  # Strip only what actually breaks tags: shell metacharacters and separators.
+  raw=${raw//[\'\"\`\$\\\;\&\|\<\>\(\)\[\]\{\}\*\?\!\#\%\,\:\/]/-}
+  # Collapse runs of dashes, then trim them from both ends.
+  while [[ $raw == *--* ]]; do raw=${raw//--/-}; done
+  raw=${raw#-}
+  raw=${raw%-}
+  print -r -- ${raw:l}
+}
+
+# The project of the currently running interval, if any.
+punch_active_project() {
+  local json
+  json=$(timew export now 2>/dev/null) || return 1
+  # An interval is active only while it has no end timestamp.
+  print -r -- $json | jq -re 'map(select(has("end") | not)) | .[0].tags[0] // empty' 2>/dev/null
+}
+
+punch_is_tracking() {
+  local json
+  json=$(timew export now 2>/dev/null) || return 1
+  print -r -- $json | jq -e 'map(select(has("end") | not)) | length > 0' >/dev/null 2>&1
+}
+
+# --- commands ---------------------------------------------------------------
+
+punch_cmd_in() {
+  local project=$1
+  shift 2>/dev/null
+
+  if [[ -z $project ]]; then
+    project=$(punch_project_for $PWD) || {
+      print -u2 "punch: no project for ${PWD/#$HOME/~}"
+      print -u2 "    name it with: punch init <name>    or: punch in <name>"
+      return 1
+    }
+  else
+    project=$(punch_slug $project)
+  fi
+
+  local current
+  current=$(punch_active_project)
+  if [[ $current == $project ]]; then
+    print "punch: already in ${(%):-%B}$project${(%):-%b} ($(punch_elapsed))"
+    return 0
+  fi
+
+  timew start $project "$@" >/dev/null || return 1
+
+  if [[ -n $current ]]; then
+    print "punch: $current → ${(%):-%B}$project${(%):-%b}"
+  else
+    print "punch: in ${(%):-%B}$project${(%):-%b}"
+  fi
+}
+
+punch_cmd_out() {
+  punch_is_tracking || { print "punch: not clocked in"; return 0; }
+  local project elapsed
+  project=$(punch_active_project)
+  elapsed=$(punch_elapsed)
+
+  # timewarrior refuses a zero-length interval. Starting and stopping within
+  # the same second is a misfire, not work, so drop it rather than erroring.
+  if [[ $(punch_elapsed_seconds) -lt 1 ]]; then
+    timew cancel >/dev/null 2>&1
+    print "punch: discarded ${(%):-%B}$project${(%):-%b} (nothing tracked)"
+    return 0
+  fi
+
+  timew stop >/dev/null || return 1
+  print "punch: out of ${(%):-%B}$project${(%):-%b} after $elapsed"
+}
+
+# Seconds elapsed in the active interval, or nothing if none is running.
+punch_elapsed_seconds() {
+  local start_iso
+  start_iso=$(timew export now 2>/dev/null \
+    | jq -re 'map(select(has("end") | not)) | .[0].start // empty' 2>/dev/null) || return 1
+  [[ -n $start_iso ]] || return 1
+
+  local start_epoch
+  # timewarrior stamps UTC as YYYYMMDDTHHMMSSZ.
+  start_epoch=$(TZ=UTC date -j -f '%Y%m%dT%H%M%SZ' $start_iso '+%s' 2>/dev/null) || return 1
+
+  local secs=$(( $(date '+%s') - start_epoch ))
+  (( secs < 0 )) && secs=0
+  print -r -- $secs
+}
+
+# Seconds as decimal hours, fixed to two places so report columns line up.
+punch_hours() {
+  local -F 2 h=$(( $1 / 3600.0 ))
+  print -r -- $h
+}
+
+# Human-readable duration of the active interval.
+punch_elapsed() {
+  local secs
+  secs=$(punch_elapsed_seconds) || return 1
+  printf '%d:%02d' $(( secs / 3600 )) $(( (secs % 3600) / 60 ))
+}
+
+# One-line state, used by the prompt, the window title and tmux.
+punch_cmd_status() {
+  local format=${1:-plain}
+  local project
+  project=$(punch_active_project)
+
+  if [[ -z $project ]]; then
+    case $format in
+      plain) print "not tracking" ;;
+      short) print "⏸" ;;
+      *)     print "" ;;
+    esac
+    return 1
+  fi
+
+  local elapsed
+  elapsed=$(punch_elapsed)
+  case $format in
+    short) print "⏱ $project $elapsed" ;;
+    *)     print "tracking $project ($elapsed)" ;;
+  esac
+  return 0
+}
+
+# Everything the prompt needs, tab-separated, in one call: the project this
+# directory belongs to, the project being tracked, and how long for. The shell
+# integration runs on every prompt, so this exists to keep that to one process.
+punch_cmd_prompt_state() {
+  local project active elapsed
+  project=$(punch_project_for $PWD)
+  active=$(punch_active_project)
+  [[ -n $active ]] && elapsed=$(punch_elapsed)
+  print -r -- "${project}"$'\t'"${active}"$'\t'"${elapsed}"
+}
+
+# Write a .punch-card marker so this tree stops depending on git remotes.
+punch_cmd_init() {
+  local name=${1:-${PWD:t}}
+  name=$(punch_slug $name)
+  local marker=$PWD/.punch-card
+
+  if [[ -e $marker ]]; then
+    print -u2 "punch: $marker already exists"
+    return 1
+  fi
+
+  print -r -- $name > $marker
+  print "punch: ${PWD/#$HOME/~} → ${(%):-%B}$name${(%):-%b}"
+  print "punch: consider adding .punch-card to your global gitignore"
+}
+
+punch_cmd_bill() {
+  local month="" project="" format="table"
+
+  while (( $# )); do
+    case $1 in
+      --month|-m)   month=$2; shift 2 ;;
+      --project|-p) project=$(punch_slug $2); shift 2 ;;
+      --csv)        format="csv"; shift ;;
+      --markdown)   format="markdown"; shift ;;
+      *)            print -u2 "punch bill: unknown option $1"; return 1 ;;
+    esac
+  done
+
+  # Default to the current month, and accept either `8` or `2026-08`.
+  [[ -z $month ]] && month=$(date '+%Y-%m')
+  if [[ $month == <-> && ${#month} -le 2 ]]; then
+    month=$(printf '%s-%02d' $(date '+%Y') $month)
+  fi
+  if [[ $month != <->-<-> ]]; then
+    print -u2 "punch bill: --month expects YYYY-MM or a month number"
+    return 1
+  fi
+
+  local range_start=${month}-01
+  local range_end
+  range_end=$(date -j -v+1m -f '%Y-%m-%d' $range_start '+%Y-%m-%d' 2>/dev/null) || {
+    print -u2 "punch bill: invalid month $month"
+    return 1
+  }
+
+  local json
+  json=$(timew export $range_start - $range_end 2>/dev/null) || {
+    print -u2 "punch bill: could not read timewarrior data"
+    return 1
+  }
+
+  # Aggregate seconds per project, then price them in the shell where the
+  # per-project rates from the config file are in scope.
+  local -A seconds
+  local line tag secs
+  while IFS=$'\t' read -r tag secs; do
+    [[ -n $tag ]] || continue
+    [[ -n $project && $tag != $project ]] && continue
+    seconds[$tag]=$secs
+  done < <(print -r -- $json | jq -r '
+    map(select(has("end")))
+    | map({
+        tag: (.tags[0] // "untagged"),
+        secs: ((.end | strptime("%Y%m%dT%H%M%SZ") | mktime)
+             - (.start | strptime("%Y%m%dT%H%M%SZ") | mktime))
+      })
+    | group_by(.tag)
+    | map([.[0].tag, (map(.secs) | add)])
+    | .[] | @tsv
+  ' 2>/dev/null)
+
+  if (( ${#seconds} == 0 )); then
+    print "punch: no completed intervals in $month${project:+ for $project}"
+    return 0
+  fi
+
+  local -a rows
+  local total_secs=0 total_amount=0 has_unrated=0
+  for tag in ${(ko)seconds}; do
+    local s=${seconds[$tag]}
+    local hours=$(punch_hours $s)
+    local rate_var="PUNCH_RATE_${${tag:u}//[^A-Z0-9]/_}"
+    local rate=${(P)rate_var}
+    local amount=""
+    if [[ -n $rate ]]; then
+      # Round to the nearest whole unit of currency, integer-only.
+      amount=$(( (s * rate + 1800) / 3600 ))
+      (( total_amount += amount ))
+    else
+      has_unrated=1
+    fi
+    rows+=("${tag}"$'\t'"${hours}"$'\t'"${rate:-}"$'\t'"${amount:-}")
+    (( total_secs += s ))
+  done
+
+  local total_hours=$(punch_hours $total_secs)
+
+  case $format in
+    csv)
+      print "project,hours,rate,amount,currency"
+      local row
+      for row in $rows; do
+        local -a f=(${(ps:\t:)row})
+        print -r -- "${f[1]},${f[2]},${f[3]},${f[4]},$PUNCH_CURRENCY"
+      done
+      ;;
+    markdown)
+      print "# Time report — $month${project:+ — $project}"
+      print
+      print "| Project | Hours | Rate | Amount |"
+      print "| --- | ---: | ---: | ---: |"
+      local row
+      for row in $rows; do
+        local -a f=(${(ps:\t:)row})
+        print -r -- "| ${f[1]} | ${f[2]} | ${f[3]:-—} | ${f[4]:-—} |"
+      done
+      print -r -- "| **Total** | **${total_hours}** | | **${total_amount}** |"
+      print
+      print "Currency: $PUNCH_CURRENCY"
+      ;;
+    *)
+      printf '%-24s %8s %8s %10s\n' PROJECT HOURS RATE AMOUNT
+      local row
+      for row in $rows; do
+        local -a f=(${(ps:\t:)row})
+        printf '%-24s %8s %8s %10s\n' ${f[1]} ${f[2]} ${f[3]:-–} ${f[4]:-–}
+      done
+      printf '%-24s %8s %8s %10s\n' TOTAL $total_hours '' $total_amount
+      (( has_unrated )) && print "\n(projects without a rate are listed with no amount; set PUNCH_RATE_* in $PUNCH_CONFIG)"
+      ;;
+  esac
+}
+
+punch_cmd_help() {
+  cat <<'EOF'
+punch — timewarrior, with projects inferred from the filesystem.
+
+  punch in [project] [tags...]  clock in (project defaults to $PWD's)
+  punch out                     clock out
+  punch status [short]          one-line state, for prompts and status bars
+  punch init [name]             mark $PWD as a project (.punch-card)
+  punch bill [--month YYYY-MM] [--project X] [--csv|--markdown]
+                                hours and amounts for completed intervals
+
+`start` and `stop` are synonyms for `in` and `out`.
+
+Anything else is passed straight to timewarrior:
+
+  punch summary :week           timewarrior's own reports
+  punch move @2 09:00           backfilling and corrections
+  punch @3 tag billable
+
+Config: ~/.config/punch/config
+EOF
+}
+
+# --- dispatch ---------------------------------------------------------------
+
+if ! (( $+commands[timew] )); then
+  print -u2 "punch: timewarrior is not installed (brew install timewarrior)"
+  exit 127
+fi
+if ! (( $+commands[jq] )); then
+  print -u2 "punch: jq is not installed (brew install jq)"
+  exit 127
+fi
+
+case ${1:-status} in
+  in|i|start)      shift; punch_cmd_in "$@" ;;
+  out|o|stop)      shift; punch_cmd_out "$@" ;;
+  status)          shift; punch_cmd_status "$@" ;;
+  init)            shift; punch_cmd_init "$@" ;;
+  bill)            shift; punch_cmd_bill "$@" ;;
+  project)         shift; punch_project_for ${1:-$PWD} ;;
+  prompt-state)    shift; punch_cmd_prompt_state ;;
+  help|--help|-h)  punch_cmd_help ;;
+  *)               timew "$@" ;;
+esac
