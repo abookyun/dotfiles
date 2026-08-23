@@ -54,6 +54,17 @@ runs on every prompt, not just on `cd` — opening a tab straight into a project
 never fires `chpwd`, and that is exactly when clocking in gets forgotten. It
 never clocks in for you; that stays a deliberate keystroke.
 
+Work with no directory behind it — a meeting, internal docs, errands — still
+gets a nudge, but a quieter one: a directory without a project is also where
+you idly open a terminal, so that hint is throttled to once every
+`PUNCH_HINT_IDLE_MINUTES` rather than fired on every prompt. Name that work
+directly, and it records like anything else:
+
+```sh
+punch in 開會
+punch in 內部文件
+```
+
 The terminal window title carries the same state, which is the only indicator
 visible from outside a bare terminal with no status line.
 
@@ -78,11 +89,20 @@ otherwise collapse onto the same variable and silently share a rate.
 Projects without a rate are reported with no amount rather than a zero, so
 unbilled work stays visible.
 
+The report splits on that: projects with a rate are **billable**, everything
+else is **internal** — listed with hours but no amount, so time spent on
+meetings and internal work stays visible without being priced. Each group is
+sorted longest-first and subtotalled separately, and the grand total keeps
+hours and money apart, because they do not cover the same rows.
+
 ```sh
-punch bill -m 8                 # this year's August, table
-punch bill -m 8 --csv | vd -    # straight into visidata
-punch bill -m 2026-08 --markdown
+punch bill -m 8                       # this year's August
+punch bill -m 8 --csv | vd -          # into visidata; has a billable column
+punch bill -m 8 -p client-a -d --markdown > invoice.md
 ```
+
+`--detail` lists every interval — date, start, end, hours — rather than a
+month's total, which is what an invoice usually has to be backed by.
 
 ## Switches
 
@@ -92,6 +112,7 @@ single run.
 | Setting | Default | Effect |
 | --- | --- | --- |
 | `PUNCH_HINT_ENABLED` | 1 | prompt hints |
+| `PUNCH_HINT_IDLE_MINUTES` | 30 | quiet between nudges outside a project; 0 disables |
 | `PUNCH_TITLE_ENABLED` | 1 | window title |
 | `PUNCH_TMUX_ENABLED` | 1 | tmux status module |
 | `PUNCH_IDLE_ENABLED` | 1 | automatic clock-out |

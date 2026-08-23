@@ -14,12 +14,18 @@
 
 typeset -g PUNCH_HINT_ENABLED=1
 typeset -g PUNCH_TITLE_ENABLED=1
+# How long to stay quiet between nudges outside a project. 0 disables them.
+typeset -g PUNCH_HINT_IDLE_MINUTES=30
 [[ -r ${XDG_CONFIG_HOME:-$HOME/.config}/punch/config ]] \
   && source ${XDG_CONFIG_HOME:-$HOME/.config}/punch/config
+
+# EPOCHSECONDS, for throttling without spawning date(1) on every prompt.
+zmodload -F zsh/datetime +p:EPOCHSECONDS 2>/dev/null
 
 # Remember what we last complained about, so the hint appears on entering a
 # mismatched state instead of nagging on every prompt for the same state.
 typeset -g _punch_last_hint=""
+typeset -g _punch_last_nudge=0
 
 # The prompt runs this on every command, so it resolves both halves of the
 # state in a single `punch` call rather than spawning one process per field.
@@ -36,8 +42,13 @@ _punch_state() {
 _punch_hint() {
   (( PUNCH_HINT_ENABLED )) || return 0
 
+  # State-change dedupe, so a steady state is stated once rather than on every
+  # prompt. The no-project case opts out: it is throttled by elapsed time
+  # instead, and its key never changes, which would silence it permanently.
   local key="${_punch_project}:${_punch_active}"
-  [[ $key == $_punch_last_hint ]] && return 0
+  if [[ -n $_punch_project || -n $_punch_active ]]; then
+    [[ $key == $_punch_last_hint ]] && return 0
+  fi
   _punch_last_hint=$key
 
   # In a project directory with nothing running: the case that loses time.
@@ -50,6 +61,20 @@ _punch_hint() {
   if [[ -n $_punch_project && -n $_punch_active && $_punch_project != $_punch_active ]]; then
     print -P "%F{yellow}⏱%f clocked into %F{red}${_punch_active}%f but sitting in %F{green}${_punch_project}%f %F{242}— %f%F{yellow}punch in%f"
     return 0
+  fi
+
+  # Clocked out with no project in sight -- a meeting, internal docs, errands.
+  # That time is still work and is the hardest to reconstruct afterwards, but
+  # a directory without a project is also where you idly open a terminal, so
+  # this one is throttled by the clock instead of firing on every prompt.
+  if [[ -z $_punch_project && -z $_punch_active ]]; then
+    local now=$EPOCHSECONDS
+    local quiet=$(( PUNCH_HINT_IDLE_MINUTES * 60 ))
+    (( quiet <= 0 )) && return 0
+    if (( now - _punch_last_nudge >= quiet )); then
+      _punch_last_nudge=$now
+      print -P "%F{242}⏸ not clocked in — %f%F{yellow}punch in <what>%f"
+    fi
   fi
 }
 

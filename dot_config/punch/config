@@ -10,6 +10,11 @@
 # project currently being tracked. (zsh chpwd/precmd hook)
 PUNCH_HINT_ENABLED=1
 
+# Outside any project -- a meeting, internal docs, errands -- there is no
+# directory to compare against, so that hint is throttled by the clock rather
+# than fired on every prompt. Minutes of quiet between nudges; 0 turns them off.
+PUNCH_HINT_IDLE_MINUTES=30
+
 # Show tracking state in the terminal window/tab title.
 PUNCH_TITLE_ENABLED=1
 
