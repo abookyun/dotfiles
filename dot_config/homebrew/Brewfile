@@ -112,7 +112,7 @@ brew "csvkit"  # CSV command-line tools
 brew "visidata"  # terminal spreadsheet viewer
 brew "opencc"  # Chinese text converter
 brew "fdupes"  # find duplicate files
-# brew "timewarrior"  # time tracking
+brew "timewarrior"  # time tracking, wrapped by `punch`
 
 # Media
 brew "yt-dlp"  # YouTube downloader
