@@ -17,14 +17,32 @@ readonly PUNCH_CONFIG="${XDG_CONFIG_HOME:-$HOME/.config}/punch/config"
 
 # --- config -----------------------------------------------------------------
 
-# Defaults live here so punch keeps working if the config file is deleted.
+# Precedence, weakest first: built-in defaults, then the config file, then the
+# environment. Defaults exist so punch still runs with no config file at all;
+# the environment wins last so a single run can be overridden without editing
+# config -- which is also what makes the idle logic testable.
+typeset -A _punch_env_overrides
+typeset _punch_setting
+for _punch_setting in PUNCH_IDLE_MINUTES PUNCH_MAX_INTERVAL_HOURS \
+                      PUNCH_IGNORE_PATHS PUNCH_CURRENCY \
+                      PUNCH_TMUX_ENABLED PUNCH_IDLE_ENABLED \
+                      PUNCH_HINT_ENABLED PUNCH_TITLE_ENABLED; do
+  [[ -n ${(P)_punch_setting} ]] && _punch_env_overrides[$_punch_setting]=${(P)_punch_setting}
+done
+
 typeset -g PUNCH_IDLE_MINUTES=15
 typeset -g PUNCH_MAX_INTERVAL_HOURS=12
 typeset -g PUNCH_IGNORE_PATHS=""
 typeset -g PUNCH_CURRENCY="TWD"
 typeset -g PUNCH_TMUX_ENABLED=1
+typeset -g PUNCH_IDLE_ENABLED=1
 
 [[ -r $PUNCH_CONFIG ]] && source $PUNCH_CONFIG
+
+for _punch_setting in ${(k)_punch_env_overrides}; do
+  typeset -g $_punch_setting=${_punch_env_overrides[$_punch_setting]}
+done
+unset _punch_env_overrides _punch_setting
 
 # --- project identity -------------------------------------------------------
 
@@ -239,6 +257,68 @@ punch_cmd_tmux_status() {
   fi
 }
 
+# Seconds since the last keyboard or mouse event, from the HID subsystem.
+# Needs no permissions and no extra software.
+punch_idle_seconds() {
+  local ns
+  ns=$(ioreg -c IOHIDSystem 2>/dev/null \
+    | awk '/HIDIdleTime/ { gsub(/[^0-9]/, "", $NF); print $NF; exit }')
+  [[ -n $ns ]] || return 1
+  print -r -- $(( ns / 1000000000 ))
+}
+
+# Close out an interval that outlived the person working on it.
+#
+# The whole point is the backdating: stopping *now* after fifteen idle minutes
+# would still bill those fifteen minutes. The interval has to end where the
+# activity ended, which is idle_seconds ago.
+#
+# Two things can trigger it. Idleness is the common one. The max-hours cap
+# catches the case idleness cannot: a machine left running overnight, where by
+# morning the "last activity" is hours of sleep old and the interval has to be
+# treated as a forgotten punch-out rather than a very long day.
+punch_cmd_idle_check() {
+  (( PUNCH_IDLE_ENABLED )) || return 0
+  punch_is_tracking || return 0
+
+  local elapsed idle
+  elapsed=$(punch_elapsed_seconds) || return 0
+  idle=$(punch_idle_seconds) || return 0
+
+  local idle_limit=$(( PUNCH_IDLE_MINUTES * 60 ))
+  local max_limit=$(( PUNCH_MAX_INTERVAL_HOURS * 3600 ))
+  local reason="" back=0
+
+  if (( idle >= idle_limit )); then
+    reason="idle for $(( idle / 60 ))m"
+    back=$idle
+  elif (( elapsed >= max_limit )); then
+    reason="ran past ${PUNCH_MAX_INTERVAL_HOURS}h"
+    back=$idle
+  else
+    return 0
+  fi
+
+  local project
+  project=$(punch_active_project)
+
+  # Idle for longer than the interval itself means nothing real happened in
+  # it -- clocked in, then walked away. Recording a sliver is worse than
+  # recording nothing, so drop it.
+  if (( back >= elapsed )); then
+    timew cancel >/dev/null 2>&1 || return 1
+    print -r -- "punch: discarded ${project} (${reason}, nothing worked on)"
+    return 0
+  fi
+
+  local end_stamp
+  end_stamp=$(date -v-${back}S '+%Y-%m-%dT%H:%M:%S') || return 1
+
+  timew stop $end_stamp >/dev/null 2>&1 || return 1
+
+  print -r -- "punch: auto-out ${project} at ${end_stamp} (${reason})"
+}
+
 # Write a .punch-card marker so this tree stops depending on git remotes.
 punch_cmd_init() {
   local name=${1:-${PWD:t}}
@@ -416,6 +496,7 @@ case ${1:-status} in
   project)         shift; punch_project_for ${1:-$PWD} ;;
   prompt-state)    shift; punch_cmd_prompt_state ;;
   tmux-status)     shift; punch_cmd_tmux_status ;;
+  idle-check)      shift; punch_cmd_idle_check ;;
   help|--help|-h)  punch_cmd_help ;;
   *)               timew "$@" ;;
 esac
