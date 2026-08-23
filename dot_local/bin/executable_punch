@@ -22,6 +22,7 @@ typeset -g PUNCH_IDLE_MINUTES=15
 typeset -g PUNCH_MAX_INTERVAL_HOURS=12
 typeset -g PUNCH_IGNORE_PATHS=""
 typeset -g PUNCH_CURRENCY="TWD"
+typeset -g PUNCH_TMUX_ENABLED=1
 
 [[ -r $PUNCH_CONFIG ]] && source $PUNCH_CONFIG
 
@@ -220,6 +221,24 @@ punch_cmd_prompt_state() {
   print -r -- "${project}"$'\t'"${active}"$'\t'"${elapsed}"
 }
 
+# Status-bar text for tmux, as "<state>|<text>". Unlike the shell hint, this
+# has no directory context to compare against -- tmux asks globally, on its own
+# refresh clock -- so it reports the clock itself rather than whether it
+# matches where you are.
+#
+# The state prefix lets the tmux format pick a colour from the same call
+# instead of running a second one on every refresh.
+punch_cmd_tmux_status() {
+  (( PUNCH_TMUX_ENABLED )) || return 0
+  local project
+  project=$(punch_active_project)
+  if [[ -n $project ]]; then
+    print -r -- "in|${project} $(punch_elapsed)"
+  else
+    print -r -- "out|out"
+  fi
+}
+
 # Write a .punch-card marker so this tree stops depending on git remotes.
 punch_cmd_init() {
   local name=${1:-${PWD:t}}
@@ -396,6 +415,7 @@ case ${1:-status} in
   bill)            shift; punch_cmd_bill "$@" ;;
   project)         shift; punch_project_for ${1:-$PWD} ;;
   prompt-state)    shift; punch_cmd_prompt_state ;;
+  tmux-status)     shift; punch_cmd_tmux_status ;;
   help|--help|-h)  punch_cmd_help ;;
   *)               timew "$@" ;;
 esac
