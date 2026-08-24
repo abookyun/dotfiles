@@ -1,0 +1,55 @@
+# punch (timewarrior wrapper) configuration
+#
+# Every feature here is opt-out: set a flag to 0 and it stops running.
+# Sourced by ~/.local/bin/punch and by the zsh integration, so keep it to
+# plain `KEY=value` lines -- no command substitution, no shell logic.
+
+# --- Feature switches -------------------------------------------------------
+
+# Print a hint when the current directory's project differs from the
+# project currently being tracked. (zsh chpwd/precmd hook)
+PUNCH_HINT_ENABLED=1
+
+# Outside any project -- a meeting, internal docs, errands -- there is no
+# directory to compare against, so that hint is throttled by the clock rather
+# than fired on every prompt. Minutes of quiet between nudges; 0 turns them off.
+PUNCH_HINT_IDLE_MINUTES=30
+
+# Show tracking state in the terminal window/tab title.
+PUNCH_TITLE_ENABLED=1
+
+# Show tracking state in the tmux status bar.
+PUNCH_TMUX_ENABLED=1
+
+# Stop tracking automatically after the machine has been idle, backdating
+# the interval's end to the last moment of real activity. (launchd agent)
+PUNCH_IDLE_ENABLED=1
+
+# --- Behaviour --------------------------------------------------------------
+
+# Minutes of keyboard/mouse inactivity before an interval is auto-stopped.
+PUNCH_IDLE_MINUTES=15
+
+# Safety net: an interval left running longer than this many hours is
+# treated as a forgotten stop, never as real work.
+PUNCH_MAX_INTERVAL_HOURS=12
+
+# Directories that never count as a project, even if they are git repos.
+# Colon-separated, matched as prefixes against $PWD.
+PUNCH_IGNORE_PATHS=$HOME/.dotfiles:$HOME/Downloads
+
+# --- Billing ----------------------------------------------------------------
+# Hourly rates per project, used by `punch bill`. Anything without a rate is
+# reported with no amount, so unbilled work stays visible instead of being
+# silently priced at zero.
+#
+#   PUNCH_RATE_<project>=<amount>
+#
+# Project names are uppercased with non-alphanumerics turned into `_`,
+# so project `client-a` reads its rate from PUNCH_RATE_CLIENT_A.
+#
+# Rates themselves go in `rates` beside this file, which is deliberately not
+# tracked: this config is a symlink into the dotfiles repo, and what a client
+# is charged per hour does not belong in version control.
+
+PUNCH_CURRENCY=TWD

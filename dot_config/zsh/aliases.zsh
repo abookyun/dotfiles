@@ -4,9 +4,9 @@ alias reload!='. ${XDG_CONFIG_HOME}/zsh/.zshrc'
 alias l='eza -lah'
 alias ll='eza -la -sold'
 
-alias ts='timew start'
-alias tp='timew stop'
-alias tc='timew continue'
+alias pi='punch in'
+alias po='punch out'
+alias pst='punch status'
 
 alias lz='lazygit'
 

@@ -18,7 +18,6 @@ source ${ZDOTDIR}/general.zsh
 # zsh-fast-syntax-highlighting
 # source $(brew --prefix)/share/zsh-fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
 
-export TIMEWARRIORDB=${XDG_DATA_HOME}/timewarrior
 export TEALDEER_CONFIG_DIR=${XDG_CONFIG_HOME}/tealdeer
 export DOCKER_CONFIG="$XDG_CONFIG_HOME"/docker
 export IRBRC="$XDG_CONFIG_HOME/ruby/irbrc"
@@ -88,3 +87,8 @@ eval "$(zoxide init zsh)"
 
 # To customize prompt, run `p10k configure` or edit ~/.config/zsh/.p10k.zsh.
 [[ ! -f ${ZDOTDIR}/.p10k.zsh ]] || source ${ZDOTDIR}/.p10k.zsh
+
+# Time tracking hints, from punch's own install. After p10k so the precmd hook
+# runs with the prompt set up; guarded so this file stays valid where punch is
+# not installed.
+[[ -r ${XDG_DATA_HOME}/punch/punch.zsh ]] && source ${XDG_DATA_HOME}/punch/punch.zsh
