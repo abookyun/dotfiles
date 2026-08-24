@@ -9,10 +9,6 @@ export XDG_CACHE_HOME="$HOME/.local/cache"
 # zsh
 export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
 
-# timewarrior. Here rather than in .zshrc because the punch idle agent runs
-# non-interactively and would otherwise write to a second, empty database.
-export TIMEWARRIORDB="$XDG_DATA_HOME/timewarrior"
-
 # Homebrew paths (only cache if brew is available)
 if command -v brew >/dev/null 2>&1; then
   export HOMEBREW_PREFIX="$(brew --prefix)"
