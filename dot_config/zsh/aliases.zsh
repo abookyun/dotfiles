@@ -8,6 +8,11 @@ alias ts='timew start'
 alias tp='timew stop'
 alias tc='timew continue'
 
+alias lz='lazygit'
+
+alias nv='nvim'
+alias v='vim'
+
 alias ga='git add'
 alias gan='git add -N'
 alias gac='git add -A && git commit -m'
