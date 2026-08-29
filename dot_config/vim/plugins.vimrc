@@ -46,6 +46,18 @@ let g:vim_markdown_folding_disabled = 1
 let g:vim_markdown_conceal_code_blocks = 0
 autocmd BufRead,BufNewFile *.md set filetype=markdown
 autocmd BufRead,BufNewFile *.md set spell spelllang=en_us,cjk
+" Soft wrap: fold visually, never insert hard line breaks ('wrap' is on by default)
+autocmd FileType markdown setlocal linebreak breakindent showbreak=↳\  textwidth=0
+" Move by screen line on wrapped lines, but keep a count (3j) on real lines
+" so it still matches the relative line numbers in the gutter.
+autocmd FileType markdown nnoremap <buffer><expr> j v:count == 0 ? 'gj' : 'j'
+autocmd FileType markdown nnoremap <buffer><expr> k v:count == 0 ? 'gk' : 'k'
+autocmd FileType markdown nnoremap <buffer><expr> 0 v:count == 0 ? 'g0' : '0'
+autocmd FileType markdown nnoremap <buffer><expr> $ v:count == 0 ? 'g$' : '$'
+autocmd FileType markdown xnoremap <buffer><expr> j v:count == 0 ? 'gj' : 'j'
+autocmd FileType markdown xnoremap <buffer><expr> k v:count == 0 ? 'gk' : 'k'
+autocmd FileType markdown xnoremap <buffer><expr> 0 v:count == 0 ? 'g0' : '0'
+autocmd FileType markdown xnoremap <buffer><expr> $ v:count == 0 ? 'g$' : '$'
 
 " vim-json
 let g:vim_json_conceal = 0

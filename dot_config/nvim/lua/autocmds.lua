@@ -55,11 +55,28 @@ vim.filetype.add({
   }
 })
 
--- Markdown spell check
+-- Markdown: spell check and soft wrap
 vim.api.nvim_create_autocmd("FileType", {
   pattern = "markdown",
   callback = function()
     vim.opt_local.spell = true
     vim.opt_local.spelllang = "en_us,cjk"
+
+    -- Soft wrap: fold visually, never insert hard line breaks
+    vim.opt_local.wrap = true
+    vim.opt_local.linebreak = true   -- break at word boundaries, not mid-word
+    vim.opt_local.breakindent = true -- keep list/quote indentation on wrapped lines
+    vim.opt_local.showbreak = "↳ "
+    vim.opt_local.textwidth = 0      -- no auto hard-wrap while typing
+
+    -- Move by screen line on wrapped lines, but keep a count (3j) on real
+    -- lines so it still matches the relative line numbers in the gutter.
+    local function map(lhs, rhs)
+      vim.keymap.set({ "n", "x" }, lhs, rhs, { buffer = true, expr = true, silent = true })
+    end
+    map("j", "v:count == 0 ? 'gj' : 'j'")
+    map("k", "v:count == 0 ? 'gk' : 'k'")
+    map("0", "v:count == 0 ? 'g0' : '0'")
+    map("$", "v:count == 0 ? 'g$' : '$'")
   end,
 })
