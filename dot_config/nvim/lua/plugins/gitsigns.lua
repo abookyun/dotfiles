@@ -7,9 +7,9 @@ return {
         local gs = package.loaded.gitsigns
         local opts = { buffer = bufnr }
 
-        -- Navigation
-        vim.keymap.set("n", "]c", gs.next_hunk, opts)
-        vim.keymap.set("n", "[c", gs.prev_hunk, opts)
+        -- Navigation (next_hunk/prev_hunk are deprecated in favour of nav_hunk)
+        vim.keymap.set("n", "]c", function() gs.nav_hunk("next") end, opts)
+        vim.keymap.set("n", "[c", function() gs.nav_hunk("prev") end, opts)
 
         -- Actions
         vim.keymap.set("n", "<leader>hs", gs.stage_hunk, opts)
