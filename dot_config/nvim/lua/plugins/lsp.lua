@@ -1,10 +1,12 @@
 -- LSP Configuration for Neovim 0.11+
 -- Using native vim.lsp.config API (no plugin dependency needed)
 
--- Global border style for floating windows
-local border = "double" -- single, double, solid, shadow, rounded
+-- Border style for every floating window: hover, signature help,
+-- diagnostics, and any plugin that does not ask for one of its own.
+-- single, double, solid, shadow, rounded
+vim.o.winborder = "double"
 
--- Custom diagnostic signs and float border
+-- Custom diagnostic signs
 vim.diagnostic.config({
   signs = {
     text = {
@@ -14,16 +16,7 @@ vim.diagnostic.config({
       [vim.diagnostic.severity.INFO] = "ℹ",
     },
   },
-  float = { border = border },
 })
-
--- LSP floating windows border (hover, signature help, etc.)
-local orig_open_floating_preview = vim.lsp.util.open_floating_preview
-vim.lsp.util.open_floating_preview = function(contents, syntax, opts, ...)
-  opts = opts or {}
-  opts.border = opts.border or border
-  return orig_open_floating_preview(contents, syntax, opts, ...)
-end
 
 -- LspAttach autocmd for custom keymaps
 vim.api.nvim_create_autocmd("LspAttach", {
