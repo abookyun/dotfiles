@@ -4,24 +4,38 @@ return {
   build = ":TSUpdate",
   event = { "BufReadPost", "BufNewFile" },
   config = function()
-    require("nvim-treesitter").setup({
-      ensure_installed = {
-        "lua",
-        "vim",
-        "vimdoc",
-        "javascript",
-        "python",
-        "ruby",
-        "html",
-        "css",
-        "json",
-        "yaml",
-        "bash",
-        "markdown",
-        "rust",
-        "sql",
-      },
-    })
+    local ts = require("nvim-treesitter")
+    ts.setup({})
+
+    -- The main branch dropped ensure_installed; install() is the replacement.
+    -- Only request what is missing, so startup does not re-fetch every time.
+    local wanted = {
+      "lua",
+      "vim",
+      "vimdoc",
+      "javascript",
+      "python",
+      "ruby",
+      "html",
+      "css",
+      "json",
+      "yaml",
+      "bash",
+      "markdown",
+      "markdown_inline",
+      "rust",
+      "sql",
+    }
+    local installed = {}
+    for _, lang in ipairs(ts.get_installed()) do
+      installed[lang] = true
+    end
+    local missing = vim.tbl_filter(function(lang)
+      return not installed[lang]
+    end, wanted)
+    if #missing > 0 then
+      ts.install(missing)
+    end
 
     local function try_attach(buf)
       local ok = pcall(vim.treesitter.start, buf)

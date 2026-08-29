@@ -10,16 +10,24 @@ vim.api.nvim_create_autocmd("BufReadPost", {
   end,
 })
 
--- Remove trailing whitespace on save
+-- Remove trailing whitespace on save.
+-- Skip unmodifiable buffers (E21) and keep the cursor and search history intact.
 vim.api.nvim_create_autocmd("BufWritePre", {
   pattern = "*",
-  command = "%s/\\s\\+$//e",
+  callback = function(args)
+    if not vim.bo[args.buf].modifiable then
+      return
+    end
+    local view = vim.fn.winsaveview()
+    vim.cmd([[keeppatterns %s/\s\+$//e]])
+    vim.fn.winrestview(view)
+  end,
 })
 
 -- Highlight yanked text
 vim.api.nvim_create_autocmd("TextYankPost", {
   callback = function()
-    vim.highlight.on_yank({ timeout = 200 })
+    vim.hl.on_yank({ timeout = 200 })
   end,
 })
 

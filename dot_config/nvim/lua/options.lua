@@ -48,8 +48,9 @@ opt.autowriteall = true
 opt.hidden = true
 
 -- Folding (treesitter)
+-- Use the built-in foldexpr; nvim_treesitter#foldexpr() is master-branch only
 opt.foldmethod = "expr"
-opt.foldexpr = "nvim_treesitter#foldexpr()"
+opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 opt.foldlevel = 99
 
 -- Update time

@@ -80,10 +80,10 @@ vim.lsp.config("basedpyright", {
   },
 })
 
--- CSS / TCSS
+-- CSS (.tcss files are mapped to the css filetype in autocmds.lua)
 vim.lsp.config("cssls", {
   cmd = { "vscode-css-language-server", "--stdio" },
-  filetypes = { "css", "tcss" },
+  filetypes = { "css" },
   root_markers = { ".git" },
 })
 
@@ -103,7 +103,8 @@ vim.lsp.config("vimls", {
 -- Harper (prose linter)
 vim.lsp.config("harper_ls", {
   cmd = { "harper-ls", "--stdio" },
-  filetypes = { "markdown", "text", "plaintext", "rst", "asciidoc", "gitcommit" },
+  -- "plaintext" is VS Code's name for this; Vim calls it "text"
+  filetypes = { "markdown", "text", "rst", "asciidoc", "gitcommit" },
 })
 
 -- Enable all configured LSP servers
