@@ -47,7 +47,13 @@ keymap("n", "<leader>1", "<cmd>bfirst<cr>", { desc = "First buffer" })
 keymap("n", "<leader>]", "<cmd>bnext<cr>", { desc = "Next buffer" })
 keymap("n", "<leader>[", "<cmd>bprevious<cr>", { desc = "Previous buffer" })
 keymap("n", "<leader>9", "<cmd>blast<cr>", { desc = "Last buffer" })
-keymap("n", "<leader>c", "<cmd>bdelete<cr>", { desc = "Delete buffer" })
+keymap("n", "<leader>x", "<cmd>bdelete<cr>", { desc = "Delete buffer" })
+
+-- Diagnostics, matching ALE's [e/]e/[E/]E in the vim config
+keymap("n", "[e", function() vim.diagnostic.jump({ count = -1 }) end, { desc = "Previous diagnostic" })
+keymap("n", "]e", function() vim.diagnostic.jump({ count = 1 }) end, { desc = "Next diagnostic" })
+keymap("n", "[E", function() vim.diagnostic.jump({ count = -math.huge, wrap = false }) end, { desc = "First diagnostic" })
+keymap("n", "]E", function() vim.diagnostic.jump({ count = math.huge, wrap = false }) end, { desc = "Last diagnostic" })
 
 -- Folding
 keymap("n", "<leader>=", "za", { desc = "Toggle fold" })

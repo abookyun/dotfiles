@@ -57,9 +57,9 @@ opt.foldlevel = 99
 opt.updatetime = 500
 opt.timeoutlen = 500
 
--- Scrolloff
-opt.scrolloff = 8
-opt.sidescrolloff = 8
+-- Scrolloff (matches vim-sensible's values on the vim side)
+opt.scrolloff = 1
+opt.sidescrolloff = 2
 
 -- Mouse
 opt.mouse = "a"

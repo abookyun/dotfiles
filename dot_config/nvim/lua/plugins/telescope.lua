@@ -11,5 +11,8 @@ return {
     { "<leader>fl", "<cmd>Telescope current_buffer_fuzzy_find<cr>", desc = "Search in buffer" },
     { "<leader>fh", "<cmd>Telescope help_tags<cr>", desc = "Help tags" },
     { "<leader>fs", "<cmd>Telescope lsp_document_symbols<cr>", desc = "Document symbols" },
+    -- Same key as vim's :TagbarToggle, though this is a picker rather than a
+    -- sidebar, and it reads symbols from the LSP instead of ctags.
+    { "<leader>}", "<cmd>Telescope lsp_document_symbols<cr>", desc = "Document symbols" },
   },
 }
