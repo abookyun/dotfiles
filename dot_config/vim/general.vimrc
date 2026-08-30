@@ -97,8 +97,11 @@ vnoremap <leader>+ zR
 vnoremap <leader>_ zM
 
 " System Clipboard
+" Normal mode takes a motion: <leader>yy for a line, <leader>yw for a word
+nnoremap <leader>y "+y
 vnoremap <leader>y "+y
 nnoremap <leader>p "+p
-nnoremap <leader>P "+P
+" Replaces the selection, and unlike plain p it leaves the register alone
+vnoremap <leader>p "+p
 
 au BufNewFile,BufRead *.py set tabstop=4 softtabstop=4 shiftwidth=4

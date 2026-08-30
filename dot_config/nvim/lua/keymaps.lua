@@ -4,10 +4,12 @@ vim.g.mapleader = " "
 local keymap = vim.keymap.set
 
 -- System clipboard
-keymap("n", "<leader>y", '"+y', { desc = "Yank to clipboard" })
+-- Normal mode takes a motion: <leader>yy for a line, <leader>yw for a word
+keymap("n", "<leader>y", '"+y', { desc = "Yank to clipboard (takes a motion)" })
 keymap("v", "<leader>y", '"+y', { desc = "Yank selection to clipboard" })
 keymap("n", "<leader>p", '"+p', { desc = "Paste from clipboard" })
-keymap("n", "<leader>P", '"+P', { desc = "Paste from clipboard before" })
+-- Replaces the selection, and unlike plain p it leaves the register alone
+keymap("v", "<leader>p", '"+p', { desc = "Paste over selection" })
 
 -- Window split
 keymap("n", "<leader>sv", "<C-w>v", { desc = "Split vertically" })
