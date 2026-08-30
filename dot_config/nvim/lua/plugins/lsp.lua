@@ -38,23 +38,26 @@ vim.keymap.set("n", "<leader>cl", vim.lsp.codelens.run, { desc = "Run codelens" 
 vim.api.nvim_create_autocmd("LspAttach", {
   callback = function(args)
     local opts = { buffer = args.buf }
-    vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
-    vim.keymap.set("n", "gD", vim.lsp.buf.type_definition, opts)
-    vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
-    vim.keymap.set("n", "gi", vim.lsp.buf.implementation, opts)
-    vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
-    vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, opts)
-    vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
-    vim.keymap.set("n", "<leader>d", vim.diagnostic.open_float, opts)
-    vim.keymap.set("n", "<leader>F", function() require("conform").format() end, opts)
+    local function map(lhs, rhs, desc)
+      vim.keymap.set("n", lhs, rhs, vim.tbl_extend("force", opts, { desc = desc }))
+    end
+    map("gd", vim.lsp.buf.definition, "Go to definition")
+    map("gD", vim.lsp.buf.type_definition, "Go to type definition")
+    map("gr", vim.lsp.buf.references, "References")
+    map("gi", vim.lsp.buf.implementation, "Go to implementation")
+    map("K", vim.lsp.buf.hover, "Hover docs")
+    map("<leader>rn", vim.lsp.buf.rename, "Rename symbol")
+    map("<leader>ca", vim.lsp.buf.code_action, "Code action")
+    map("<leader>d", vim.diagnostic.open_float, "Show diagnostic")
+    map("<leader>F", function() require("conform").format() end, "Format buffer")
 
     -- Inferred types and parameter names, where the server offers them
     local client = vim.lsp.get_client_by_id(args.data.client_id)
     if client:supports_method("textDocument/inlayHint") then
       vim.lsp.inlay_hint.enable(true, { bufnr = args.buf })
-      vim.keymap.set("n", "<leader>th", function()
+      map("<leader>H", function()
         vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = args.buf }), { bufnr = args.buf })
-      end, vim.tbl_extend("force", opts, { desc = "Toggle inlay hints" }))
+      end, "Toggle inlay hints")
     end
 
     -- Paint colour literals in their own colour (cssls)

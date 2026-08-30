@@ -4,43 +4,43 @@ vim.g.mapleader = " "
 local keymap = vim.keymap.set
 
 -- System clipboard
-keymap("n", "<leader>y", '"+y')
-keymap("v", "<leader>y", '"+y')
-keymap("n", "<leader>p", '"+p')
-keymap("n", "<leader>P", '"+P')
+keymap("n", "<leader>y", '"+y', { desc = "Yank to clipboard" })
+keymap("v", "<leader>y", '"+y', { desc = "Yank selection to clipboard" })
+keymap("n", "<leader>p", '"+p', { desc = "Paste from clipboard" })
+keymap("n", "<leader>P", '"+P', { desc = "Paste from clipboard before" })
 
 -- Window split
-keymap("n", "<leader>sv", "<C-w>v")
-keymap("n", "<leader>sh", "<C-w>s")
-keymap("n", "<leader>se", "<C-w>=")
-keymap("n", "<leader>sc", ":close<CR>")
+keymap("n", "<leader>sv", "<C-w>v", { desc = "Split vertically" })
+keymap("n", "<leader>sh", "<C-w>s", { desc = "Split horizontally" })
+keymap("n", "<leader>se", "<C-w>=", { desc = "Equalize splits" })
+keymap("n", "<leader>sc", ":close<CR>", { desc = "Close split" })
 
 -- Window maximize/restore
-keymap("n", "<leader>sm", "<C-w>_<C-w>|")
+keymap("n", "<leader>sm", "<C-w>_<C-w>|", { desc = "Maximize split" })
 
 -- Window swap/rotate
-keymap("n", "<leader>sr", "<C-w>r")
-keymap("n", "<leader>sx", "<C-w>x")
+keymap("n", "<leader>sr", "<C-w>r", { desc = "Rotate splits" })
+keymap("n", "<leader>sx", "<C-w>x", { desc = "Swap split" })
 
 -- Window navigation
-keymap("n", "<C-h>", "<C-w>h")
-keymap("n", "<C-j>", "<C-w>j")
-keymap("n", "<C-k>", "<C-w>k")
-keymap("n", "<C-l>", "<C-w>l")
+keymap("n", "<C-h>", "<C-w>h", { desc = "Window left" })
+keymap("n", "<C-j>", "<C-w>j", { desc = "Window down" })
+keymap("n", "<C-k>", "<C-w>k", { desc = "Window up" })
+keymap("n", "<C-l>", "<C-w>l", { desc = "Window right" })
 
 -- Move lines in visual mode
-keymap("v", "J", ":m '>+1<CR>gv=gv")
-keymap("v", "K", ":m '<-2<CR>gv=gv")
+keymap("v", "J", ":m '>+1<CR>gv=gv", { desc = "Move selection down" })
+keymap("v", "K", ":m '<-2<CR>gv=gv", { desc = "Move selection up" })
 
 -- Keep cursor centered
-keymap("n", "<C-d>", "<C-d>zz")
-keymap("n", "<C-u>", "<C-u>zz")
-keymap("n", "n", "nzzzv")
-keymap("n", "N", "Nzzzv")
+keymap("n", "<C-d>", "<C-d>zz", { desc = "Half page down, centered" })
+keymap("n", "<C-u>", "<C-u>zz", { desc = "Half page up, centered" })
+keymap("n", "n", "nzzzv", { desc = "Next search match, centered" })
+keymap("n", "N", "Nzzzv", { desc = "Previous search match, centered" })
 
 -- Quick save/quit
-keymap("n", "<leader>w", ":w<CR>")
-keymap("n", "<leader>q", ":q<CR>")
+keymap("n", "<leader>w", ":w<CR>", { desc = "Write" })
+keymap("n", "<leader>q", ":q<CR>", { desc = "Quit" })
 
 -- Buffer navigation
 keymap("n", "<leader>1", "<cmd>bfirst<cr>", { desc = "First buffer" })
