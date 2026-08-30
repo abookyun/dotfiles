@@ -5,3 +5,9 @@
 pip
 setuptools
 wheel
+
+# Editor tooling. These live here rather than in brew because asdf installs
+# packages per Python version, so anything missing from this file silently
+# disappears on the next `asdf install python`.
+basedpyright
+ruff

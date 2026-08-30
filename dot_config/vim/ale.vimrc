@@ -63,10 +63,10 @@ let g:ale_python_pyright_config = {
 \}
 
 " Configure ruff linter options (PEP8 rules: E=errors, F=pyflakes, W=warnings)
-let g:ale_python_ruff_options = '--line-length 120 --target-version py313 --select E,F,W'
+let g:ale_python_ruff_options = '--line-length 120 --target-version py314 --select E,F,W'
 
 " Configure ruff format options
-let g:ale_python_ruff_format_options = '--line-length 120 --target-version py313'
+let g:ale_python_ruff_format_options = '--line-length 120 --target-version py314'
 
 " Auto-detect uv/poetry/pipenv virtual environments
 let g:ale_python_pyright_auto_uv = 1
