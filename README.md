@@ -58,6 +58,20 @@ After applying dotfiles:
 
 ## Managing Dotfiles with chezmoi
 
+This repo runs in `mode = "symlink"`, so each target links back to its source file. Editing a managed file takes effect immediately — the target *is* the source. But a **new** source file has no symlink yet, so nothing reads it until you apply. Same for renames and deletes.
+
+```bash
+# Editing an existing file: no apply needed
+$EDITOR dot_config/zsh/aliases.zsh
+
+# A new file stays invisible until applied
+$EDITOR dot_config/zsh/docker.zsh
+chezmoi apply ~/.config/zsh/docker.zsh
+
+# When a change seems to have no effect, check the link
+ls -l ~/.config/zsh/
+```
+
 ### Basic Operations
 
 ```bash
