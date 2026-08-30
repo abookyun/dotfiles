@@ -18,6 +18,22 @@ vim.diagnostic.config({
   },
 })
 
+-- Drop the built-in gr* LSP maps (0.11+). Two reasons:
+--
+-- 1. They make "gr" ambiguous. Our own gr is a prefix of grr/gra/gri/grn/grt,
+--    so nvim waits out 'timeoutlen' on every press to see if a second key is
+--    coming. Removing them makes gr fire immediately.
+-- 2. The vim config drives the same commands through ALE on gd/gD/gr/gi, and
+--    plain vim has no gr* maps at all, so this keeps both editors identical.
+--
+-- Every one of them already has a shorter binding below, except grx
+-- (codelens), which moves to <leader>cl.
+for _, key in ipairs({ "grn", "gra", "grr", "gri", "grt", "grx" }) do
+  pcall(vim.keymap.del, "n", key)
+end
+pcall(vim.keymap.del, "x", "gra")
+vim.keymap.set("n", "<leader>cl", vim.lsp.codelens.run, { desc = "Run codelens" })
+
 -- LspAttach autocmd for custom keymaps
 vim.api.nvim_create_autocmd("LspAttach", {
   callback = function(args)
@@ -31,6 +47,20 @@ vim.api.nvim_create_autocmd("LspAttach", {
     vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
     vim.keymap.set("n", "<leader>d", vim.diagnostic.open_float, opts)
     vim.keymap.set("n", "<leader>F", function() require("conform").format() end, opts)
+
+    -- Inferred types and parameter names, where the server offers them
+    local client = vim.lsp.get_client_by_id(args.data.client_id)
+    if client:supports_method("textDocument/inlayHint") then
+      vim.lsp.inlay_hint.enable(true, { bufnr = args.buf })
+      vim.keymap.set("n", "<leader>th", function()
+        vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = args.buf }), { bufnr = args.buf })
+      end, vim.tbl_extend("force", opts, { desc = "Toggle inlay hints" }))
+    end
+
+    -- Paint colour literals in their own colour (cssls)
+    if client:supports_method("textDocument/documentColor") then
+      vim.lsp.document_color.enable(true, { bufnr = args.buf })
+    end
   end,
 })
 
