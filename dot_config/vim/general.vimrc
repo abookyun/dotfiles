@@ -60,8 +60,45 @@ nnoremap <leader>u :UndotreeToggle<CR>
 nnoremap <CR> za
 vnoremap <CR> zf
 
+" Quick save/quit
+nnoremap <leader>w :w<CR>
+nnoremap <leader>q :q<CR>
+
+" Move lines in visual mode
+vnoremap J :m '>+1<CR>gv=gv
+vnoremap K :m '<-2<CR>gv=gv
+
+" Keep cursor centered
+nnoremap <C-d> <C-d>zz
+nnoremap <C-u> <C-u>zz
+nnoremap n nzzzv
+nnoremap N Nzzzv
+
+" Window split
+nnoremap <leader>sv <C-w>v
+nnoremap <leader>sh <C-w>s
+nnoremap <leader>se <C-w>=
+nnoremap <leader>sc :close<CR>
+
+" Window maximize/restore
+" <Bar> because a bare | ends the mapping's rhs
+nnoremap <leader>sm <C-w>_<C-w><Bar>
+
+" Window swap/rotate
+nnoremap <leader>sr <C-w>r
+nnoremap <leader>sx <C-w>x
+
+" Folding
+nnoremap <leader>= za
+nnoremap <leader>+ zR
+nnoremap <leader>_ zM
+vnoremap <leader>= za
+vnoremap <leader>+ zR
+vnoremap <leader>_ zM
+
 " System Clipboard
 vnoremap <leader>y "+y
 nnoremap <leader>p "+p
+nnoremap <leader>P "+P
 
 au BufNewFile,BufRead *.py set tabstop=4 softtabstop=4 shiftwidth=4
