@@ -22,3 +22,5 @@
     helper = osxkeychain
 [init]
     defaultBranch = main
+[core]
+	autocrlf = false
