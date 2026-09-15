@@ -1,0 +1,11 @@
+onboarding = false
+
+[keys]
+prefix = "alt+space"
+
+# Match the vim-tmux-navigator bindings: ctrl+hjkl moves focus directly,
+# no prefix needed. Keeps the prefix variants as a fallback.
+focus_pane_left = ["prefix+h", "ctrl+h"]
+focus_pane_down = ["prefix+j", "ctrl+j"]
+focus_pane_up = ["prefix+k", "ctrl+k"]
+focus_pane_right = ["prefix+l", "ctrl+l"]
