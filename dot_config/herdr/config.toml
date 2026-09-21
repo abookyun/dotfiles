@@ -9,3 +9,17 @@ focus_pane_left = ["prefix+h", "ctrl+h"]
 focus_pane_down = ["prefix+j", "ctrl+j"]
 focus_pane_up = ["prefix+k", "ctrl+k"]
 focus_pane_right = ["prefix+l", "ctrl+l"]
+
+# Navigation follows the sidebar layout: hl walks the tab row, jk walks the
+# workspace list, and shift lifts jk up to the agent list.
+switch_tab = "prefix+1..9"
+previous_tab = ["alt+h"]
+next_tab = ["alt+l"]
+
+previous_workspace = ["alt+k"]
+next_workspace = ["alt+j"]
+switch_workspace = "prefix+shift+1..9"
+
+# Agent cycling crosses workspaces, so you do not have to find one first.
+previous_agent = ["alt+shift+k"]
+next_agent = ["alt+shift+j"]
