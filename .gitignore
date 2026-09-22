@@ -1,1 +1,6 @@
 git/config.local
+.DS_Store
+
+# visidata writes this as you use it. macros.jsonl is kept: those are
+# recorded on purpose and worth restoring.
+dot_config/visidata/input_history.jsonl
