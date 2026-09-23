@@ -14,19 +14,29 @@ Inspired by @holman/dotfiles, and [XDG Base Directory Specification](https://spe
 
 **Warning**: You should not directly use this repo as your setting unless you fully reviewed the code.
 
-```sh
-# Clone the repository
-git clone https://github.com/abookyun/dotfiles ~/.dotfiles
+On a new machine, one line does everything:
 
-# Initialize chezmoi and apply dotfiles
-sh -c "$(curl -fsLS get.chezmoi.io)" -- init --apply ~/.dotfiles
+```sh
+export GITHUB_USERNAME=your-username
+export SOURCE_DIR=~/.dotfiles
+
+sh -c "$(curl -fsLS get.chezmoi.io)" -- init -S "$SOURCE_DIR" --apply "$GITHUB_USERNAME"
 ```
 
-On first run, chezmoi will:
-1. Prompt for your git email and full name
-2. Create XDG directory structure
-3. Install Homebrew packages automatically
-4. Symlink all configuration files
+`$SOURCE_DIR` is where the repo is cloned, and it has to match the `sourceDir` in `.chezmoi.toml.tmpl`. Without `-S`, chezmoi clones into `~/.local/share/chezmoi` and the two no longer agree.
+
+chezmoi then:
+1. Prompts for your git email and full name
+2. Creates the XDG directory structure
+3. Installs Homebrew, and the packages in the Brewfile
+4. Installs the language runtimes in `.tool-versions` through asdf
+5. Applies the macOS defaults
+6. Symlinks every configuration file
+
+Homebrew brings the Xcode command line tools with it, so there is nothing to install first. Two things still need you:
+
+- Homebrew asks for your password
+- Sign in to the App Store first, or the `mas` entries fail
 
 ## What's Installed
 
@@ -52,7 +62,7 @@ On first run, chezmoi will:
 
 After applying dotfiles:
 1. Restart terminal or run `exec zsh`
-2. Vim plugins auto-install on first launch
+2. Vim and Neovim plugins install themselves on first launch
 3. Tmux plugins: Press `Alt+Space + I` to install
 4. Machine-specific git settings are configured via chezmoi templates
 
