@@ -50,6 +50,11 @@ else
     echo "  brew bundle check --file=$BREWFILE --verbose"
     echo "Going on to the next step."
 fi
+
+# From the zsh-completions caveat: compinit warns about "insecure
+# directories" while the Homebrew installer leaves share group writable.
+chmod go-w "$(brew --prefix)/share"
+chmod -R go-w "$(brew --prefix)/share/zsh"
 {{- else }}
 echo "Skipping Homebrew installation (not macOS)"
 {{- end }}

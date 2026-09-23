@@ -8,8 +8,7 @@ fi
 # initialize autocomplete here, otherwise functions won't be loaded
 autoload -U compinit
 _comp_options+=(globdots) # With hidden files
-# compaudit | xargs chmod g-w
-# https://unix.stackexchange.com/questions/383365/zsh-compinit-insecure-directories-run-compaudit-for-list
+# run_once_after_02-install-brew-packages fixes the "insecure directories" warning
 compinit -d ${XDG_CACHE_HOME}/zsh/zcompdump-$ZSH_VERSION-by-$(whoami)
 # matches case insensitive for lowercase
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
