@@ -42,8 +42,8 @@ if [ ! -f "$BREWFILE" ]; then
 fi
 
 # A failed entry here should not stop the language runtimes from installing.
-echo "Running: brew bundle --file=$BREWFILE"
-if brew bundle --file="$BREWFILE"; then
+echo "Running: brew bundle --file=$BREWFILE --verbose"
+if brew bundle --file="$BREWFILE" --verbose; then
     echo "✓ Homebrew packages installed"
 else
     echo "Some entries did not install. To see which ones:"
