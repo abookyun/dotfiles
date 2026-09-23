@@ -101,10 +101,7 @@ cask "qlmarkdown"  # markdown quicklook support
 mas "Money Pro", id: 972572731  # personal budget and account tracking
 mas "PCalc", id: 403504866  # scientific calculator
 mas "Cardhop", id: 1290358394  # contacts manager
-mas "Instapaper Save", id: 1481302432  # Safari extension, save pages to Instapaper
-mas "Pages", id: 409201541  # Apple word processor
-mas "Keynote", id: 409183694  # Apple presentation app
-mas "Numbers", id: 409203825  # Apple spreadsheet
+mas "Instapaper", id: 288545208  # read-later app, save pages to Instapaper
 mas "Magnet", id: 441258766  # window snapping by keyboard
 mas "Irvue", id: 1039633667  # beautiful wallpaper
 mas "Amphetamine", id: 937984704  # keep computer awake
@@ -126,6 +123,9 @@ mas "Hush", id: 1544743900  # Safari extension, block cookie consent dialogs
 # mas "iMovie", id: 408981434  # Apple video editor
 # mas "Vimari", id: 1480933944  # Safari extension, vim keys for browsing
 # mas "Exporter", id: 1099120373  # exporter for Apple Notes
+# mas "Pages", id: 409201541  # Apple word processor
+# mas "Keynote", id: 409183694  # Apple presentation app
+# mas "Numbers", id: 409203825  # Apple spreadsheet
 
 # ====================================================================
 # Internet
@@ -135,7 +135,9 @@ cask "telegram"  # messaging app
 cask "firefox"  # web browser
 cask "google-chrome"  # web browser
 cask "adguard"  # system-wide ad blocker
-cask "welly"  # BBS client
+# Homebrew disabled this cask on 2026-09-01 because it fails the Gatekeeper check
+# download via https://github.com/clyang/welly/releases
+# cask "welly"  # BBS client
 cask "transmit"  # FTP/SFTP/S3 file transfer client
 cask "maestral"  # open-source dropbox client
 
