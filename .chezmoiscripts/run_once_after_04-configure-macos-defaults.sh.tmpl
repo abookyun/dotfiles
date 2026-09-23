@@ -14,16 +14,22 @@ defaults write NSGlobalDomain NSAutomaticPeriodSubstitutionEnabled -bool false
 # Disable smart quotes as they're annoying when typing code
 defaults write NSGlobalDomain NSAutomaticQuoteSubstitutionEnabled -bool false
 
-# Trackpad: enable tap to click for this user and for the login screen
-defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Clicking -bool true
+# Trackpad: tap to click, and double tap dragging without drag lock.
+# Built-in and Bluetooth trackpads keep separate settings.
+for domain in com.apple.AppleMultitouchTrackpad com.apple.driver.AppleBluetoothMultitouch.trackpad; do
+    defaults write "$domain" Clicking -bool true
+    defaults write "$domain" Dragging -bool true
+    defaults write "$domain" DragLock -bool false
+done
+
+# Trackpad: tap to click for this user and for the login screen
 defaults -currentHost write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
 defaults write NSGlobalDomain com.apple.mouse.tapBehavior -int 1
 
-# Trackpad: enable double tap dragging
-defaults write com.apple.driver.AppleBluetoothMultitouch.trackpad Dragging -bool true
+# Trackpad: tracking speed
+defaults write NSGlobalDomain com.apple.trackpad.scaling -float 1.5
 
-# Enable full keyboard access for all controls
-# (e.g. enable Tab in modal dialogs)
+# Keyboard navigation: move focus between controls with Tab
 defaults write NSGlobalDomain AppleKeyboardUIMode -int 2
 
 # Disable press-and-hold for keys in favor of key repeat.
@@ -32,6 +38,24 @@ defaults write -g ApplePressAndHoldEnabled -bool false
 # Set a blazingly fast keyboard repeat rate
 defaults write NSGlobalDomain KeyRepeat -int 2
 defaults write NSGlobalDomain InitialKeyRepeat -int 15
+
+# System shortcuts: set_hotkey <id> <enabled> <char> <keycode> <modifiers>
+# Modifiers: Shift 131072, Control 262144, Option 524288, Command 1048576
+set_hotkey() {
+    defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add "$1" \
+        "<dict><key>enabled</key><$2/><key>value</key><dict><key>parameters</key><array><integer>$3</integer><integer>$4</integer><integer>$5</integer></array><key>type</key><string>standard</string></dict></dict>"
+}
+# Select the previous input source: Cmd+Space
+set_hotkey 60 true 32 49 1048576
+# Select next source in Input menu: off, Cmd+Shift+Space conflicts
+set_hotkey 61 false 32 49 1179648
+# Show Spotlight search: Ctrl+Shift+Space
+set_hotkey 64 true 32 49 393216
+# Show Notification Center: Cmd+Esc
+set_hotkey 163 true 65535 53 1048576
+
+# Photos: Show in All Photos with Cmd+Shift+D
+defaults write com.apple.Photos NSUserKeyEquivalents -dict-add "Show in All Photos" "@\$d"
 
 #== Finder ==#
 
@@ -61,6 +85,10 @@ defaults write com.apple.finder ShowRemovableMediaOnDesktop -bool true
 # Keep folders on top when sorting by name
 defaults write com.apple.finder _FXSortFoldersFirst -bool true
 
+# New Finder windows show the home folder
+defaults write com.apple.finder NewWindowTarget -string "PfHm"
+defaults write com.apple.finder NewWindowTargetPath -string "file://${HOME}/"
+
 # Avoid creating .DS_Store files on network or USB volumes
 defaults write com.apple.desktopservices DSDontWriteNetworkStores -bool true
 defaults write com.apple.desktopservices DSDontWriteUSBStores -bool true
@@ -72,6 +100,12 @@ defaults write com.apple.dock autohide -bool true
 
 # Set the icon size of Dock items to 46 pixels
 defaults write com.apple.dock tilesize -int 46
+
+# Mission Control: group windows by application
+defaults write com.apple.dock expose-group-apps -bool true
+
+# Start the screen saver after 3 minutes
+defaults -currentHost write com.apple.screensaver idleTime -int 180
 
 # Hot corners
 # Possible values:
@@ -102,6 +136,9 @@ defaults write com.apple.dock wvous-tl-modifier -int 0
 
 # Don't show recent applications in Dock
 defaults write com.apple.dock show-recents -bool false
+
+# Click wallpaper to reveal desktop: only in Stage Manager
+defaults write com.apple.WindowManager EnableStandardClickToShowDesktop -bool false
 
 #== Applications ==#
 
