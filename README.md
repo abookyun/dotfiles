@@ -37,8 +37,8 @@ On first run, chezmoi will:
 - **Tools:** zoxide (smart cd), eza (better ls), bat, ripgrep
 
 ### Development Tools
-- **Version Manager:** asdf (Ruby, Python, Rust, Node, Postgres, Redis, SQLite)
-- **Editor:** Vim with 26 plugins (Dracula theme, ALE linter, fugitive, fzf.vim)
+- **Version Manager:** asdf (Ruby, Python, Rust, Node, Go, Postgres, Redis, SQLite)
+- **Editors:** Neovim with lazy.nvim, and Vim with vim-plug. Both use the Dracula theme
 - **Multiplexer:** Tmux with Catppuccin theme
 - **Git:** Custom aliases and configuration
 
@@ -145,7 +145,9 @@ brewdiff
 # - Packages in Brewfile but not installed (either install or remove from Brewfile)
 ```
 
-Manually add new packages to your Brewfile in the appropriate section with comments to maintain organization.
+Add new packages to the Brewfile by hand, with a short comment saying what they are for.
+
+Each section starts with a line saying what it excludes. One way to pick a section is to read from the top and take the first one that does not exclude the package. Sections run from the small basket to the large one, so the first match is usually the more specific one.
 
 ### Update asdf Plugins and Tools
 ```bash
@@ -155,7 +157,7 @@ asdf install
 
 ## Custom Functions
 
-Located in `functions/` directory:
+Located in `dot_config/zsh/functions/`, loaded from `$ZDOTDIR/functions`:
 - `brewup` - Update all Homebrew packages
 - `brewdiff` - Compare Brewfile with installed packages
 - `asdfup` - Update all asdf plugins
