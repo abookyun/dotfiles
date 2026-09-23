@@ -16,6 +16,10 @@ if ! command -v brew &> /dev/null; then
     fi
 fi
 
+# The calling shell may not have loaded the zsh config yet
+source "$HOME/.zshenv"                 # XDG paths, HOMEBREW_PREFIX
+source "$XDG_CONFIG_HOME/asdf/asdfrc"  # ASDF_DATA_DIR, compiler flags
+
 # Check if asdf is installed
 if ! command -v asdf &> /dev/null; then
     echo "Error: asdf is not installed"

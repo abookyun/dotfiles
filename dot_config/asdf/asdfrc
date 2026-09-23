@@ -10,3 +10,10 @@ export ASDF_PYTHON_DEFAULT_PACKAGES_FILE=${XDG_CONFIG_HOME}/asdf/default-python-
 
 # asdf-ruby: default gem packages
 export ASDF_GEM_DEFAULT_PACKAGES_FILE=${XDG_CONFIG_HOME}/asdf/default-gems
+
+# Compiler
+# asdf install postgres needs pkg-config and icu4c. curl is here too, so keep
+# both in one assignment: a second `export` would drop the first one.
+export LDFLAGS="-L${HOMEBREW_PREFIX}/opt/icu4c@78/lib -L${HOMEBREW_PREFIX}/opt/curl/lib"
+export CPPFLAGS="-I${HOMEBREW_PREFIX}/opt/icu4c@78/include -I${HOMEBREW_PREFIX}/opt/curl/include"
+export PKG_CONFIG_PATH="${HOMEBREW_PREFIX}/opt/icu4c@78/lib/pkgconfig:${HOMEBREW_PREFIX}/opt/curl/lib/pkgconfig"
