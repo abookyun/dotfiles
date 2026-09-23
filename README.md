@@ -28,10 +28,13 @@ sh -c "$(curl -fsLS get.chezmoi.io)" -- init -S "$SOURCE_DIR" --apply "$GITHUB_U
 chezmoi then:
 1. Prompts for your git email and full name
 2. Creates the XDG directory structure
-3. Installs Homebrew, and the packages in the Brewfile
+3. Installs Homebrew, and the formulae in the Brewfile
 4. Installs the language runtimes in `.tool-versions` through asdf
 5. Applies the macOS defaults
-6. Symlinks every configuration file
+6. Installs the casks and Mac App Store apps in the Brewfile
+7. Symlinks every configuration file
+
+Step 6 can be slow. Stop it with Ctrl+C if needed, and the next `chezmoi apply` tries again.
 
 Homebrew brings the Xcode command line tools with it, so there is nothing to install first. Two things still need you:
 
