@@ -41,11 +41,15 @@ if [ ! -f "$BREWFILE" ]; then
     exit 1
 fi
 
-# Run brew bundle
+# A failed entry here should not stop the language runtimes from installing.
 echo "Running: brew bundle --file=$BREWFILE"
-brew bundle --file="$BREWFILE"
-
-echo "✓ Homebrew packages installed"
+if brew bundle --file="$BREWFILE"; then
+    echo "✓ Homebrew packages installed"
+else
+    echo "Some entries did not install. To see which ones:"
+    echo "  brew bundle check --file=$BREWFILE --verbose"
+    echo "Going on to the next step."
+fi
 {{- else }}
 echo "Skipping Homebrew installation (not macOS)"
 {{- end }}
