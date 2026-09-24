@@ -102,9 +102,14 @@ mas "Money Pro", id: 972572731  # personal budget and account tracking
 mas "PCalc", id: 403504866  # scientific calculator
 mas "Cardhop", id: 1290358394  # contacts manager
 mas "Instapaper", id: 288545208  # read-later app, save pages to Instapaper
-mas "Pages", id: 409201541  # Apple word processor
-mas "Keynote", id: 409183694  # Apple presentation app
-mas "Numbers", id: 409203825  # Apple spreadsheet
+# The IDs below are the old Mac-only iWork apps. Apple made iWork universal and
+# now the Mac store uses the same IDs as iOS, so the old apps are gone.
+# mas "Pages", id: 409201541  # Apple word processor
+# mas "Keynote", id: 409183694  # Apple presentation app
+# mas "Numbers", id: 409203825  # Apple spreadsheet
+mas "Pages", id: 361309726  # Apple word processor
+mas "Keynote", id: 361285480  # Apple presentation app
+mas "Numbers", id: 361304891  # Apple spreadsheet
 mas "Magnet", id: 441258766  # window snapping by keyboard
 mas "Irvue", id: 1039633667  # beautiful wallpaper
 mas "Amphetamine", id: 937984704  # keep computer awake
