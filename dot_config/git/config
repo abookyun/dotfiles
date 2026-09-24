@@ -24,3 +24,12 @@
     defaultBranch = main
 [core]
 	autocrlf = false
+# Let gh answer for GitHub over HTTPS. The empty helper line clears the
+# osxkeychain helper above, so gh is the only helper these two hosts ask.
+# Other hosts keep using osxkeychain.
+[credential "https://github.com"]
+	helper = 
+	helper = !gh auth git-credential
+[credential "https://gist.github.com"]
+	helper = 
+	helper = !gh auth git-credential
