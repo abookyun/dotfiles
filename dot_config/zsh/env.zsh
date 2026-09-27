@@ -37,6 +37,10 @@ export UV_CACHE_DIR=$XDG_CACHE_HOME/uv
 # less
 export LESSHISTFILE="${XDG_STATE_HOME}/zsh/lesshst"
 
+# Stop Terminal.app from writing ~/.zsh_sessions. /etc/zshrc_Apple_Terminal
+# reads this from the environment, so it has to be exported.
+export SHELL_SESSIONS_DISABLE=1
+
 # ruby
 # BUNDLE_USER_* are in asdf.zsh.
 export IRBRC="$XDG_CONFIG_HOME/ruby/irbrc"
