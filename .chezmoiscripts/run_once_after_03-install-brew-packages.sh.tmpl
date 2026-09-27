@@ -41,12 +41,12 @@ if [ ! -f "$BREWFILE" ]; then
     exit 1
 fi
 
-# Install only taps and formulae here. The dotfiles and the asdf script need
-# them, and they download fast. Casks and mas apps can be slow, so script 05
-# installs them after everything else.
+# Install the entries marked `# core` here. Those are the ones the dotfiles and
+# the asdf script need, plus the tools you want on a fresh machine right away.
+# Script 05 installs the rest after everything else.
 # A failed entry here should not stop the language runtimes from installing.
-echo "Running: brew bundle for the taps and formulae in $BREWFILE"
-if grep -E '^(tap|brew) ' "$BREWFILE" | brew bundle install --file=- --verbose; then
+echo "Running: brew bundle for the core entries in $BREWFILE"
+if grep '# core' "$BREWFILE" | brew bundle install --file=- --verbose; then
     echo "✓ Homebrew formulae installed"
 else
     echo "Some entries did not install. To see which ones:"

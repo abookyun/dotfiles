@@ -28,13 +28,17 @@ sh -c "$(curl -fsLS get.chezmoi.io)" -- init -S "$SOURCE_DIR" --apply "$GITHUB_U
 chezmoi then:
 1. Prompts for your git email and full name
 2. Creates the XDG directory structure
-3. Installs Homebrew, and the formulae in the Brewfile
-4. Installs the language runtimes in `.tool-versions` through asdf
-5. Applies the macOS defaults
-6. Installs the casks and Mac App Store apps in the Brewfile
+3. Applies the macOS defaults
+4. Installs Homebrew, and the Brewfile entries marked `# core`
+5. Installs the language runtimes in `.tool-versions` through asdf
+6. Installs the rest of the Brewfile, casks and Mac App Store apps included
 7. Symlinks every configuration file
 
-Step 6 can be slow. Stop it with Ctrl+C if needed, and the next `chezmoi apply` tries again.
+Step 3 comes first so the trackpad, keyboard and Finder behave the way you
+expect while the rest installs.
+
+Step 6 can be slow. Stop it with Ctrl+C if needed, and the next `chezmoi apply`
+tries again.
 
 Homebrew brings the Xcode command line tools with it, so there is nothing to install first. Two things still need you:
 
@@ -117,7 +121,10 @@ chezmoi verify
 The following files use chezmoi templates for machine-specific configuration:
 - `.chezmoi.toml.tmpl` - Main configuration with git email/name prompts
 - `run_once_before_01-create-xdg-directories.sh.tmpl` - XDG directory setup
-- `run_once_after_02-install-brew-packages.sh.tmpl` - Homebrew package installation
+- `run_once_after_02-configure-macos-defaults.sh.tmpl` - macOS settings, first so the machine is usable while the rest installs
+- `run_once_after_03-install-brew-packages.sh.tmpl` - Homebrew entries marked `# core` in the Brewfile
+- `run_once_after_04-install-asdf-tools.sh.tmpl` - asdf plugins and language runtimes
+- `run_onchange_after_05-install-brew-apps.sh.tmpl` - the rest of the Brewfile, casks and mas apps included
 
 ### Common Workflows
 
@@ -161,6 +168,29 @@ brewdiff
 Add new packages to the Brewfile by hand, with a short comment saying what they are for.
 
 Each section starts with a line saying what it excludes. One way to pick a section is to read from the top and take the first one that does not exclude the package. Sections run from the small basket to the large one, so the first match is usually the more specific one.
+
+### The `# core` marker
+
+A comment that starts with `# core` puts the entry in step 4, the early
+install. Everything else waits for step 6. Mark an entry `# core` when a new
+machine needs it before the rest finishes:
+
+- the shell and the terminal, because `.zshrc` sources them and a missing one
+  breaks every new shell
+- the editor and the language servers it calls
+- the libraries asdf builds the language runtimes against
+- the commands you reach for on day one
+
+Leave everything else unmarked. `ffmpeg`, `mpv`, `imagemagick` and `poppler`
+alone pull in 128 dependencies, so they cost real time and nothing needs them
+early.
+
+The marker goes between the entry and its description:
+
+```ruby
+brew "ripgrep"  # core — better grep
+brew "yt-dlp"  # YouTube downloader
+```
 
 ### Update asdf Plugins and Tools
 ```bash

@@ -2,27 +2,27 @@
 # Bootstrap
 # Excludes anything you can install later
 # ====================================================================
-brew "chezmoi"  # dotfiles manager across machines
-brew "asdf"  # version manager for language runtimes
-brew "mas"  # Mac App Store CLI, required by `mas` entries below
-brew "git"  # distributed version control
+brew "chezmoi"  # core — dotfiles manager across machines
+brew "asdf"  # core — version manager for language runtimes
+brew "mas"  # core — Mac App Store CLI, required by `mas` entries below
+brew "git"  # core — distributed version control
 
 # ====================================================================
 # Terminal Environment
 # Excludes anything you run inside it
 # ====================================================================
-brew "zsh"  # UNIX shell, the login shell here
-brew "powerlevel10k"  # zsh theme
-brew "zsh-vi-mode"  # vi mode for zsh
-brew "zsh-syntax-highlighting"  # syntax highlighting
-brew "zsh-autosuggestions"  # command suggestions
-brew "zsh-completions"  # additional completions
+brew "zsh"  # core — UNIX shell, the login shell here
+brew "powerlevel10k"  # core — zsh theme
+brew "zsh-vi-mode"  # core — vi mode for zsh
+brew "zsh-syntax-highlighting"  # core — syntax highlighting
+brew "zsh-autosuggestions"  # core — command suggestions
+brew "zsh-completions"  # core — additional completions
 brew "tmux"  # terminal multiplexer
 brew "smug"  # automate tmux workflows via config files
-brew "herdr"  # agent multiplexer that lives in your terminal
+brew "herdr"  # core — agent multiplexer that lives in your terminal
 
 cask "iterm2"  # terminal emulator
-cask "ghostty"  # GPU-accelerated terminal, platform-native UI
+cask "ghostty"  # core — GPU-accelerated terminal, platform-native UI
 
 # brew "zsh-autocomplete"  # real-time type-ahead completion
 # not fast for man: https://github.com/zdharma-continuum/fast-syntax-highlighting/issues/27
@@ -35,12 +35,12 @@ cask "ghostty"  # GPU-accelerated terminal, platform-native UI
 # Excludes anything you only read
 # ====================================================================
 brew "vim"  # vi-compatible editor
-brew "neovim"  # vim fork, main editor
+brew "neovim"  # core — vim fork, main editor
 brew "helix"  # post-modern modal editor, no config needed
-brew "lua-language-server"  # Lua LSP
-brew "tree-sitter-cli"  # tree-sitter parser compiler (needed by nvim-treesitter)
+brew "lua-language-server"  # core — Lua LSP
+brew "tree-sitter-cli"  # core — tree-sitter parser compiler (needed by nvim-treesitter)
 brew "universal-ctags"  # code indexing (for editors)
-brew "harper"  # grammar checker
+brew "harper"  # core — grammar checker
 
 cask "obsidian"  # knowledge base over local markdown files
 cask "markedit"  # markdown editor
@@ -59,14 +59,14 @@ mas "Day One", id: 1055511498  # journaling app
 # Better, CLI
 # Excludes anything that neither improves on something nor runs in the terminal
 # ====================================================================
-brew "ripgrep"  # better grep
-brew "fzf"  # fuzzy finder
-brew "zoxide"  # smarter cd
-brew "curl"  # HTTP client (newer version than macOS built-in)
+brew "ripgrep"  # core — better grep
+brew "fzf"  # core — fuzzy finder
+brew "zoxide"  # core — smarter cd
+brew "curl"  # core — HTTP client (newer version than macOS built-in)
 brew "figlet"  # ASCII art text
-brew "eza"  # better ls
-brew "bat"  # better cat
-brew "fd"  # better find
+brew "eza"  # core — better ls
+brew "bat"  # core — better cat
+brew "fd"  # core — better find
 brew "tree"  # directory tree
 brew "tealdeer"  # fast tldr (command examples)
 brew "visidata"  # terminal spreadsheet viewer
@@ -75,8 +75,8 @@ brew "ncdu"  # disk usage analyzer
 brew "gdu"  # better ncdu, parallel disk usage analyzer, command is `gdu-go`
 brew "fdupes"  # find duplicate files
 brew "mosh"  # mobile shell (better SSH)
-brew "lazygit"  # terminal UI for git
-brew "gh"  # GitHub CLI
+brew "lazygit"  # core — terminal UI for git
+brew "gh"  # core — GitHub CLI
 brew "git-filter-repo"  # rewrite git repo history (e.g. purge secrets/large files)
 brew "wget"  # file downloader
 brew "opencc"  # Chinese text converter
@@ -190,11 +190,11 @@ cask "plex"  # home media player
 # Development
 # Excludes anything you would use even if you did not write code
 # ====================================================================
-brew "openssl@3"  # SSL/TLS toolkit
-brew "readline"  # line editing library
-brew "libyaml"  # YAML parser
-brew "icu4c@78"  # International Components for Unicode for C/C++
-brew "pkgconf"  # package config helper
+brew "openssl@3"  # core — SSL/TLS toolkit
+brew "readline"  # core — line editing library
+brew "libyaml"  # core — YAML parser
+brew "icu4c@78"  # core — International Components for Unicode for C/C++
+brew "pkgconf"  # core — package config helper
 brew "poppler"  # PDF rendering library (dependency for PDF tools)
 brew "ruby"  # Ruby programming language
 brew "uv"  # fast Python package installer
