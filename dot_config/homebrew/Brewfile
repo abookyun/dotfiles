@@ -196,7 +196,6 @@ brew "libyaml"  # core — YAML parser
 brew "icu4c@78"  # core — International Components for Unicode for C/C++
 brew "pkgconf"  # core — package config helper
 brew "poppler"  # PDF rendering library (dependency for PDF tools)
-brew "ruby"  # Ruby programming language
 brew "uv"  # fast Python package installer
 brew "cmake"  # cross-platform build system generator
 brew "pgcli"  # PostgreSQL CLI with autocomplete
