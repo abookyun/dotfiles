@@ -9,9 +9,15 @@ export XDG_CACHE_HOME="$HOME/.local/cache"
 # zsh
 export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
 
-# Homebrew paths (only cache if brew is available)
-if command -v brew >/dev/null 2>&1; then
-  export HOMEBREW_PREFIX="$(brew --prefix)"
+# Homebrew prefix. .zprofile exports this too, by way of brew shellenv, but it
+# is needed here: .zshenv runs first, and the chezmoi install scripts source
+# asdf.zsh with bash and never load .zprofile.
+#
+# Testing for the binary, rather than asking `brew --prefix`, keeps this from
+# depending on brew already being on PATH. At this point it only is when
+# /etc/paths.d/homebrew happens to exist.
+if [[ -x /opt/homebrew/bin/brew ]]; then
+  export HOMEBREW_PREFIX=/opt/homebrew
 else
-  export HOMEBREW_PREFIX="/opt/homebrew"
+  export HOMEBREW_PREFIX=/usr/local
 fi
