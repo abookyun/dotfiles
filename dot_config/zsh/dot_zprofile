@@ -4,7 +4,9 @@
 # after .zshenv and moves any prepend below /usr/bin. .zshrc would leave
 # scripts and other non-interactive shells without these.
 
-eval "$(/opt/homebrew/bin/brew shellenv zsh)"
+# HOMEBREW_PREFIX comes from .zshenv, which runs before this file. Calling brew
+# by its full path, because nothing has put it on PATH yet.
+eval "$(${HOMEBREW_PREFIX}/bin/brew shellenv zsh)"
 
 # curl is keg-only, so it needs its own entry.
 path=(${HOMEBREW_PREFIX}/opt/curl/bin $path)
