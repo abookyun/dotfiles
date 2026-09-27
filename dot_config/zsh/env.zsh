@@ -23,6 +23,8 @@ export VISUAL='nvim'
 export NODE_REPL_HISTORY=$XDG_STATE_HOME/node/node_repl_history
 
 # python
+# There is no PYTHONHISTFILE here because python does not read one:
+# python/pythonrc builds the history path from XDG_STATE_HOME itself.
 export PYTHONSTARTUP=$XDG_CONFIG_HOME/python/pythonrc
 export PYTHONPYCACHEPREFIX=$XDG_CACHE_HOME/python
 export PYTHONUSERBASE=$XDG_DATA_HOME/python
@@ -34,3 +36,12 @@ export UV_CACHE_DIR=$XDG_CACHE_HOME/uv
 
 # less
 export LESSHISTFILE="${XDG_STATE_HOME}/zsh/lesshst"
+
+# ruby
+# BUNDLE_USER_* are in asdf.zsh.
+export IRBRC="$XDG_CONFIG_HOME/ruby/irbrc"
+
+# other tools reading their config from the environment
+export TEALDEER_CONFIG_DIR=${XDG_CONFIG_HOME}/tealdeer
+export DOCKER_CONFIG="$XDG_CONFIG_HOME"/docker
+export WGETRC="$XDG_CONFIG_HOME/wget/wgetrc"
