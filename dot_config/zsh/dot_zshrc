@@ -36,13 +36,9 @@ if [[ -d "$ZDOTDIR/functions" ]]; then
   autoload -Uz $ZDOTDIR/functions/*(:t)
 fi
 
-# use brewed curl first
-PATH=${HOMEBREW_PREFIX}/opt/curl/bin:$PATH
-PATH=${HOME}/.local/bin:${XDG_DATA_HOME}/asdf/shims:$PATH
+# PATH lives in .zprofile so scripts get it too. FPATH stays here: compinit
+# below needs it, and only an interactive shell completes.
 FPATH=${HOMEBREW_PREFIX}/share/zsh-completions:$FPATH
-
-# Added for obsidian cli
-export PATH="$PATH:/Applications/Obsidian.app/Contents/MacOS"
 
 # Completion
 source ${ZDOTDIR}/completion.zsh

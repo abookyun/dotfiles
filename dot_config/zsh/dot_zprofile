@@ -1,5 +1,16 @@
 #!/usr/bin/env zsh
 
-# Homebrew PATH. This has to stay in .zprofile, not .zshenv: /etc/zprofile runs
-# path_helper after .zshenv, and path_helper moves the prepend below /usr/bin.
+# PATH belongs here, not in .zshenv or .zshrc. /etc/zprofile runs path_helper
+# after .zshenv and moves any prepend below /usr/bin. .zshrc would leave
+# scripts and other non-interactive shells without these.
+
 eval "$(/opt/homebrew/bin/brew shellenv zsh)"
+
+# curl is keg-only, so it needs its own entry.
+path=(${HOMEBREW_PREFIX}/opt/curl/bin $path)
+path=(${HOME}/.local/bin ${XDG_DATA_HOME}/asdf/shims $path)
+path+=(/Applications/Obsidian.app/Contents/MacOS)  # obsidian cli
+
+# Drop the duplicates path_helper and the parent shell leave behind.
+typeset -U path
+export PATH
