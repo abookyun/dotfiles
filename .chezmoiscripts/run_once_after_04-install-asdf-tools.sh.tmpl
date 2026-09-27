@@ -7,14 +7,7 @@ set -e
 
 echo "Installing asdf plugins and tools..."
 
-# Put brew on PATH if it is installed but the calling shell does not have it
-if ! command -v brew &> /dev/null; then
-    if [ -x /opt/homebrew/bin/brew ]; then
-        eval "$(/opt/homebrew/bin/brew shellenv)"
-    elif [ -x /usr/local/bin/brew ]; then
-        eval "$(/usr/local/bin/brew shellenv)"
-    fi
-fi
+{{ template "load-brew.sh" }}
 
 # The calling shell may not have loaded the zsh config yet
 source "$HOME/.zshenv"                      # XDG paths, HOMEBREW_PREFIX
