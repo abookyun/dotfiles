@@ -76,12 +76,31 @@ if [[ -d "$ZDOTDIR/functions" ]]; then
   autoload -Uz $ZDOTDIR/functions/*(:t)
 fi
 
+# Completion
+#
 # PATH lives in .zprofile so scripts get it too. FPATH stays here: compinit
 # below needs it, and only an interactive shell completes.
+# https://docs.brew.sh/Shell-Completion
 FPATH=${HOMEBREW_PREFIX}/share/zsh-completions:$FPATH
+FPATH="${HOMEBREW_PREFIX}/share/zsh/site-functions:${FPATH}"
 
-# Completion
-source ${ZDOTDIR}/completion.zsh
+# compinit has to run after every FPATH change above.
+autoload -U compinit
+_comp_options+=(globdots) # With hidden files
+# run_once_after_03-install-brew-packages fixes the "insecure directories" warning
+compinit -d ${XDG_CACHE_HOME}/zsh/zcompdump-$ZSH_VERSION-by-$(whoami)
+zmodload zsh/complist
+
+# matches case insensitive for lowercase
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
+# Use cache for commands using cache
+zstyle ':completion:*' use-cache on
+zstyle ':completion:*' cache-path "$XDG_CACHE_HOME/zsh/.zcompcache"
+# Complete the alias when _expand_alias is used as a function
+zstyle ':completion:*' complete true
+# Conflicts with zsh-autocomplete
+# zstyle ':completion:*' insert-tab pending
+# zstyle ':completion:*' menu select
 # tealdeer: https://github.com/dbrgn/tealdeer/blob/main/docs/src/installing.md#autocompletion
 
 source ${HOMEBREW_PREFIX}/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
