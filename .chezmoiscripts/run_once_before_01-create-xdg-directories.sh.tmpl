@@ -28,6 +28,8 @@ mkdir -p "${XDG_STATE_HOME:-$HOME/.local/state}/ruby"
 mkdir -p "${XDG_STATE_HOME:-$HOME/.local/state}/python"
 
 # Cache directories
+# zsh: compinit writes the zcompdump here, and completion caching too.
+mkdir -p "${XDG_CACHE_HOME:-$HOME/.local/cache}/zsh"
 mkdir -p "${XDG_CACHE_HOME:-$HOME/.local/cache}/wget"
 
 echo "✓ XDG directories created"
