@@ -1,32 +1,9 @@
-# zsh exports
-export LC_ALL=en_US.UTF-8
+# Interactive shell settings. The exports that were here are in env.zsh now.
 
 HISTFILE=${XDG_STATE_HOME}/zsh/zsh_history
 HISTSIZE=10000
 SAVEHIST=10000
 SHELL_SESSIONS_DISABLE=1
-
-# vim
-export EDITOR='nvim'
-export VISUAL='nvim'
-
-# node and npm
-# NPM_CONFIG_USERCONFIG and NPM_CONFIG_CACHE are in asdf.zsh, which the chezmoi
-# install script sources too.
-export NODE_REPL_HISTORY=$XDG_STATE_HOME/node/node_repl_history
-
-# python
-export PYTHONSTARTUP=$XDG_CONFIG_HOME/python/pythonrc
-export PYTHONPYCACHEPREFIX=$XDG_CACHE_HOME/python
-export PYTHONUSERBASE=$XDG_DATA_HOME/python
-
-# uv (fast Python package installer)
-export UV_TOOL_DIR=$XDG_DATA_HOME/uv/tools
-export UV_TOOL_BIN_DIR=$XDG_DATA_HOME/uv/bin
-export UV_CACHE_DIR=$XDG_CACHE_HOME/uv
-
-# less
-export LESSHISTFILE="${XDG_STATE_HOME}/zsh/lesshst"
 
 # zsh settings
 setopt AUTOCD

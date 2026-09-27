@@ -21,3 +21,7 @@ if [[ -x /opt/homebrew/bin/brew ]]; then
 else
   export HOMEBREW_PREFIX=/usr/local
 fi
+
+# Environment for every shell, interactive or not. Last, so it can use the
+# variables above.
+source ${ZDOTDIR}/env.zsh
