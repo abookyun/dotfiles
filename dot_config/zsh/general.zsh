@@ -11,8 +11,9 @@ export EDITOR='nvim'
 export VISUAL='nvim'
 
 # node and npm
+# NPM_CONFIG_USERCONFIG and NPM_CONFIG_CACHE are in asdf.zsh, which the chezmoi
+# install script sources too.
 export NODE_REPL_HISTORY=$XDG_STATE_HOME/node/node_repl_history
-export NPM_CONFIG_USERCONFIG=$XDG_CONFIG_HOME/npm/config
 
 # python
 export PYTHONSTARTUP=$XDG_CONFIG_HOME/python/pythonrc

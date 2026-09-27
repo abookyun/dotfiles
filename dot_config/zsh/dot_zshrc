@@ -21,15 +21,13 @@ source ${ZDOTDIR}/general.zsh
 export TEALDEER_CONFIG_DIR=${XDG_CONFIG_HOME}/tealdeer
 export DOCKER_CONFIG="$XDG_CONFIG_HOME"/docker
 export IRBRC="$XDG_CONFIG_HOME/ruby/irbrc"
-export BUNDLE_USER_CONFIG="$XDG_CONFIG_HOME"/bundle
-export BUNDLE_USER_CACHE="$XDG_CACHE_HOME"/bundle
-export BUNDLE_USER_PLUGIN="$XDG_DATA_HOME"/bundle
+# BUNDLE_USER_* are in asdf.zsh, sourced below.
 export WGETRC="$XDG_CONFIG_HOME/wget/wgetrc"
-export PYTHONHISTFILE="$XDG_STATE_HOME/python/history"
-export PYTHONSTARTUP="$XDG_CONFIG_HOME/python/pythonrc"
+# The PYTHON* variables are in general.zsh. Python does not read PYTHONHISTFILE:
+# python/pythonrc builds the history path from XDG_STATE_HOME itself.
 
 # asdf, with the compiler flags it builds with
-source ${XDG_CONFIG_HOME}/asdf/asdfrc
+source ${ZDOTDIR}/asdf.zsh
 
 # PATH and FPATH
 # Load custom functions

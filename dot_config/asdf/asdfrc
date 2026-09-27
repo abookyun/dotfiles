@@ -1,19 +1,11 @@
-# asdf
-export ASDF_CONFIG_FILE=${XDG_CONFIG_HOME}/asdf/asdfrc
-export ASDF_DATA_DIR=${XDG_DATA_HOME}/asdf
+# asdf configuration.
+# Keys and defaults: https://asdf-vm.com/manage/configuration.html
+#
+# This file is key-value, not shell. asdf parses it and ignores anything it
+# does not recognise, so an `export` line here would fail without an error.
+# The asdf environment variables live in zsh/asdf.zsh.
 
-# asdf-nodejs: default npm packages
-export ASDF_NPM_DEFAULT_PACKAGES_FILE=${XDG_CONFIG_HOME}/asdf/default-npm-packages
-
-# asdf-python: default pip packages
-export ASDF_PYTHON_DEFAULT_PACKAGES_FILE=${XDG_CONFIG_HOME}/asdf/default-python-packages
-
-# asdf-ruby: default gem packages
-export ASDF_GEM_DEFAULT_PACKAGES_FILE=${XDG_CONFIG_HOME}/asdf/default-gems
-
-# Compiler
-# asdf install postgres needs pkg-config and icu4c. curl is here too, so keep
-# both in one assignment: a second `export` would drop the first one.
-export LDFLAGS="-L${HOMEBREW_PREFIX}/opt/icu4c@78/lib -L${HOMEBREW_PREFIX}/opt/curl/lib"
-export CPPFLAGS="-I${HOMEBREW_PREFIX}/opt/icu4c@78/include -I${HOMEBREW_PREFIX}/opt/curl/include"
-export PKG_CONFIG_PATH="${HOMEBREW_PREFIX}/opt/icu4c@78/lib/pkgconfig:${HOMEBREW_PREFIX}/opt/curl/lib/pkgconfig"
+# Read .ruby-version, .nvmrc and similar files from other version managers.
+# .tool-versions still wins where it names a tool, so this only adds a fallback
+# for projects that do not carry one. Needs plugin support to take effect.
+legacy_version_file = yes
