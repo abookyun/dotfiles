@@ -1,9 +1,7 @@
 # zsh completions
 
 # homebrew completion: https://docs.brew.sh/Shell-Completion
-if type brew &>/dev/null; then
-  FPATH="$(brew --prefix)/share/zsh/site-functions:${FPATH}"
-fi
+FPATH="${HOMEBREW_PREFIX}/share/zsh/site-functions:${FPATH}"
 
 # initialize autocomplete here, otherwise functions won't be loaded
 autoload -U compinit
