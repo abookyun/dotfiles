@@ -205,7 +205,6 @@ brew "csvkit"  # CSV command-line tools
 
 cask "codexbar"  # menu bar usage monitor for Codex and Claude
 cask "orbstack"  # docker/linux VM runtime, lighter than Docker Desktop
-cask "chatgpt"  # OpenAI desktop app
 cask "claude-code"  # terminal-based AI coding assistant
 
 # brew "perl"  # Perl programming language
@@ -214,6 +213,7 @@ cask "claude-code"  # terminal-based AI coding assistant
 # brew "elasticsearch"  # search and analytics engine (removed from homebrew/core)
 # brew "mitmproxy"  # network traffic intercepter
 
+# cask "chatgpt"  # OpenAI desktop app
 # cask "docker"  # replaced by orbstack
 # cask "ollama-app"  # run large language models locally
 # cask "sequel-pro"  # MySQL GUI client
