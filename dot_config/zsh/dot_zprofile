@@ -1,11 +1,5 @@
 #!/usr/bin/env zsh
 
-# Homebrew PATH.
-#
-# This must live in .zprofile, not .zshenv. macOS runs /etc/zprofile after
-# .zshenv, and that file calls path_helper. path_helper rebuilds PATH from
-# /etc/paths and /etc/paths.d, and it always puts /etc/paths first. So /usr/bin
-# lands before /opt/homebrew/bin and the system tools win. Anything .zshenv
-# prepends gets moved down. .zprofile runs after path_helper, so the order here
-# is the final one.
+# Homebrew PATH. This has to stay in .zprofile, not .zshenv: /etc/zprofile runs
+# path_helper after .zshenv, and path_helper moves the prepend below /usr/bin.
 eval "$(/opt/homebrew/bin/brew shellenv zsh)"

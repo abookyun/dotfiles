@@ -1,0 +1,62 @@
+#!/bin/bash
+# Warn when a tool that Homebrew provides resolves to the system copy instead.
+# Runs on every apply, so a missing PATH line shows up the same day.
+
+{{- if eq .chezmoi.os "darwin" }}
+# No `set -e`: a warning here should not fail the apply.
+
+load_brew() {
+    command -v brew &> /dev/null && return
+    if [ -x /opt/homebrew/bin/brew ]; then
+        eval "$(/opt/homebrew/bin/brew shellenv)"
+    elif [ -x /usr/local/bin/brew ]; then
+        eval "$(/usr/local/bin/brew shellenv)"
+    fi
+}
+
+load_brew
+
+if ! command -v brew &> /dev/null; then
+    echo "PATH check: brew not found, skipping"
+    exit 0
+fi
+
+PREFIX="$(brew --prefix)"
+problems=0
+
+# Ask a login shell. The PATH this script runs with comes from chezmoi.
+login_path="$(/bin/zsh -l -c 'echo $PATH' 2>/dev/null)"
+
+if [ -z "$login_path" ]; then
+    echo "PATH check: could not read the login shell PATH, skipping"
+    exit 0
+fi
+
+# Names that exist in both prefixes, where PATH order picks the winner.
+while IFS= read -r tool; do
+    resolved="$(PATH="$login_path" command -v "$tool" 2>/dev/null)"
+    case "$resolved" in
+        "$PREFIX"/*) ;;
+        */asdf/shims/*) ;;  # asdf owns the language runtimes
+        "") ;;
+        *)
+            problems=$((problems + 1))
+            [ "$problems" -le 5 ] && echo "PATH check: $tool is $resolved"
+            ;;
+    esac
+done < <(comm -12 \
+    <(ls "$PREFIX/bin" 2>/dev/null | sort) \
+    <(ls /usr/bin 2>/dev/null | sort))
+
+if [ "$problems" -gt 0 ]; then
+    [ "$problems" -gt 5 ] && echo "PATH check: and $((problems - 5)) more"
+    echo ""
+    echo "$problems tool(s) come from the system. The Homebrew prepend is in"
+    echo "dot_config/zsh/dot_zprofile, and it has to stay in .zprofile:"
+    echo "path_helper runs after .zshenv and moves that prepend below /usr/bin."
+else
+    echo "✓ PATH check: Homebrew tools come first"
+fi
+{{- else }}
+echo "Skipping PATH check (not macOS)"
+{{- end }}
