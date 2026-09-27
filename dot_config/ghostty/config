@@ -27,6 +27,15 @@ window-save-state = always
 # Vertical sync (prevents kernel panics on macOS 14.4+)
 window-vsync = true
 
+# Close a split or tab without asking
+confirm-close-surface = false
+
+# No size overlay while dragging a window edge
+resize-overlay = never
+
+# Get the pointer out of the way
+mouse-hide-while-typing = true
+
 # ============================================================================
 # Font Settings
 # ============================================================================
@@ -61,9 +70,20 @@ unfocused-split-opacity = 0.85
 theme = Catppuccin Frappe
 
 # ============================================================================
+# Notifications
+# ============================================================================
+
+# Notify when a command finishes, for the ones that take long enough that you
+# have switched away. Needs shell integration, which Ghostty detects for zsh.
+notify-on-command-finish = always
+notify-on-command-finish-after = 30s
+
+# ============================================================================
 # Keybindings
 # ============================================================================
 
-# Quick Terminal: Cmd + ` (backtick) - built-in feature
+# No Quick Terminal binding. A global: keybind takes the key from every other
+# app, and cmd+` cycles windows in the active app.
+
 # Config reload: Cmd + Shift + ,
 # Open config: Cmd + ,
