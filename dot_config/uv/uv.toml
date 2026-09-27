@@ -3,3 +3,13 @@
 
 # Note: Tool directories are configured via environment variables in shell config:
 # UV_TOOL_DIR, UV_TOOL_BIN_DIR, UV_CACHE_DIR
+
+# asdf owns the Python version, uv owns project virtualenvs and their
+# dependencies. uv can install Python too, so turn that off: .tool-versions
+# stays the only place a version is named.
+python-downloads = "never"
+python-preference = "only-system"
+
+# Python CLI tools stay with brew. It gives each one its own virtualenv under
+# Cellar/<tool>/libexec, so they share nothing. Use `uv tool install` only for
+# a tool brew does not package.
