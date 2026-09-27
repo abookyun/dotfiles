@@ -9,10 +9,57 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-# General Settings
 # export TERM='xterm-ghostty'
 source ${ZDOTDIR}/aliases.zsh
-source ${ZDOTDIR}/general.zsh
+
+# History
+HISTFILE=${XDG_STATE_HOME}/zsh/zsh_history
+HISTSIZE=10000
+SAVEHIST=10000
+SHELL_SESSIONS_DISABLE=1
+
+setopt APPEND_HISTORY # adds history
+setopt SHARE_HISTORY # share history between sessions
+setopt EXTENDED_HISTORY # add timestamps to history
+setopt HIST_VERIFY
+setopt INC_APPEND_HISTORY # adds history incrementally
+setopt HIST_IGNORE_ALL_DUPS  # don't record dupes in history
+setopt HIST_REDUCE_BLANKS
+
+# zsh settings
+setopt AUTOCD
+setopt AUTO_LIST
+setopt NO_BG_NICE # don't nice background tasks
+setopt NO_HUP
+setopt NO_LIST_BEEP
+setopt LOCAL_OPTIONS # allow functions to have local options
+setopt LOCAL_TRAPS # allow functions to have local traps
+setopt PROMPT_SUBST
+setopt IGNORE_EOF
+
+# Directory Stack
+setopt AUTO_PUSHD # push the current directory visited on the stack
+setopt PUSHD_IGNORE_DUPS # do not store duplicates in the stack
+setopt PUSHD_SILENT # do not print the directory stack after pushd or popd
+
+# Completion
+setopt LIST_PACKED
+setopt COMPLETE_IN_WORD
+# don't expand aliases _before_ completion has finished
+#   like: git comm-[tab]
+setopt complete_aliases
+
+# Key bindings. The history search widgets come from
+# https://coderwall.com/p/jpj_6q/zsh-better-history-searching-with-arrow-keys
+# The arrow keys are bound in zvm_after_init below, because zsh-vi-mode
+# rebinds them when it loads.
+autoload -U up-line-or-beginning-search
+autoload -U down-line-or-beginning-search
+zle -N up-line-or-beginning-search
+zle -N down-line-or-beginning-search
+
+bindkey -v
+KEYTIMEOUT=1
 
 # Plugin Settings
 # zsh-fast-syntax-highlighting
