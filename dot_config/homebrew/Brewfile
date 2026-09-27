@@ -190,10 +190,12 @@ cask "plex"  # home media player
 # Development
 # Excludes anything you would use even if you did not write code
 # ====================================================================
+# Keep the @3. Homebrew ships @3 and @4 side by side, and the ruby and python
+# asdf builds link to @3. See the openssl note in zsh/asdf.zsh.
 brew "openssl@3"  # core — SSL/TLS toolkit
 brew "readline"  # core — line editing library
 brew "libyaml"  # core — YAML parser
-brew "icu4c@78"  # core — International Components for Unicode for C/C++
+brew "icu4c"  # core — International Components for Unicode for C/C++
 brew "pkgconf"  # core — package config helper
 brew "poppler"  # PDF rendering library (dependency for PDF tools)
 brew "uv"  # fast Python package installer

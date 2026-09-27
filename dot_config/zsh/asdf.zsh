@@ -33,6 +33,15 @@ export BUNDLE_USER_PLUGIN=${XDG_DATA_HOME}/bundle
 # Compiler
 # asdf install postgres needs pkg-config and icu4c. curl is here too, so keep
 # both in one assignment: a second `export` would drop the first one.
-export LDFLAGS="-L${HOMEBREW_PREFIX}/opt/icu4c@78/lib -L${HOMEBREW_PREFIX}/opt/curl/lib"
-export CPPFLAGS="-I${HOMEBREW_PREFIX}/opt/icu4c@78/include -I${HOMEBREW_PREFIX}/opt/curl/include"
-export PKG_CONFIG_PATH="${HOMEBREW_PREFIX}/opt/icu4c@78/lib/pkgconfig:${HOMEBREW_PREFIX}/opt/curl/lib/pkgconfig"
+# `opt/icu4c` is the unversioned symlink, so a new major version needs no edit
+# here. Homebrew keeps one icu4c at a time, and asdf recompiles postgres
+# against whatever is current.
+#
+# openssl is the other way round. Homebrew ships @3 and @4 side by side because
+# their binary layouts differ, so a library built against @3 cannot load @4.
+# The ruby and python that asdf builds link to @3, which is why the Brewfile
+# names @3 and not the `openssl` alias: that alias moves to @4 one day, and a
+# new machine would then build against the wrong one. Keep the number.
+export LDFLAGS="-L${HOMEBREW_PREFIX}/opt/icu4c/lib -L${HOMEBREW_PREFIX}/opt/curl/lib"
+export CPPFLAGS="-I${HOMEBREW_PREFIX}/opt/icu4c/include -I${HOMEBREW_PREFIX}/opt/curl/include"
+export PKG_CONFIG_PATH="${HOMEBREW_PREFIX}/opt/icu4c/lib/pkgconfig:${HOMEBREW_PREFIX}/opt/curl/lib/pkgconfig"
