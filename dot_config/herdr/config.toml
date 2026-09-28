@@ -3,12 +3,12 @@ onboarding = false
 [keys]
 prefix = "alt+space"
 
-# Match the vim-tmux-navigator bindings: ctrl+hjkl moves focus directly,
-# no prefix needed. Keeps the prefix variants as a fallback.
-focus_pane_left = ["prefix+h", "ctrl+h"]
-focus_pane_down = ["prefix+j", "ctrl+j"]
-focus_pane_up = ["prefix+k", "ctrl+k"]
-focus_pane_right = ["prefix+l", "ctrl+l"]
+# ctrl+hjkl is bound to navigate.sh below, so vim gets these keys too.
+# The prefix variants still move herdr focus directly.
+focus_pane_left = ["prefix+h"]
+focus_pane_down = ["prefix+j"]
+focus_pane_up = ["prefix+k"]
+focus_pane_right = ["prefix+l"]
 
 # Navigation follows the sidebar layout: hl walks the tab row, jk walks the
 # workspace list, and shift lifts jk up to the agent list.
@@ -23,3 +23,29 @@ switch_workspace = "prefix+shift+1..9"
 # Agent cycling crosses workspaces, so you do not have to find one first.
 previous_agent = ["alt+shift+k"]
 next_agent = ["alt+shift+j"]
+
+# Match the vim-tmux-navigator bindings: ctrl+hjkl moves between herdr panes
+# and vim splits. navigate.sh passes the key to vim when vim is in front.
+[[keys.command]]
+key = "ctrl+h"
+type = "shell"
+command = "sh ~/.config/herdr/navigate.sh left"
+description = "Focus left pane or vim split"
+
+[[keys.command]]
+key = "ctrl+j"
+type = "shell"
+command = "sh ~/.config/herdr/navigate.sh down"
+description = "Focus pane or vim split below"
+
+[[keys.command]]
+key = "ctrl+k"
+type = "shell"
+command = "sh ~/.config/herdr/navigate.sh up"
+description = "Focus pane or vim split above"
+
+[[keys.command]]
+key = "ctrl+l"
+type = "shell"
+command = "sh ~/.config/herdr/navigate.sh right"
+description = "Focus right pane or vim split"
