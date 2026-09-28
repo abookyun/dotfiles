@@ -214,7 +214,7 @@ brew "cargo-shear"  # find unused dependencies
 
 cask "codexbar"  # menu bar usage monitor for Codex and Claude
 cask "orbstack"  # docker/linux VM runtime, lighter than Docker Desktop
-cask "claude-code"  # terminal-based AI coding assistant
+cask "claude-code@latest"  # terminal-based AI coding assistant
 
 # brew "perl"  # Perl programming language
 # brew "redis"  # in-memory key-value store
