@@ -41,6 +41,7 @@ brew "lua-language-server"  # core — Lua LSP
 brew "tree-sitter-cli"  # core — tree-sitter parser compiler (needed by nvim-treesitter)
 brew "universal-ctags"  # code indexing (for editors)
 brew "harper"  # core — grammar checker
+brew "taplo"  # TOML LSP and formatter
 
 cask "obsidian"  # knowledge base over local markdown files
 cask "markedit"  # markdown editor
@@ -202,6 +203,14 @@ brew "uv"  # fast Python package installer
 brew "cmake"  # cross-platform build system generator
 brew "pgcli"  # PostgreSQL CLI with autocomplete
 brew "csvkit"  # CSV command-line tools
+brew "just"  # command runner for project tasks
+
+# Rust tools. asdf manages the toolchain only. cargo finds cargo-* subcommands
+# on PATH, so these keep working when the asdf Rust version changes.
+brew "bacon"  # background cargo check/clippy/test runner
+brew "cargo-nextest"  # faster test runner
+brew "cargo-deny"  # check licenses, advisories and duplicate dependencies
+brew "cargo-shear"  # find unused dependencies
 
 cask "codexbar"  # menu bar usage monitor for Codex and Claude
 cask "orbstack"  # docker/linux VM runtime, lighter than Docker Desktop

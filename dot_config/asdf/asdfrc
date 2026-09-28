@@ -9,3 +9,10 @@
 # .tool-versions still wins where it names a tool, so this only adds a fallback
 # for projects that do not carry one. Needs plugin support to take effect.
 legacy_version_file = yes
+
+# Add the rustup components that the default profile leaves out. The editor
+# needs both of them (see nvim lsp.lua).
+# asdf passes the version as $1 but does not set ASDF_INSTALL_PATH for hooks.
+# asdf-rust keeps RUSTUP_HOME and CARGO_HOME in the install directory.
+# The value is parsed as INI, so `;` starts a comment. Chain with && only.
+post_asdf_install_rust = d="$ASDF_DATA_DIR/installs/rust/$1" && RUSTUP_HOME="$d" CARGO_HOME="$d" "$d/bin/rustup" component add rust-src rust-analyzer

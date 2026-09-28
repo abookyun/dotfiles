@@ -120,6 +120,26 @@ vim.lsp.config("ruby_lsp", {
   root_markers = { "Gemfile", ".ruby-version", ".git" },
 })
 
+-- Rust (rust-analyzer and rust-src come from rustup, see asdf/asdfrc)
+vim.lsp.config("rust_analyzer", {
+  cmd = { "rust-analyzer" },
+  filetypes = { "rust" },
+  -- Cargo.lock sits at the workspace root, so search for it first
+  root_markers = { "Cargo.lock", "Cargo.toml", ".git" },
+  settings = {
+    ["rust-analyzer"] = {
+      check = { command = "clippy" },
+    },
+  },
+})
+
+-- TOML
+vim.lsp.config("taplo", {
+  cmd = { "taplo", "lsp", "stdio" },
+  filetypes = { "toml" },
+  root_markers = { ".taplo.toml", "taplo.toml", ".git" },
+})
+
 -- Vim
 vim.lsp.config("vimls", {
   cmd = { "vim-language-server", "--stdio" },
@@ -134,7 +154,7 @@ vim.lsp.config("harper_ls", {
 })
 
 -- Enable all configured LSP servers
-vim.lsp.enable({ "lua_ls", "basedpyright", "cssls", "ruby_lsp", "vimls", "harper_ls" })
+vim.lsp.enable({ "lua_ls", "basedpyright", "cssls", "ruby_lsp", "rust_analyzer", "taplo", "vimls", "harper_ls" })
 
 -- Return empty table (no plugin dependency needed for native LSP)
 return {}
