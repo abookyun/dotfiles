@@ -145,6 +145,9 @@ defaults write com.apple.WindowManager EnableStandardClickToShowDesktop -bool fa
 # TextEdit: use plain text mode for new documents
 defaults write com.apple.TextEdit RichText -int 0
 
+# OrbStack: do not send system profile with update checks
+defaults write dev.kdrag0n.MacVirt SUSendProfileInfo -bool false
+
 echo "macOS defaults configured successfully!"
 echo "Note: Some changes may require logging out and back in to take effect."
 

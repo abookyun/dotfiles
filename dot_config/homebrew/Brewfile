@@ -213,6 +213,7 @@ brew "cargo-deny"  # check licenses, advisories and duplicate dependencies
 brew "cargo-shear"  # find unused dependencies
 
 cask "codexbar"  # menu bar usage monitor for Codex and Claude
+# orbstack settings live in ~/.orbstack/vmconfig.json. Restart OrbStack to apply.
 cask "orbstack"  # docker/linux VM runtime, lighter than Docker Desktop
 cask "claude-code@latest"  # terminal-based AI coding assistant
 
