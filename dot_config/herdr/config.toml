@@ -18,7 +18,7 @@ next_tab = ["alt+l"]
 
 previous_workspace = ["alt+k"]
 next_workspace = ["alt+j"]
-switch_workspace = "prefix+shift+1..9"
+switch_workspace = ["alt+shift+1..9", "prefix+shift+1..9"]
 
 # Agent cycling crosses workspaces, so you do not have to find one first.
 previous_agent = ["alt+shift+k"]
