@@ -24,6 +24,12 @@
     defaultBranch = main
 [core]
 	autocrlf = false
+# Refuse to commit leftover conflict markers in every repo.
+# git runs this before the repo's own .git/hooks/pre-commit.
+# Skip it once with `git commit --no-verify`.
+[hook "conflict-markers"]
+	event = pre-commit
+	command = "! git diff --cached --check | grep 'leftover conflict marker'"
 # Let gh answer for GitHub over HTTPS. The empty helper line clears the
 # osxkeychain helper above, so gh is the only helper these two hosts ask.
 # Other hosts keep using osxkeychain.
