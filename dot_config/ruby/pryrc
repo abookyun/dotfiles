@@ -1,19 +1,16 @@
 #!/usr/bin/ruby
 
-Pry.editor = 'vim'
+# No Pry.editor here: pry falls back to $EDITOR.
 Pry.config.history_file = "#{ENV['XDG_STATE_HOME']}/ruby/pry_history"
 
-# Use awesome_print (or amazing_print)
+# Pretty printing, when awesome_print or amazing_print is installed
 begin
   require 'awesome_print'
   AwesomePrint.pry!
-rescue LoadError => err
+rescue LoadError
   begin
-    puts "no awesome_print :( #{err}"
-    puts 'trying amazing_print'
     require 'amazing_print'
     AmazingPrint.pry!
-  rescue LoadError => err2
-    puts "no awesome_print :( #{err2}"
+  rescue LoadError
   end
 end
