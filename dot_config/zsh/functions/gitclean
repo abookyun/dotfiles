@@ -1,3 +1,5 @@
 #!/usr/bin/env zsh
 # Remove merged local branches
-git branch --merged | grep -v '\*\|main\|master' | xargs -n 1 git branch -d
+# Skips the current branch (*), branches checked out in other worktrees (+),
+# and main/master by exact name, so `maintenance` is still cleaned up.
+git branch --merged | grep -vE '^[*+]|^[[:space:]]*(main|master)$' | xargs -n 1 git branch -d
