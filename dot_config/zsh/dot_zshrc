@@ -102,15 +102,16 @@ zstyle ':completion:*' complete true
 # zstyle ':completion:*' menu select
 # tealdeer: https://github.com/dbrgn/tealdeer/blob/main/docs/src/installing.md#autocompletion
 
-source ${HOMEBREW_PREFIX}/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source ${HOMEBREW_PREFIX}/share/zsh-autosuggestions/zsh-autosuggestions.zsh
-# fzf shell integration: https://github.com/junegunn/fzf#setting-up-shell-integration
-source <(fzf --zsh)
 # zsh-autocomplete must load before zsh-vi-mode
 # source ${HOMEBREW_PREFIX}/opt/zsh-autocomplete/share/zsh-autocomplete/zsh-autocomplete.plugin.zsh
 
 # zsh-vi-mode after vi-mode initialized re-bindkey
 function zvm_after_init() {
+  # fzf shell integration: https://github.com/junegunn/fzf#setting-up-shell-integration
+  # Here rather than above, because zsh-vi-mode resets ^R when it initializes.
+  source <(fzf --zsh)
+
   # history search bindkey
   bindkey "^[[A" history-beginning-search-backward
   bindkey "^[[B" history-beginning-search-forward
@@ -135,3 +136,6 @@ eval "$(zoxide init zsh)"
 # runs with the prompt set up; guarded so this file stays valid where punch is
 # not installed.
 [[ -r ${XDG_DATA_HOME}/punch/punch.zsh ]] && source ${XDG_DATA_HOME}/punch/punch.zsh
+
+# zsh-syntax-highlighting has to be sourced last, after every widget is defined.
+source ${HOMEBREW_PREFIX}/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
