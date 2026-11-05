@@ -8,7 +8,8 @@ return {
       python = { "ruff" },
       ruby = { "rubocop" },
       sh = { "shellcheck" },
-      zsh = { "shellcheck" },
+      -- shellcheck refuses zsh (SC1071); `zsh -n` checks syntax only
+      zsh = { "zsh" },
     }
 
     vim.api.nvim_create_autocmd({ "BufWritePost", "BufReadPost" }, {
