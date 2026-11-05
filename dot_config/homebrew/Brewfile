@@ -80,6 +80,7 @@ brew "lazygit"  # core — terminal UI for git
 brew "gh"  # core — GitHub CLI
 brew "git-filter-repo"  # rewrite git repo history (e.g. purge secrets/large files)
 brew "wget"  # file downloader
+brew "rsync"  # incremental file transfer, macOS ships openrsync instead
 brew "opencc"  # Chinese text converter
 brew "timewarrior"  # time tracking, wrapped by `punch`
 
@@ -147,6 +148,9 @@ cask "adguard"  # system-wide ad blocker
 # cask "welly"  # BBS client
 cask "transmit"  # FTP/SFTP/S3 file transfer client
 cask "maestral"  # open-source dropbox client
+cask "cloudflare-warp"  # Cloudflare WARP VPN client
+
+brew "gmailctl"  # declarative configuration for Gmail filters
 
 mas "Telegram Lite", id: 946399090  # native Telegram client for macOS
 
@@ -204,6 +208,19 @@ brew "cmake"  # cross-platform build system generator
 brew "pgcli"  # PostgreSQL CLI with autocomplete
 brew "csvkit"  # CSV command-line tools
 brew "just"  # command runner for project tasks
+brew "awscli"  # AWS command-line interface
+brew "eksctl"  # create and manage Amazon EKS clusters
+brew "minio"  # S3-compatible object storage server
+brew "jpeg-xl"  # JPEG XL image format library and tools
+brew "librsvg"  # SVG rendering library (Cairo)
+brew "resvg"  # SVG rendering tool and library
+
+# Local LLMs
+brew "ollama"  # create, run, and share large language models
+# Plugins live in the Cellar, so redo `llm install llm-ollama` after an upgrade
+brew "llm"  # access large language models from the command line
+tap "mattt/tap"
+brew "mattt/tap/preowned", trusted: true  # OpenAI-compatible API for the models built into macOS
 
 # Rust tools. asdf manages the toolchain only. cargo finds cargo-* subcommands
 # on PATH, so these keep working when the asdf Rust version changes.
@@ -225,7 +242,6 @@ cask "claude-code@latest"  # terminal-based AI coding assistant
 
 # cask "chatgpt"  # OpenAI desktop app
 # cask "docker"  # replaced by orbstack
-# cask "ollama-app"  # run large language models locally
 # cask "sequel-pro"  # MySQL GUI client
 # cask "psequel"  # PostgreSQL GUI client
 # cask "java"  # Java runtime
