@@ -34,8 +34,12 @@ export BUNDLE_USER_PLUGIN=${XDG_DATA_HOME}/bundle
 # asdf install postgres needs pkg-config and icu4c. curl is here too, so keep
 # both in one assignment: a second `export` would drop the first one.
 # `opt/icu4c` is the unversioned symlink, so a new major version needs no edit
-# here. Homebrew keeps one icu4c at a time, and asdf recompiles postgres
-# against whatever is current.
+# here. It only affects new builds: Homebrew now keeps icu4c@NN side by side,
+# and an installed postgres stays linked to the versioned keg it was built
+# against (check with `otool -L $(asdf where postgres)/bin/postgres`). Keep
+# that keg installed on request, so `brew autoremove` leaves it alone, until
+# postgres is rebuilt. Rebuilding means `asdf uninstall postgres`, which
+# deletes its data directory too, so run pg_dumpall first.
 #
 # openssl is the other way round. Homebrew ships @3 and @4 side by side because
 # their binary layouts differ, so a library built against @3 cannot load @4.

@@ -10,7 +10,7 @@ echo "Installing Homebrew apps..."
 
 BREWFILE="${XDG_CONFIG_HOME:-$HOME/.config}/homebrew/Brewfile"
 
-# Script 02 already installed the formulae, so this mostly installs casks and
+# Script 03 already installed the formulae, so this mostly installs casks and
 # mas apps. A failure here fails the script, so the next `chezmoi apply` tries
 # again. It is safe to stop this step with Ctrl+C for the same reason.
 echo "Running: brew bundle install --file=$BREWFILE --no-upgrade --verbose"
