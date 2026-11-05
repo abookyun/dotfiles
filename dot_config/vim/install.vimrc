@@ -47,7 +47,6 @@ Plug 'haya14busa/incsearch.vim'
 Plug 'haya14busa/incsearch-easymotion.vim'
 
 " === Tools & Utilities ===
-Plug 'rking/ag.vim'
 Plug 'preservim/tagbar'
 Plug 'godlygeek/tabular'
 Plug 'editorconfig/editorconfig-vim'
