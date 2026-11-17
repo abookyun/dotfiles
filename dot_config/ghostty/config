@@ -82,8 +82,9 @@ notify-on-command-finish-after = 30s
 # Keybindings
 # ============================================================================
 
-# No Quick Terminal binding. A global: keybind takes the key from every other
-# app, and cmd+` cycles windows in the active app.
+# Quick Terminal (floating window) from any app: Option + Esc.
+# global: needs Accessibility permission for Ghostty in System Settings.
+keybind = global:alt+escape=toggle_quick_terminal
 
 # Config reload: Cmd + Shift + ,
 # Open config: Cmd + ,
