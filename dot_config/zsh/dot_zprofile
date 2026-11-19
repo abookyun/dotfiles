@@ -6,12 +6,14 @@
 
 # HOMEBREW_PREFIX comes from .zshenv, which runs before this file. Calling brew
 # by its full path, because nothing has put it on PATH yet.
-eval "$(${HOMEBREW_PREFIX}/bin/brew shellenv zsh)"
+if [[ -n $HOMEBREW_PREFIX ]]; then
+  eval "$(${HOMEBREW_PREFIX}/bin/brew shellenv zsh)"
 
-# curl is keg-only, so it needs its own entry.
-path=(${HOMEBREW_PREFIX}/opt/curl/bin $path)
+  # curl is keg-only, so it needs its own entry.
+  path=(${HOMEBREW_PREFIX}/opt/curl/bin $path)
+  path+=(/Applications/Obsidian.app/Contents/MacOS)  # obsidian cli
+fi
 path=(${HOME}/.local/bin ${XDG_DATA_HOME}/asdf/shims $path)
-path+=(/Applications/Obsidian.app/Contents/MacOS)  # obsidian cli
 
 # Drop the duplicates path_helper and the parent shell leave behind.
 typeset -U path

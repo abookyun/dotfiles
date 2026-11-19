@@ -45,6 +45,32 @@ Homebrew brings the Xcode command line tools with it, so there is nothing to ins
 - Homebrew asks for your password
 - Sign in to the App Store first, or the `mas` entries fail
 
+### Debian
+
+Debian gets the same dotfiles, for a server rather than a workstation. Install
+curl and git first, since a minimal Debian has neither. `-b` puts chezmoi in
+`~/.local/bin`, where `.zprofile` finds it:
+
+```sh
+sudo apt install curl git
+sh -c "$(curl -fsLS get.chezmoi.io)" -- -b ~/.local/bin init -S "$SOURCE_DIR" --apply "$GITHUB_USERNAME"
+```
+
+chezmoi then skips the macOS steps and the Mac-only files (`Library`,
+`.orbstack`, Ghostty and Homebrew config), and instead
+`run_onchange_after_03-install-apt-packages.sh.tmpl`:
+
+1. Installs the shell, editor and CLI tools with apt, the `# core` entries of
+   the Brewfile that a server needs
+2. Clones zsh-vi-mode and powerlevel10k, which Debian does not package
+3. Installs Neovim and the tree-sitter CLI from their releases, because
+   Debian's are too old for the Neovim config
+4. Makes zsh the login shell
+
+It asks for your sudo password. There is no asdf, Homebrew or GUI app on
+Debian. To update Neovim or tree-sitter, change the version in the script and
+run `chezmoi apply`.
+
 ## What's Installed
 
 ### Terminal & Shell

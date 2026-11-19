@@ -16,9 +16,12 @@ export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
 # Testing for the binary, rather than asking `brew --prefix`, keeps this from
 # depending on brew already being on PATH. At this point it only is when
 # /etc/paths.d/homebrew happens to exist.
+#
+# Linux has no Homebrew, so HOMEBREW_PREFIX stays unset there, and the files
+# that read it check for that first.
 if [[ -x /opt/homebrew/bin/brew ]]; then
   export HOMEBREW_PREFIX=/opt/homebrew
-else
+elif [[ -x /usr/local/bin/brew ]]; then
   export HOMEBREW_PREFIX=/usr/local
 fi
 

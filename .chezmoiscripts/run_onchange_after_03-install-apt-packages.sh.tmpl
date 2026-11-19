@@ -1,0 +1,81 @@
+#!/bin/bash
+# Install the Debian packages the shell and editors need, the Brewfile's
+# `# core` entries for a server. Also installs the few tools Debian does not
+# package, or packages too old.
+# Runs again whenever this file changes, for example a new Neovim version.
+
+{{- if and (eq .chezmoi.os "linux") (eq .chezmoi.osRelease.id "debian") }}
+set -euo pipefail
+
+echo "Installing Debian packages..."
+
+sudo apt-get update
+sudo apt-get install -y \
+    zsh git curl ca-certificates locales ncurses-term \
+    zsh-autosuggestions zsh-syntax-highlighting \
+    tmux vim gcc libc6-dev \
+    ripgrep fzf zoxide eza bat fd-find tree \
+    lazygit gh mosh \
+    btop duf ncdu
+
+# Debian renames bat and fd, because other packages took those names first.
+mkdir -p "$HOME/.local/bin"
+ln -sf /usr/bin/batcat "$HOME/.local/bin/bat"
+ln -sf /usr/bin/fdfind "$HOME/.local/bin/fd"
+
+# env.zsh sets LC_ALL=en_US.UTF-8. The installer only generates the locale you
+# picked, and a missing one makes every program print a warning.
+if ! locale -a | grep -qix 'en_US.utf8'; then
+    sudo sed -i 's/^# *\(en_US.UTF-8 UTF-8\)/\1/' /etc/locale.gen
+    sudo locale-gen
+fi
+
+# Ghostty sends TERM=xterm-ghostty over SSH. ncurses-term ships the entry as
+# `ghostty` only, so link the other name where .zshrc points TERMINFO.
+terminfo="${XDG_DATA_HOME:-$HOME/.local/share}/zsh/terminfo"
+mkdir -p "$terminfo/x"
+ln -sf /usr/share/terminfo/g/ghostty "$terminfo/x/xterm-ghostty"
+
+# zsh plugins Debian does not package. .zshrc sources them from here.
+plugins="${XDG_DATA_HOME:-$HOME/.local/share}/zsh/plugins"
+mkdir -p "$plugins"
+for repo in jeffreytse/zsh-vi-mode romkatv/powerlevel10k; do
+    dir="$plugins/${repo#*/}"
+    if [ -d "$dir" ]; then
+        git -C "$dir" pull --ff-only --quiet
+    else
+        git clone --depth 1 "https://github.com/$repo" "$dir"
+    fi
+done
+
+# Neovim and the tree-sitter CLI. Debian 13 ships Neovim 0.10 and tree-sitter
+# 0.22, and nvim-treesitter's main branch needs Neovim 0.12 and tree-sitter
+# 0.26.1 or later. It also compiles each parser, which is why gcc is above.
+nvim_version=v0.12.6
+tree_sitter_version=v0.27.2
+case "$(uname -m)" in
+    x86_64) nvim_arch=x86_64 tree_sitter_arch=x64 ;;
+    aarch64) nvim_arch=arm64 tree_sitter_arch=arm64 ;;
+    *) echo "No Neovim build for $(uname -m)"; exit 1 ;;
+esac
+nvim_dir="$HOME/.local/opt/nvim"
+rm -rf "$nvim_dir"
+mkdir -p "$nvim_dir"
+curl -fsSL "https://github.com/neovim/neovim/releases/download/$nvim_version/nvim-linux-$nvim_arch.tar.gz" |
+    tar -xz -C "$nvim_dir" --strip-components=1
+ln -sf "$nvim_dir/bin/nvim" "$HOME/.local/bin/nvim"
+
+curl -fsSL "https://github.com/tree-sitter/tree-sitter/releases/download/$tree_sitter_version/tree-sitter-linux-$tree_sitter_arch.gz" |
+    gunzip > "$HOME/.local/bin/tree-sitter"
+chmod +x "$HOME/.local/bin/tree-sitter"
+
+# zsh as the login shell. .zshenv sets ZDOTDIR, so the rest of the config
+# follows from there.
+if [ "$(getent passwd "$USER" | cut -d: -f7)" != /usr/bin/zsh ]; then
+    sudo chsh -s /usr/bin/zsh "$USER"
+fi
+
+echo "✓ Debian packages installed"
+{{- else }}
+echo "Skipping apt packages (not Debian)"
+{{- end }}

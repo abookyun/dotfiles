@@ -5,3 +5,11 @@ LICENSE
 README.md
 # Hourly rates stay on the machine, never in the repo.
 .config/punch/rates
+
+{{ if ne .chezmoi.os "darwin" }}
+# macOS only
+Library
+.orbstack
+.config/ghostty
+.config/homebrew
+{{ end }}

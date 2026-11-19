@@ -81,8 +81,10 @@ fi
 # PATH lives in .zprofile so scripts get it too. FPATH stays here: compinit
 # below needs it, and only an interactive shell completes.
 # https://docs.brew.sh/Shell-Completion
-FPATH=${HOMEBREW_PREFIX}/share/zsh-completions:$FPATH
-FPATH="${HOMEBREW_PREFIX}/share/zsh/site-functions:${FPATH}"
+if [[ -n $HOMEBREW_PREFIX ]]; then
+  FPATH=${HOMEBREW_PREFIX}/share/zsh-completions:$FPATH
+  FPATH="${HOMEBREW_PREFIX}/share/zsh/site-functions:${FPATH}"
+fi
 
 # compinit has to run after every FPATH change above.
 autoload -U compinit
@@ -103,7 +105,27 @@ zstyle ':completion:*' complete true
 # zstyle ':completion:*' menu select
 # tealdeer: https://github.com/dbrgn/tealdeer/blob/main/docs/src/installing.md#autocompletion
 
-source ${HOMEBREW_PREFIX}/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+# Plugin files. Homebrew installs them on macOS. On Debian, apt installs the
+# two it packages and run_onchange_after_03-install-apt-packages clones the
+# other two.
+typeset -A zsh_plugin
+if [[ -n $HOMEBREW_PREFIX ]]; then
+  zsh_plugin=(
+    autosuggestions     ${HOMEBREW_PREFIX}/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+    vi-mode             ${HOMEBREW_PREFIX}/opt/zsh-vi-mode/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh
+    powerlevel10k       ${HOMEBREW_PREFIX}/share/powerlevel10k/powerlevel10k.zsh-theme
+    syntax-highlighting ${HOMEBREW_PREFIX}/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+  )
+else
+  zsh_plugin=(
+    autosuggestions     /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+    vi-mode             ${XDG_DATA_HOME}/zsh/plugins/zsh-vi-mode/zsh-vi-mode.plugin.zsh
+    powerlevel10k       ${XDG_DATA_HOME}/zsh/plugins/powerlevel10k/powerlevel10k.zsh-theme
+    syntax-highlighting /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+  )
+fi
+
+source $zsh_plugin[autosuggestions]
 # zsh-autocomplete must load before zsh-vi-mode
 # source ${HOMEBREW_PREFIX}/opt/zsh-autocomplete/share/zsh-autocomplete/zsh-autocomplete.plugin.zsh
 
@@ -123,8 +145,8 @@ function zvm_after_init() {
   bindkey -M menuselect 'j' vi-down-line-or-history
   bindkey -M menuselect 'l' vi-forward-char
 }
-source ${HOMEBREW_PREFIX}/opt/zsh-vi-mode/share/zsh-vi-mode/zsh-vi-mode.plugin.zsh
-source ${HOMEBREW_PREFIX}/share/powerlevel10k/powerlevel10k.zsh-theme
+source $zsh_plugin[vi-mode]
+source $zsh_plugin[powerlevel10k]
 
 # zoxide
 export _ZO_DATA_DIR=$XDG_DATA_HOME/zsh
@@ -139,4 +161,4 @@ eval "$(zoxide init zsh)"
 [[ -r ${XDG_DATA_HOME}/punch/punch.zsh ]] && source ${XDG_DATA_HOME}/punch/punch.zsh
 
 # zsh-syntax-highlighting has to be sourced last, after every widget is defined.
-source ${HOMEBREW_PREFIX}/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source $zsh_plugin[syntax-highlighting]

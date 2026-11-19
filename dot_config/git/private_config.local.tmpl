@@ -1,3 +1,7 @@
 [user]
     name = {{ .name }}
     email = {{ .email }}
+{{- if eq .chezmoi.os "darwin" }}
+[credential]
+    helper = osxkeychain
+{{- end }}
