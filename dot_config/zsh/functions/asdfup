@@ -1,3 +1,101 @@
 #!/usr/bin/env zsh
-# Update all asdf plugins
-asdf plugin update --all
+# Update asdf plugins, then offer to install the latest version of each tool
+# and set it in the global ~/.tool-versions. Run `asdfup -h` for usage.
+
+local usage="Usage:
+  asdfup                            update all plugins, offer the latest version
+                                    of each tool in ~/.tool-versions
+  asdfup <plugin>                   the same for one tool
+  asdfup <plugin> remove --unused   uninstall every version but the global one
+  asdfup <plugin> remove <version>  uninstall that version
+  asdfup -h, --help                 show this help"
+
+if [[ $1 == (-h|--help|help) ]]; then
+  print $usage
+  return
+fi
+if [[ $1 == -* ]] || { (( $# > 1 )) && [[ $2 != remove || $# != 3 ]] }; then
+  print -u2 $usage
+  return 1
+fi
+
+if [[ $2 == remove ]]; then
+  local plugin=$1 target=$3
+  local out
+  out=$(asdf list "$plugin") || { print "$out"; return 1 }
+  local -a installed=(${(f)"$(sed 's/^[ *]*//' <<< $out)"})
+  local global=$(awk -v t="$plugin" '$1 == t { print $2 }' ~/.tool-versions)
+
+  local -a remove
+  if [[ $target == --unused ]]; then
+    remove=(${installed:#$global})
+  elif [[ $target == $global ]]; then
+    print "$plugin $target is the global version in ~/.tool-versions; not removing it."
+    return 1
+  elif (( ${installed[(Ie)$target]} )); then
+    remove=($target)
+  else
+    print "$plugin $target is not installed."
+    return 1
+  fi
+
+  (( $#remove )) || { print "No unused $plugin versions."; return }
+  print "Global: $plugin ${global:-none}"
+  print "Remove: $plugin $remove"
+  read -q "?Uninstall these versions? [y/N] " || { print; return }
+  print
+  local v
+  for v in $remove; do
+    asdf uninstall "$plugin" "$v"
+  done
+  return
+fi
+
+local -a tools
+if (( $# )); then
+  asdf plugin update "$1" || return
+  tools=("$1")
+else
+  asdf plugin update --all || return
+  tools=(${(f)"$(awk '!/^#/ && NF { print $1 }' ~/.tool-versions)"})
+fi
+
+local -A current latest
+local tool
+local -a outdated
+for tool in $tools; do
+  current[$tool]=$(awk -v t="$tool" '$1 == t { print $2 }' ~/.tool-versions)
+  # Only plain numeric versions: skips rc, dev, free-threaded "t" builds, etc.
+  latest[$tool]=$(asdf list all "$tool" 2>/dev/null | grep -E '^[0-9]+(\.[0-9]+)*$' | sort -V | tail -1)
+  if [[ -z $latest[$tool] ]]; then
+    print "$tool: no stable version found"
+  elif [[ $latest[$tool] == $current[$tool] ]]; then
+    print "$tool: $current[$tool] (latest)"
+  else
+    print "$tool: ${current[$tool]:-none} -> $latest[$tool]"
+    outdated+=($tool)
+  fi
+done
+
+(( $#outdated )) || { print "\nEverything is up to date."; return }
+
+# Ask everything up front, so the installs can run unattended afterwards.
+print
+local reply
+read -k 1 "reply?Install and set globally: [a]ll $#outdated, [c]hoose each, or [N]one? "
+print
+local -a chosen
+case $reply in
+  [aA]) chosen=($outdated) ;;
+  [cC])
+    for tool in $outdated; do
+      read -q "?Install $tool $latest[$tool]? [y/N] " && chosen+=($tool)
+      print
+    done
+    ;;
+esac
+
+for tool in $chosen; do
+  print "\n==> $tool $latest[$tool]"
+  asdf install "$tool" "$latest[$tool]" && asdf set -u "$tool" "$latest[$tool]"
+done

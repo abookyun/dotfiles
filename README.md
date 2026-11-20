@@ -194,8 +194,10 @@ brew "yt-dlp"  # YouTube downloader
 
 ### Update asdf Plugins and Tools
 ```bash
-asdfup
-asdf install
+asdfup          # all tools in ~/.tool-versions
+asdfup nodejs   # one tool
+asdfup nodejs remove --unused   # uninstall every version but the global one
+asdfup nodejs remove 26.5.0     # uninstall one version
 ```
 
 ## Custom Functions
@@ -203,6 +205,6 @@ asdf install
 Located in `dot_config/zsh/functions/`, loaded from `$ZDOTDIR/functions`:
 - `brewup` - Update all Homebrew packages
 - `brewdiff` - Compare Brewfile with installed packages
-- `asdfup` - Update all asdf plugins
+- `asdfup [plugin]` - Update asdf plugins and offer to install each tool's latest version globally; `asdfup <plugin> remove --unused|<version>` uninstalls old versions
 - `gitclean` - Remove merged git branches
 - `mkcd` - Create directory and cd into it
