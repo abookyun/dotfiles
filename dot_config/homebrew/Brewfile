@@ -233,6 +233,8 @@ cask "codexbar"  # menu bar usage monitor for Codex and Claude
 # orbstack settings live in ~/.orbstack/vmconfig.json. Restart OrbStack to apply.
 cask "orbstack"  # docker/linux VM runtime, lighter than Docker Desktop
 cask "claude-code@latest"  # terminal-based AI coding assistant
+# From brew, not npm, so it survives asdf nodejs upgrades. Pulls in brew node.
+brew "pi-coding-agent"  # terminal-based AI coding agent
 
 # brew "perl"  # Perl programming language
 # brew "redis"  # in-memory key-value store
