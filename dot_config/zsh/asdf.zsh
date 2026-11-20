@@ -18,6 +18,11 @@ export ASDF_PYTHON_DEFAULT_PACKAGES_FILE=${XDG_CONFIG_HOME}/asdf/default-python-
 # asdf-ruby: default gem packages
 export ASDF_GEM_DEFAULT_PACKAGES_FILE=${XDG_CONFIG_HOME}/asdf/default-gems
 
+# asdf-rust: default cargo crates
+# asdf-rust appends /.default-cargo-crates to this value, so it names the
+# directory, not the file.
+export ASDF_CRATE_DEFAULT_PACKAGES_FILE=${XDG_CONFIG_HOME}/asdf
+
 # Where npm, pip and bundler keep their caches and config.
 # `asdf install` runs these tools to install the default packages above, and it
 # does not load the rest of the zsh config. They belong here so the install

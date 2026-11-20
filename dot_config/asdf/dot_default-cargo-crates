@@ -1,0 +1,6 @@
+// Cargo crates to install automatically with each Rust version
+// https://github.com/asdf-community/asdf-rust#default-cargo-crates
+//
+// asdf-rust keeps CARGO_HOME inside each version's install directory, so
+// anything from `cargo install` that is missing here is gone after the next
+// `asdf install rust`. Comments use // in this file, not #.
