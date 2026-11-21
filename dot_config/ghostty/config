@@ -82,9 +82,9 @@ notify-on-command-finish-after = 30s
 # Keybindings
 # ============================================================================
 
-# Quick Terminal (floating window) from any app: Option + Esc.
-# global: needs Accessibility permission for Ghostty in System Settings.
-keybind = global:alt+escape=toggle_quick_terminal
+# Quick Terminal (floating window): Option + Esc, only while Ghostty is focused.
+# (A global: prefix would work from any app but needs Accessibility permission.)
+keybind = alt+escape=toggle_quick_terminal
 
 # Config reload: Cmd + Shift + ,
 # Open config: Cmd + ,
